@@ -1,13 +1,20 @@
 package model;
 
-public abstract class Emergency {
+import model.strategy.PrioritizationEmergenciesStrategy;
+import utils.EmergencyLocation;
+import utils.SeverityLevel;
+
+public abstract class Emergency implements Comparable<Emergency> {
 private String type;
-private String location;
-private int severityLevel;
+private EmergencyLocation location;
+private SeverityLevel severityLevel;
 private int responseTime;
 private boolean attended;
+private int priority;
+private long startTimeAttention;
+private long finalTimeAttention;
 
-    public Emergency(String type, String location, int severityLevel, int responseTime){
+    public Emergency(String type, EmergencyLocation location, SeverityLevel severityLevel, int responseTime){
         this.type = type;
         this.location = location;
         this.severityLevel = severityLevel;
@@ -24,19 +31,19 @@ private boolean attended;
         this.type = type;
     }
 
-    public String getLocation() {
+    public EmergencyLocation getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(EmergencyLocation location) {
         this.location = location;
     }
 
-    public int getSeverityLevel() {
+    public SeverityLevel getSeverityLevel() {
         return severityLevel;
     }
 
-    public void setSeverityLevel(int severityLevel) {
+    public void setSeverityLevel(SeverityLevel severityLevel) {
         this.severityLevel = severityLevel;
     }
 
@@ -54,6 +61,55 @@ private boolean attended;
 
     public void setAttended(boolean attended) {
         this.attended = attended;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public long getStartTimeAttention() {
+        return startTimeAttention;
+    }
+
+    public void setStartTimeAttention(long startTimeAttention) {
+        this.startTimeAttention = startTimeAttention;
+    }
+
+    public long getFinalTimeAttention() {
+        return finalTimeAttention;
+    }
+
+    public void setFinalTimeAttention(long finalTimeAttention) {
+        this.finalTimeAttention = finalTimeAttention;
+    }
+
+    public void startAttention(){
+        this.startTimeAttention = System.currentTimeMillis();
+    }
+
+    public void endAttention(){
+        this.attended = true;
+        this.finalTimeAttention = System.currentTimeMillis();
+    }
+
+    public String getDescription() {
+        return String.format("%s en %s (gravedad: %s)", type, location, severityLevel + " prioridad:  " + priority);
+    }
+
+    @Override
+    public int compareTo(Emergency other){
+        return other.priority - this.priority; // Orden descendente
+    }
+    PrioritizationEmergenciesStrategy strategy = new PrioritizationEmergenciesStrategy();
+
+    @Override
+    public String toString() {
+        return "Emergencia [tipo: " + type + ", ubicacion: " + location + ", Nivel de gravedad: " + severityLevel
+                + ", Con prioridad: " + priority+ "]";
     }
 
 }
