@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Random;
 
+
 import model.Emergency;
 import model.strategy.PrioritizationStrategy;
 
@@ -46,18 +47,36 @@ public class EmergencyManager {
     public Emergency peekNextEmergency(){
         return ePriorityQueue.peek(); // Obtiene la emergencia con mayor prioridad
     }
+
+    //Ejecuta un hilo secundario para atender la emergencia y poder seguir usando el programa
+    public void backgroundEmergency(Emergency emergency){
+        Thread emergencyThread = new Thread(new Runnable(){
+
+            @Override
+            public void run() {
+                attendedEmergencie();
+                System.out.println("La emergencia: " + emergency.getDescription() + " ha sido atendida exitosamente");
+            }
+        });
+        emergencyThread.start();
+        System.out.println("continua la ejecución");
+    }
+    // tiempo de ejecucion de la emergencia
+    public static void attendedEmergencie(){
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        }
     //Función para manejar o atender la siguiente emergencia, ordenadas en una "Queue" según su prioridad
     public Emergency handleNextEmergency(){
         Emergency nextEmergency = ePriorityQueue.poll();// Obtiene y elimina la emergencia con mayor prioridad
         if (nextEmergency != null) {
             nextEmergency.startAttention();
             attendedEmergencies.add(nextEmergency);
-            // try para manejar el tiempo de atención de la emergencia, el tiempo se define con el metodo "random"
-            try {
-                Thread.sleep(random.nextInt(5000,8000));
-            } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
+            // se llama al metodo para manejar la emergencia como una tarea secundaria
+            backgroundEmergency(nextEmergency);
 
             nextEmergency.endAttention();
             System.out.println("Atendiendo emergencia: " + nextEmergency.getDescription());
