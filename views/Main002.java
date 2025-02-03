@@ -64,7 +64,7 @@ public class Main002 {
  * System.out.
  * println("Presiona 's' para atender la siguiente emergencia, 'n' para salir");
  * input = scanner.nextLine();
- * 
+ *
  * if (input.equalsIgnoreCase("s")) {
  * Emergency nextEmergency = manager.peekNextEmergency();
  * if (nextEmergency != null) {
@@ -72,7 +72,7 @@ public class Main002 {
  * nextEmergency.getPriority());
  * System.out.println("DATOS: " +nextEmergency.getType()+" "+
  * nextEmergency.getSeverityLevel() +" "+ nextEmergency.getLocation());
- * 
+ *
  * System.out.
  * println("Presiona 's' para atender la emergencia, 'n' para no atenderla");
  * input = scanner.nextLine();
