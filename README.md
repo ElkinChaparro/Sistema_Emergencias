@@ -15,3 +15,10 @@ Inventario_dia (Recursos Vehiculos Personal) Almacenar en arraylist U objetos El
 
 # View
 Main 
+
+# Update Felix
+El menú accede al tipo de emergencia, ubicación y gravedad por medio de ENUMS, ubicados en la carpeta "utils".
+El sistema puede crear nuevas emergencias y atenderlas de manera basica, solo imprime un mensaje en consola
+El sistema puede mostrar una lista de las emergencias ya registradas y que estan pendientes por atender
+El sistema puede dar unas breves estadisticas del dia
+Cuando se atiende una emergencia pasa del "Queue" a una lista, donde se almacenarán todas las emergencias ya atendidas // Sujeto a cambios para una mejor optimización
