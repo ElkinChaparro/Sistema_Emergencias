@@ -167,22 +167,25 @@ public class EmergencyManager {
 
     // Función para manejar o atender la siguiente emergencia, ordenadas en una
     // "Queue" según su prioridad
-    public Emergency handleNextEmergency(Robbery robbery) {
+    public Emergency handleNextEmergency() {
         //TODO Crear listadod e todas las emergencias cradas
+        printAllEmergencies();
         Emergency nextEmergency = ePriorityQueue.poll();// Obtiene y elimina la emergencia con mayor prioridad
         //TODO implementar recursos y eliminaciones igualando nextEmergency con las variantes
-        if (nextEmergency == robbery) {
-            
-            nextEmergency.startAttention();
-            attendedEmergencies.add(nextEmergency);
-            // se llama al metodo para manejar la emergencia como una tarea secundaria
-            
-            backgroundEmergency(nextEmergency);
+        if (nextEmergency != null) {
+            System.out.println("Desea atender la siguiente emergencia? 's' o 'n'");
+            String option = scanner.nextLine();
+            if (option.equalsIgnoreCase("s")) {
+                nextEmergency.startAttention();
+                attendedEmergencies.add(nextEmergency);
+                // se llama al metodo para manejar la emergencia como una tarea secundaria
+                backgroundEmergency(nextEmergency);
 
-            nextEmergency.endAttention();
-            System.out.println("Atendiendo emergencia: " + nextEmergency.getDescription());
-            numberEmergenciesAtt++;
-            totalAttentionTime += nextEmergency.getResponseTime();
+                nextEmergency.endAttention();
+                System.out.println("Atendiendo emergencia: " + nextEmergency.getDescription());
+                numberEmergenciesAtt++;
+                totalAttentionTime += nextEmergency.getResponseTime();
+            }
         } else {
             System.out.println("No hay emergencias pendientes");
         }
