@@ -14,8 +14,8 @@ Inventario_dia (Recursos Vehiculos Personal) Almacenar en arraylist U objetos El
 
 
 # View
-Main 
-Separar los ShowMenu en una clase aparte 
+Main
+Separar los ShowMenu en una clase aparte
 
 # Update Felix
 El menú accede al tipo de emergencia, ubicación y gravedad por medio de ENUMS, ubicados en la carpeta "utils".

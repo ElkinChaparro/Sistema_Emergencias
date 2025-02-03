@@ -16,4 +16,6 @@ public interface lEmergencyService {
 
     void setFreeVehicle(int amount);
 
+    void spendFuel(int anount);
+
 }

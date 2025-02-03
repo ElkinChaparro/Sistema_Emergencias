@@ -3,7 +3,7 @@ package images;
 public class imagesACCI {
 
     public static void Welcome() {
-System.out.println("""
+System.out.print("""
 |===========================================================|
 |-MMMMMMMMMMk..................kMMMMMMMMMM-|                |
 |-MMMMMMMMMMk.'cllllllllllllc'.kMMMMMMMMMM-|                |

@@ -2,7 +2,11 @@ package controller;
 
 import java.util.*;
 
+import images.showMenu;
 import model.factory.*;
+import model.services.Ambulancia;
+import model.services.Bomberos;
+import model.services.Policia;
 import model.strategy.*;
 import utils.*;
 import model.*;
@@ -126,7 +130,7 @@ public class EmergencyManager {
         }
 
         addEmergency(newEmergency);
-        System.out.println("Emergencia registrada:" + newEmergency);
+        System.out.println("Emergencia registrada: " + newEmergency);
     }
 
     // Función para aregar una emergencia nueva
@@ -167,23 +171,31 @@ public class EmergencyManager {
 
     // Función para manejar o atender la siguiente emergencia, ordenadas en una
     // "Queue" según su prioridad
-    public Emergency handleNextEmergency(Robbery robbery) {
-        //TODO Crear listadod e todas las emergencias cradas
+    public Emergency handleNextEmergency(Robbery robbery, TrafficAccident trafficAccident, Fire fire) {
+        // TODO Crear listadod e todas las emergencias cradas
         Emergency nextEmergency = ePriorityQueue.poll();// Obtiene y elimina la emergencia con mayor prioridad
-        //TODO implementar recursos y eliminaciones igualando nextEmergency con las variantes
+        // TODO implementar recursos y eliminaciones igualando nextEmergency con las
+        // variantes
         if (nextEmergency == robbery) {
-            
-            nextEmergency.startAttention();
-            attendedEmergencies.add(nextEmergency);
-            // se llama al metodo para manejar la emergencia como una tarea secundaria
-            
-            backgroundEmergency(nextEmergency);
+            Policia.executeRobbery(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
+        } else if (nextEmergency == trafficAccident) {
+            Ambulancia.executetrafficAccident(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
+        }
+        else if (nextEmergency == fire) {
+            Bomberos.executeFire(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
+        }
+        nextEmergency.startAttention();
+        attendedEmergencies.add(nextEmergency);
+        // se llama al metodo para manejar la emergencia como una tarea secundaria
 
-            nextEmergency.endAttention();
-            System.out.println("Atendiendo emergencia: " + nextEmergency.getDescription());
-            numberEmergenciesAtt++;
-            totalAttentionTime += nextEmergency.getResponseTime();
-        } else {
+        backgroundEmergency(nextEmergency);
+
+        nextEmergency.endAttention();
+        System.out.println("Atendiendo emergencia: " + nextEmergency.getDescription());
+        numberEmergenciesAtt++;
+        totalAttentionTime += nextEmergency.getResponseTime();
+
+        {
             System.out.println("No hay emergencias pendientes");
         }
         return nextEmergency;
