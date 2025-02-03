@@ -6,7 +6,7 @@ import drivers.*;
 import images.*;
 //import models.*;
 
-public class Main01 {
+public class Main001 {
 
     static boolean exit = false;
     static Scanner scGame = new Scanner(System.in);
