@@ -4,58 +4,88 @@ import java.util.*;
 
 public class dailyRequest {
         static Scanner scGame = new Scanner(System.in);
-        // TODO remplazar los objet por sus respectivos objetos con caracteristicas
-        // propias
         public static List<Integer> firstAidKits = new ArrayList<>();
-        public static List<Integer> litersOfWater = new ArrayList<>();
-        public static List<Integer> ammunition = new ArrayList<>();
         public static List<Integer> ambulances = new ArrayList<>();
+        public static List<Integer> paramedics = new ArrayList<>();
+        public static List<Integer> litersOfWater = new ArrayList<>();
         public static List<Integer> fireTrucks = new ArrayList<>();
+        public static List<Integer> firefighters = new ArrayList<>();
+        public static List<Integer> ammunition = new ArrayList<>();
         public static List<Integer> patrols = new ArrayList<>();
+        public static List<Integer> police = new ArrayList<>();
+        public static List<Integer> litersOfGasoline = new ArrayList<>();
 
         public static void Application() {
 
                 System.out.print("""
                                 |===========================================================|
-                                |-Con cuantos botiquines contamos el dia de hoy?
+                                |-Con cuantos botiquines contamos el dia de hoy?            |
                                 |==-""");
                 var option01 = scGame.nextInt();
                 firstAidKits.add(option01);
 
                 System.out.print("""
                                 |===========================================================|
-                                |-Con cuantos Litros de agua contamos el dia de hoy?
+                                |-Con cuantas ambulancias contamos el dia de hoy?           |
                                 |==-""");
                 var option02 = scGame.nextInt();
-                litersOfWater.add(option02);
+                ambulances.add(option02);
 
                 System.out.print("""
                                 |===========================================================|
-                                |-Con cuantas municiones contamos el dia de hoy?
+                                |-Con cuantos paramedicos contamos el dia de hoy?           |
                                 |==-""");
                 var option03 = scGame.nextInt();
-                ammunition.add(option03);
+                paramedics.add(option03);
 
                 System.out.print("""
                                 |===========================================================|
-                                |-Con cuantas ambulancias contamos el dia de hoy?
+                                |-Con cuantos Litros de agua contamos el dia de hoy?        |
                                 |==-""");
                 var option04 = scGame.nextInt();
-                ambulances.add(option04);
+                litersOfWater.add(option04);
 
                 System.out.print("""
                                 |===========================================================|
-                                |-Con cuantos carros de bomberos contamos el dia de hoy?
+                                |-Con cuantos carros de bomberos contamos el dia de hoy?    |
                                 |==-""");
                 var option05 = scGame.nextInt();
                 fireTrucks.add(option05);
 
                 System.out.print("""
                                 |===========================================================|
-                                |-Con cuantas patrullas contamos el dia de hoy?
+                                |-Con cuantos bomberos contamos el dia de hoy?              |
                                 |==-""");
                 var option06 = scGame.nextInt();
-                patrols.add(option06);
+                firefighters.add(option06);
+
+                System.out.print("""
+                                |===========================================================|
+                                |-Con cuantas municiones contamos el dia de hoy?            |
+                                |==-""");
+                var option07 = scGame.nextInt();
+                ammunition.add(option07);
+
+                System.out.print("""
+                                |===========================================================|
+                                |-Con cuantas patrullas contamos el dia de hoy?             |
+                                |==-""");
+                var option08 = scGame.nextInt();
+                patrols.add(option08);
+
+                System.out.print("""
+                                |===========================================================|
+                                |-Con cuantos policias contamos el dia de hoy?              |
+                                |==-""");
+                var option09 = scGame.nextInt();
+                patrols.add(option09);
+
+                System.out.print("""
+                                |===========================================================|
+                                |-Con cuantos litros de gasolina contamos el dia de hoy?    |
+                                |==-""");
+                var option10 = scGame.nextInt();
+                litersOfGasoline.add(option10);
 
                 pressEnter(scGame);
 
@@ -64,8 +94,8 @@ public class dailyRequest {
         public static void pressEnter(Scanner scGame) {
                 System.out.print("""
                                 |===========================================================|
-                                |-Presione Enter para Continuar
-                                |==-""");
+                                |-Presione Enter para Continuar                             |
+                                |===========================================================|""");
                 scGame.nextLine();
         }
 }

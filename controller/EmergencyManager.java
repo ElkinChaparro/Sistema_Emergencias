@@ -2,7 +2,11 @@ package controller;
 
 import java.util.*;
 
+import images.showMenu;
 import model.factory.*;
+import model.services.Ambulancia;
+import model.services.Bomberos;
+import model.services.Policia;
 import model.strategy.*;
 import utils.*;
 import model.*;
@@ -126,7 +130,7 @@ public class EmergencyManager {
         }
 
         addEmergency(newEmergency);
-        System.out.println("Emergencia registrada:" + newEmergency);
+        System.out.println("Emergencia registrada: " + newEmergency);
     }
 
     // Función para aregar una emergencia nueva
@@ -149,7 +153,7 @@ public class EmergencyManager {
             @Override
             public void run() {
                 attendedEmergencie();
-                System.out.println("La emergencia: " + emergency.getDescription() + " ha sido atendida exitosamente");
+                System.out.println("\nLa emergencia: " + emergency.getDescription() + " ha sido atendida exitosamente");
             }
         });
         emergencyThread.start();
@@ -167,15 +171,25 @@ public class EmergencyManager {
 
     // Función para manejar o atender la siguiente emergencia, ordenadas en una
     // "Queue" según su prioridad
-    public Emergency handleNextEmergency() {
-        //TODO Crear listadod e todas las emergencias cradas
+    public Emergency handleNextEmergency(Robbery robbery, TrafficAccident trafficAccident, Fire fire) {
+        // TODO Crear listadod e todas las emergencias cradas
         printAllEmergencies();
-        Emergency nextEmergency = ePriorityQueue.poll();// Obtiene y elimina la emergencia con mayor prioridad
-        //TODO implementar recursos y eliminaciones igualando nextEmergency con las variantes
+        Emergency nextEmergency = peekNextEmergency();
+        // TODO implementar recursos y eliminaciones igualando nextEmergency con las
+        // variantes
+            if (nextEmergency == robbery) {
+                Policia.executeRobbery(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
+            } else if (nextEmergency == trafficAccident) {
+                Ambulancia.executetrafficAccident(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
+            }
+            else if (nextEmergency == fire) {
+                Bomberos.executeFire(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
+            }
         if (nextEmergency != null) {
             System.out.println("Desea atender la siguiente emergencia? 's' o 'n'");
             String option = scanner.nextLine();
             if (option.equalsIgnoreCase("s")) {
+                nextEmergency = ePriorityQueue.poll();// Obtiene y elimina la emergencia con mayor prioridad
                 nextEmergency.startAttention();
                 attendedEmergencies.add(nextEmergency);
                 // se llama al metodo para manejar la emergencia como una tarea secundaria
@@ -186,11 +200,12 @@ public class EmergencyManager {
                 numberEmergenciesAtt++;
                 totalAttentionTime += nextEmergency.getResponseTime();
             }
-        } else {
+        }else{
             System.out.println("No hay emergencias pendientes");
         }
         return nextEmergency;
     }
+
 
     // obtiene e imprime en consola todas las emergencias pendientes por atender
     public void printAllEmergencies() {

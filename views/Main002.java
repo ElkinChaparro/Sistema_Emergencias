@@ -3,7 +3,6 @@ package views;
 import java.util.*;
 
 import controller.*;
-import model.*;
 import model.strategy.*;
 import images.*;
 
@@ -36,10 +35,11 @@ public class Main002 {
                     manager.registerEmergencyMenu(scanner);
                     break;
                 case 2:
-                    manager.handleNextEmergency();
+                    manager.handleNextEmergency(null, null, null);
                     break;
                 case 3:
-                    // Recursos Actuales
+                    showMenu.menu03();
+                    dailyRequest.pressEnter(scanner);
                 case 4:
                     manager.printAllEmergencies();
                     break;
