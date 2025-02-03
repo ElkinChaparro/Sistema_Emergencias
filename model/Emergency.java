@@ -1,20 +1,19 @@
 package model;
 
 import model.strategy.PrioritizationEmergenciesStrategy;
-import utils.EmergencyLocation;
-import utils.SeverityLevel;
+import utils.*;
 
 public abstract class Emergency implements Comparable<Emergency> {
-private String type;
-private EmergencyLocation location;
-private SeverityLevel severityLevel;
-private int responseTime;
-private boolean attended;
-private int priority;
-private long startTimeAttention;
-private long finalTimeAttention;
+    private String type;
+    private EmergencyLocation location;
+    private SeverityLevel severityLevel;
+    private int responseTime;
+    private boolean attended;
+    private int priority;
+    private long startTimeAttention;
+    private long finalTimeAttention;
 
-    public Emergency(String type, EmergencyLocation location, SeverityLevel severityLevel, int responseTime){
+    public Emergency(String type, EmergencyLocation location, SeverityLevel severityLevel, int responseTime) {
         this.type = type;
         this.location = location;
         this.severityLevel = severityLevel;
@@ -87,11 +86,12 @@ private long finalTimeAttention;
         this.finalTimeAttention = finalTimeAttention;
     }
 
-    public void startAttention(){
+    public void startAttention() {
         this.startTimeAttention = System.currentTimeMillis();
     }
 
-    public void endAttention(){
+
+    public void endAttention() {
         this.attended = true;
         this.finalTimeAttention = System.currentTimeMillis();
     }
@@ -101,15 +101,16 @@ private long finalTimeAttention;
     }
 
     @Override
-    public int compareTo(Emergency other){
+    public int compareTo(Emergency other) {
         return other.priority - this.priority; // Orden descendente
     }
+
     PrioritizationEmergenciesStrategy strategy = new PrioritizationEmergenciesStrategy();
 
     @Override
     public String toString() {
         return "Emergencia [tipo: " + type + ", ubicacion: " + location + ", Nivel de gravedad: " + severityLevel
-                + ", Con prioridad: " + priority+ "]";
+                + ", Con prioridad: " + priority + "]";
     }
 
 }

@@ -1,9 +1,8 @@
 package model;
 
-import utils.EmergencyLocation;
-import utils.SeverityLevel;
+import utils.*;
 
-public class TrafficAccident extends Emergency{
+public class TrafficAccident extends Emergency {
 
     public TrafficAccident(EmergencyLocation location, SeverityLevel severityLevel, int responseTime) {
         super("AccidentedeTransito", location, severityLevel, responseTime);
