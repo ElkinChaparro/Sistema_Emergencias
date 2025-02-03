@@ -10,7 +10,7 @@ import utils.EmergencyLocation;
 import utils.EmergencyType;
 import utils.SeverityLevel;
 
-public class Main {
+public class Main002 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
