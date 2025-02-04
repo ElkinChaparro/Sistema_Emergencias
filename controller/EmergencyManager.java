@@ -4,6 +4,9 @@ import java.util.*;
 
 import images.showMenu;
 import model.factory.*;
+import model.observer.ConsoleObserver;
+import model.observer.ObserverEmergencies;
+import model.observer.SubjectEmergencies;
 import model.services.Ambulancia;
 import model.services.Bomberos;
 import model.services.Policia;
@@ -11,14 +14,16 @@ import model.strategy.*;
 import utils.*;
 import model.*;
 
-public class EmergencyManager {
+public class EmergencyManager implements SubjectEmergencies {
 
     private static EmergencyManager instancia;
     private static PrioritizationStrategy strategy;
     private static PriorityQueue<Emergency> ePriorityQueue;
     private List<Emergency> attendedEmergencies;
+    private List<ObserverEmergencies> observers;
     Random random = new Random();
     static Scanner scanner = new Scanner(System.in);
+    ObserverEmergencies observer = new ConsoleObserver();
 
     private int numberEmergenciesAtt;
     private int totalAttentionTime;
@@ -26,6 +31,7 @@ public class EmergencyManager {
     public EmergencyManager() {
         ePriorityQueue = new PriorityQueue<>();
         attendedEmergencies = new ArrayList<>();
+        observers = new ArrayList<>();
         numberEmergenciesAtt = 0;
         totalAttentionTime = 0;
     }
@@ -130,7 +136,10 @@ public class EmergencyManager {
         }
 
         addEmergency(newEmergency);
-        System.out.println("Emergencia registrada: " + newEmergency);
+        System.out.println("Emergencia registrada exitosamente. ");
+        // se agrega el observer y se notifica de la emergencia registrada
+        addObserver(observer);
+        notifyObservers(newEmergency);
     }
 
     // Función para aregar una emergencia nueva
@@ -227,6 +236,23 @@ public class EmergencyManager {
         System.out.println("\n === ESTADISTICAS DEL DIA ===");
         System.out.println("Emergencias atendidas: " + numberEmergenciesAtt);
         System.out.println("TIEMPO: " + totalAttentionTime);
+    }
+
+    @Override
+    public void addObserver(ObserverEmergencies observerEmergencies) {
+        observers.add(observerEmergencies);
+    }
+
+    @Override
+    public void removeObserver(ObserverEmergencies observerEmergencies) {
+        observers.remove(numberEmergenciesAtt);
+    }
+
+    @Override
+    public void notifyObservers(Emergency emergency) {
+        for(ObserverEmergencies observerEmergencies : observers){
+            observerEmergencies.update(emergency);
+        }
     }
 
 }
