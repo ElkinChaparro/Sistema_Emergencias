@@ -92,8 +92,11 @@ public abstract class Emergency implements Comparable<Emergency> {
 
 
     public void endAttention() {
-        this.attended = true;
         this.finalTimeAttention = System.currentTimeMillis();
+    }
+
+    public long calculateAttentionTime() {
+        return (finalTimeAttention- startTimeAttention);
     }
 
     public String getDescription() {
@@ -110,7 +113,7 @@ public abstract class Emergency implements Comparable<Emergency> {
     @Override
     public String toString() {
         return "Emergencia [tipo: " + type + ", ubicacion: " + location + ", Nivel de gravedad: " + severityLevel
-                + ", Con prioridad: " + priority + "]";
+                + ", Con prioridad: " + priority + "] -> Tiempo estimado de atención: " + responseTime + " minutos";
     }
 
 }

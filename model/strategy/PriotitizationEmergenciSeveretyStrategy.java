@@ -1,6 +1,7 @@
 package model.strategy;
 
 import model.Emergency;
+import utils.EmergencyLocation;
 
 public class PriotitizationEmergenciSeveretyStrategy implements PrioritizationStrategy {
 
@@ -18,4 +19,11 @@ public class PriotitizationEmergenciSeveretyStrategy implements PrioritizationSt
     }
 
 }
+
+
+    @Override
+    public int estimatedTime(EmergencyLocation location) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'estimatedTime'");
+    }
 }

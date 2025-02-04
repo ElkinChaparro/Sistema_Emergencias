@@ -123,7 +123,7 @@ public class EmergencyManager {
                 break;
         }
 
-        Emergency newEmergency = FactoryEmergencies.creatEmergency(type, location, severityLevel, 500);
+        Emergency newEmergency = FactoryEmergencies.creatEmergency(type, location, severityLevel, strategy.estimatedTime(location));
         if (newEmergency == null) {
             System.out.println("Tipo de emergencia invalido");
             return;
@@ -152,8 +152,14 @@ public class EmergencyManager {
 
             @Override
             public void run() {
+                emergency.startAttention();
                 attendedEmergencie();
+                emergency.endAttention();
                 System.out.println("\nLa emergencia: " + emergency.getDescription() + " ha sido atendida exitosamente");
+                // transformar de milisegundos a segundos
+                long durationMillis = emergency.calculateAttentionTime();
+                double durationSeconds = durationMillis / 1000.0;
+                System.out.println("La emergencia ha sido atentido en: " + durationSeconds + " segundos");
             }
         });
         emergencyThread.start();
@@ -163,7 +169,7 @@ public class EmergencyManager {
     // tiempo de ejecucion de la emergencia
     public static void attendedEmergencie() {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(8000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -190,12 +196,10 @@ public class EmergencyManager {
             String option = scanner.nextLine();
             if (option.equalsIgnoreCase("s")) {
                 nextEmergency = ePriorityQueue.poll();// Obtiene y elimina la emergencia con mayor prioridad
-                nextEmergency.startAttention();
                 attendedEmergencies.add(nextEmergency);
                 // se llama al metodo para manejar la emergencia como una tarea secundaria
                 backgroundEmergency(nextEmergency);
 
-                nextEmergency.endAttention();
                 System.out.println("Atendiendo emergencia: " + nextEmergency.getDescription());
                 numberEmergenciesAtt++;
                 totalAttentionTime += nextEmergency.getResponseTime();

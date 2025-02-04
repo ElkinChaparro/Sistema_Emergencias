@@ -52,4 +52,18 @@ public class PrioritizationEmergenciesStrategy implements PrioritizationStrategy
 
     }
 
+
+    @Override
+    public int estimatedTime(EmergencyLocation location) {
+        int distanceZona = mapaUrbano.calculateDistance(location);
+        if ( distanceZona >= 7) {
+            return 8;
+        }
+        else if (distanceZona <= 4) {
+            return 2;
+        }else{
+            return 5;
+        }
+    }
+
 }
