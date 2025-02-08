@@ -52,9 +52,9 @@ public class showMenu {
     }
 
     public static void serrMenu() {
-        System.out.println("|===========================================================|");
-        System.out.println("|==========-Opción invalida, intentelo nuevamente.-=========|");
-        System.out.println("|===========================================================|");
+        System.out.println(ConsoleColor.redText("|===========================================================|"));
+        System.out.println(ConsoleColor.redText("|==========-Opción invalida, intentelo nuevamente.-=========|"));
+        System.out.println(ConsoleColor.redText("|===========================================================|"));
     }
 
 }

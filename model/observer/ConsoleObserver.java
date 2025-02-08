@@ -3,6 +3,7 @@ package model.observer;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import images.ConsoleColor;
 import model.Emergency;
 
 public class ConsoleObserver implements ObserverEmergencies {
@@ -21,13 +22,14 @@ public class ConsoleObserver implements ObserverEmergencies {
 
     @Override
     public void update(Emergency emergency) {
-        System.out.println("""
+        System.out.println(ConsoleColor.redText("""
                 |================= ALERTA DE EMERGENCIA ====================|
-                |
-                |===NUEVA EMERGENCIA RECIBIDA===|
-                """);
+                |===========================================================|
+                |============== NUEVA EMERGENCIA RECIBIDA ==================|
+                """));
         System.out.println("Tipo de emergencia: " + emergency.getType());
         System.out.println("Ubicación: " + emergency.getLocation());
+        System.out.println("Prioridad: " + emergency.getPriority());
         System.out.println("Fecha y hora del suceso: " + GetDateTime());
     }
 

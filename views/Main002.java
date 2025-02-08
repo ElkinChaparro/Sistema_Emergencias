@@ -32,7 +32,11 @@ public class Main002 {
 
             switch (option) {
                 case 1:
+                //try {
                     manager.registerEmergencyMenu(scanner);
+                //} catch (NullPointerException e) {
+                    //System.out.println("ERROR: UNO DE LAS OPCIONES SELECCIONADAS FUE INCORRECTA");
+                //}
                     break;
                 case 2:
                     manager.handleNextEmergency(null, null, null);
