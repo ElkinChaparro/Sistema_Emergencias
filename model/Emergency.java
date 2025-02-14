@@ -112,8 +112,8 @@ public abstract class Emergency implements Comparable<Emergency> {
 
     @Override
     public String toString() {
-        return "Emergencia [tipo: " + type + ", ubicacion: " + location + ", Nivel de gravedad: " + severityLevel
-                + ", Con prioridad: " + priority + "] -> Tiempo estimado de atención: " + responseTime + " minutos";
+        return "\n|-Emergencia tipo: " + type + ".\n|-Ubicacion: " + location + ".\n|-Nivel de gravedad: " + severityLevel
+                + ".\n|-Con prioridad: " + priority + "\n|-Tiempo estimado de atención: " + responseTime + " minutos";
     }
 
 }

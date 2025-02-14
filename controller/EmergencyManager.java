@@ -2,15 +2,10 @@ package controller;
 
 import java.util.*;
 
-import images.ConsoleColor;
-import images.showMenu;
+import images.*;
 import model.factory.*;
-import model.observer.ConsoleObserver;
-import model.observer.ObserverEmergencies;
-import model.observer.SubjectEmergencies;
-import model.services.Ambulancia;
-import model.services.Bomberos;
-import model.services.Policia;
+import model.observer.*;
+import model.services.*;
 import model.strategy.*;
 import utils.*;
 import model.*;
@@ -22,8 +17,8 @@ public class EmergencyManager implements SubjectEmergencies {
     private static PriorityQueue<Emergency> ePriorityQueue;
     private List<Emergency> attendedEmergencies;
     private List<ObserverEmergencies> observers;
-    Random random = new Random();
     static Scanner scanner = new Scanner(System.in);
+    Random random = new Random();
     ObserverEmergencies observer = new ConsoleObserver();
 
     private int numberEmergenciesAtt;
@@ -50,118 +45,112 @@ public class EmergencyManager implements SubjectEmergencies {
 
     public void registerEmergencyMenu(Scanner scanner) {
         var exit = false;
-        var option = showMenu.menu02(null);
         EmergencyType type = null;
-        while (!exit) {
-        try {
-            option = Integer.parseInt(scanner.nextLine());
-            switch (option) {
-
-                case 1:
-                    type = EmergencyType.INCENDIO;
-                    break;
-                case 2:
-                    type = EmergencyType.ACCIDENTE_TRANSITO;
-                    break;
-                case 3:
-                    type = EmergencyType.ROBO;
-                    break;
-                default:
-                    throw new NullPointerException(ConsoleColor.redText("|======= ERROR: Opción invalida, intentelo nuevamente ======|"));
-            }
-        } catch (NumberFormatException e) {
-            showMenu.serrMenu();
-            break;
-        } catch (NullPointerException e){
-            System.out.println(e.getMessage());
-            break;
-        }
-
-        // TODO desicion sobre random y estatico
-        System.out.println("===Seleccione la ubicación de la emergencia===");
-        System.out.println("""
-                1. Zona-norte
-                2. Zona-sur
-                3. Zona-centro
-                4. Zona-oriente
-                5. Zona-occidente
-                """);
-        System.out.print("Seleccione el tipo: ");
         EmergencyLocation location = null;
-        try {
-            option = Integer.parseInt(scanner.nextLine());
-            switch (option) {
-                case 1:
-                    location = EmergencyLocation.ZONA_NORTE;
-                    break;
-                case 2:
-                    location = EmergencyLocation.ZONA_SUR;
-                    break;
-                case 3:
-                    location = EmergencyLocation.ZONA_CENTRO;
-                    break;
-                case 4:
-                    location = EmergencyLocation.ZONA_ORIENTE;
-                    break;
-                case 5:
-                    location = EmergencyLocation.ZONA_OCCIDENTE;
-                    break;
-                default:
-                throw new NullPointerException(ConsoleColor.redText("|======= ERROR: Opción invalida, intentelo nuevamente ======|"));
-            }
-        } catch (NumberFormatException e) {
-            showMenu.serrMenu();
-            break;
-        } catch (NullPointerException e){
-            System.out.println(e.getMessage());
-            break;
-        }
-
-
-        System.out.println("===Ingrese el nivel de gravedad===");
-        System.out.println("""
-                1. Bajo
-                2. Medio
-                3. Alto
-                """);
         SeverityLevel severityLevel = null;
-        try {
-            option = Integer.parseInt(scanner.nextLine());
-        switch (option) {
-            case 1:
-                severityLevel = SeverityLevel.BAJO;
-                break;
-            case 2:
-                severityLevel = SeverityLevel.MEDIO;
-                break;
-            case 3:
-                severityLevel = SeverityLevel.ALTO;
-                break;
-            default:
-            throw new NullPointerException(ConsoleColor.redText("|======= ERROR: Opción invalida, intentelo nuevamente ======|"));
-        }
-        } catch (NumberFormatException e) {
-            showMenu.serrMenu();
-            break;
-        } catch (NullPointerException e){
-            System.out.println(e.getMessage());
-            break;
-        }
 
+        while (!exit) {
+            var option01 = showMenu.menuType(null);
 
-        Emergency newEmergency = FactoryEmergencies.creatEmergency(type, location, severityLevel, strategy.estimatedTime(location));
-        if (newEmergency == null) {
-            System.out.println("Tipo de emergencia invalido");
-            return;
+            try {
+                option01 = Integer.parseInt(scanner.nextLine());
+
+                switch (option01) {
+
+                    case 1:
+                        type = EmergencyType.INCENDIO;
+                        break;
+                    case 2:
+                        type = EmergencyType.ACCIDENTE_TRANSITO;
+                        break;
+                    case 3:
+                        type = EmergencyType.ROBO;
+                        break;
+                    default:
+                        throw new NullPointerException();
+                }
+            }
+
+            catch (NumberFormatException e) {
+                showMenu.serrMenu();
+                break;
+            } catch (NullPointerException e) {
+                showMenu.serrMenu();
+                break;
+            }
+
+            var option02 = showMenu.menuLocation(null);
+
+            try {
+                option02 = Integer.parseInt(scanner.nextLine());
+
+                switch (option02) {
+                    case 1:
+                        location = EmergencyLocation.ZONA_NORTE;
+                        break;
+                    case 2:
+                        location = EmergencyLocation.ZONA_SUR;
+                        break;
+                    case 3:
+                        location = EmergencyLocation.ZONA_CENTRO;
+                        break;
+                    case 4:
+                        location = EmergencyLocation.ZONA_ORIENTE;
+                        break;
+                    case 5:
+                        location = EmergencyLocation.ZONA_OCCIDENTE;
+                        break;
+                    default:
+                        throw new NullPointerException();
+                }
+            } catch (NumberFormatException e) {
+                showMenu.serrMenu();
+                break;
+            } catch (NullPointerException e) {
+                showMenu.serrMenu();
+                break;
+            }
+
+            var option03 = showMenu.menuGravity(null);
+
+            try {
+                option03 = Integer.parseInt(scanner.nextLine());
+
+                switch (option03) {
+                    case 1:
+                        severityLevel = SeverityLevel.BAJO;
+                        break;
+                    case 2:
+                        severityLevel = SeverityLevel.MEDIO;
+                        break;
+                    case 3:
+                        severityLevel = SeverityLevel.ALTO;
+                        break;
+                    default:
+                        throw new NullPointerException();
+                }
+            } catch (NumberFormatException e) {
+                showMenu.serrMenu();
+                break;
+            } catch (NullPointerException e) {
+                showMenu.serrMenu();
+                break;
+            }
+
+            Emergency newEmergency = FactoryEmergencies.creatEmergency(type, location, severityLevel,
+                    strategy.estimatedTime(location));
+            if (newEmergency == null) {
+                System.out.println("Tipo de emergencia invalido");
+                return;
+            }
+
+            addEmergency(newEmergency);
+            System.out.println(ConsoleColor.greenText("Emergencia registrada exitosamente. "));
+            // se agrega el observer y se notifica de la emergencia registrada
+            addObserver(observer);
+            notifyObservers(newEmergency);
+            exit = true;
         }
-
-        addEmergency(newEmergency);
-        System.out.println(ConsoleColor.greenText("Emergencia registrada exitosamente. "));
-        // se agrega el observer y se notifica de la emergencia registrada
-        addObserver(observer);
-        notifyObservers(newEmergency);
-        exit = true;
-    }
     }
 
     // Función para aregar una emergencia nueva
@@ -202,12 +191,13 @@ public class EmergencyManager implements SubjectEmergencies {
     public static void attendedEmergencie(Emergency emergency) {
         Random random = new Random();
         try {
-            if (emergency.getLocation().equals(EmergencyLocation.ZONA_SUR) || emergency.getLocation().equals(EmergencyLocation.ZONA_NORTE)){
-                Thread.sleep(random.nextInt((45000 - 30000)+ 1) + 30000);
-            }else if (emergency.getLocation().equals(EmergencyLocation.ZONA_OCCIDENTE)) {
-                Thread.sleep(random.nextInt((29000- 15000)+ 1) + 15000);
-            }else{
-                Thread.sleep(random.nextInt((10000 - 5000)+ 1) + 5000);
+            if (emergency.getLocation().equals(EmergencyLocation.ZONA_SUR)
+                    || emergency.getLocation().equals(EmergencyLocation.ZONA_NORTE)) {
+                Thread.sleep(random.nextInt((45000 - 30000) + 1) + 30000);
+            } else if (emergency.getLocation().equals(EmergencyLocation.ZONA_OCCIDENTE)) {
+                Thread.sleep(random.nextInt((29000 - 15000) + 1) + 15000);
+            } else {
+                Thread.sleep(random.nextInt((10000 - 5000) + 1) + 5000);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -217,19 +207,16 @@ public class EmergencyManager implements SubjectEmergencies {
     // Función para manejar o atender la siguiente emergencia, ordenadas en una
     // "Queue" según su prioridad
     public Emergency handleNextEmergency(Robbery robbery, TrafficAccident trafficAccident, Fire fire) {
-        // TODO Crear listadod e todas las emergencias cradas
         printAllEmergencies();
         Emergency nextEmergency = peekNextEmergency();
-        // TODO implementar recursos y eliminaciones igualando nextEmergency con las
-        // variantes
-            if (nextEmergency == robbery) {
-                Policia.executeRobbery(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
-            } else if (nextEmergency == trafficAccident) {
-                Ambulancia.executetrafficAccident(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
-            }
-            else if (nextEmergency == fire) {
-                Bomberos.executeFire(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
-            }
+        //TODO arreglar
+        // if (nextEmergency == robbery) {
+        //     Policia.executeRobbery(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
+        // } else if (nextEmergency == trafficAccident) {
+        //     Ambulancia.executetrafficAccident(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
+        // } else if (nextEmergency == fire) {
+        //     Bomberos.executeFire(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
+        // }
         if (nextEmergency != null) {
             System.out.println("Desea atender la siguiente emergencia? 's' o 'n'");
             String option = scanner.nextLine();
@@ -241,14 +228,12 @@ public class EmergencyManager implements SubjectEmergencies {
 
                 System.out.println("Atendiendo emergencia: " + nextEmergency.getDescription());
                 numberEmergenciesAtt++;
-                //totalAttentionTime += nextEmergency.getResponseTime();
             }
-        }else{
+        } else {
             System.out.println("No hay emergencias pendientes");
         }
         return nextEmergency;
     }
-
 
     // obtiene e imprime en consola todas las emergencias pendientes por atender
     public void printAllEmergencies() {
@@ -280,7 +265,7 @@ public class EmergencyManager implements SubjectEmergencies {
 
     @Override
     public void notifyObservers(Emergency emergency) {
-        for(ObserverEmergencies observerEmergencies : observers){
+        for (ObserverEmergencies observerEmergencies : observers) {
             observerEmergencies.update(emergency);
         }
     }
