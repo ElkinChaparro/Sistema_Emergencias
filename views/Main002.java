@@ -1,7 +1,6 @@
 package views;
 
 import java.util.*;
-
 import controller.*;
 import model.strategy.*;
 import images.*;
@@ -21,7 +20,7 @@ public class Main002 {
         scanner.nextLine();
         // Menú de prueba
         while (!exit) {
-            var option = showMenu.menu01(null);
+            var option = showMenu.menuMain(null);
 
             try {
                 option = Integer.parseInt(scanner.nextLine());
@@ -32,27 +31,27 @@ public class Main002 {
 
             switch (option) {
                 case 1:
-                //try {
                     manager.registerEmergencyMenu(scanner);
-                //} catch (NullPointerException e) {
-                    //System.out.println("ERROR: UNO DE LAS OPCIONES SELECCIONADAS FUE INCORRECTA");
-                //}
                     break;
                 case 2:
                     manager.handleNextEmergency(null, null, null);
                     break;
                 case 3:
-                    showMenu.menu03();
-                    dailyRequest.pressEnter(scanner);
+                    showMenu.menuResources();
+                    showMenu.pressEnter(scanner);
+                    break;
                 case 4:
                     manager.printAllEmergencies();
                     break;
                 case 5:
                     manager.showStatistics();
+                    showMenu.pressEnter(scanner);
                     break;
                 case 6:
                     // Finalizar jornada
                     break;
+                default:
+                    showMenu.serrMenu();
             }
         }
     }

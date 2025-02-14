@@ -2,6 +2,8 @@ package controller;
 
 import java.util.*;
 
+import images.showMenu;
+
 public class dailyRequest {
         static Scanner scGame = new Scanner(System.in);
         public static List<Integer> firstAidKits = new ArrayList<>();
@@ -87,15 +89,8 @@ public class dailyRequest {
                 var option10 = scGame.nextInt();
                 litersOfGasoline.add(option10);
 
-                pressEnter(scGame);
+                showMenu.pressEnter(scGame);
 
         }
 
-        public static void pressEnter(Scanner scGame) {
-                System.out.print("""
-                                |===========================================================|
-                                |-Presione Enter para Continuar                             |
-                                |===========================================================|""");
-                scGame.nextLine();
-        }
 }
