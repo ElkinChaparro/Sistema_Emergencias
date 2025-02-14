@@ -3,12 +3,12 @@ package controller;
 import java.util.*;
 
 import images.*;
-import model.factory.*;
-import model.observer.*;
-import model.services.*;
-import model.strategy.*;
+import models.*;
+import models.factory.*;
+import models.observer.*;
+import models.services.*;
+import models.strategy.*;
 import utils.*;
-import model.*;
 
 public class EmergencyManager implements SubjectEmergencies {
 
@@ -149,6 +149,7 @@ public class EmergencyManager implements SubjectEmergencies {
             // se agrega el observer y se notifica de la emergencia registrada
             addObserver(observer);
             notifyObservers(newEmergency);
+            removeObserver(observer);
             exit = true;
         }
     }
@@ -206,26 +207,19 @@ public class EmergencyManager implements SubjectEmergencies {
 
     // Función para manejar o atender la siguiente emergencia, ordenadas en una
     // "Queue" según su prioridad
-    public Emergency handleNextEmergency(Robbery robbery, TrafficAccident trafficAccident, Fire fire) {
+    public Emergency handleNextEmergency() {
         printAllEmergencies();
         Emergency nextEmergency = peekNextEmergency();
-        //TODO arreglar
-        // if (nextEmergency == robbery) {
-        //     Policia.executeRobbery(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
-        // } else if (nextEmergency == trafficAccident) {
-        //     Ambulancia.executetrafficAccident(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
-        // } else if (nextEmergency == fire) {
-        //     Bomberos.executeFire(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
-        // }
+
         if (nextEmergency != null) {
             System.out.println("Desea atender la siguiente emergencia? 's' o 'n'");
             String option = scanner.nextLine();
             if (option.equalsIgnoreCase("s")) {
+                operations(nextEmergency);
                 nextEmergency = ePriorityQueue.poll();// Obtiene y elimina la emergencia con mayor prioridad
                 attendedEmergencies.add(nextEmergency);
                 // se llama al metodo para manejar la emergencia como una tarea secundaria
                 backgroundEmergency(nextEmergency);
-
                 System.out.println("Atendiendo emergencia: " + nextEmergency.getDescription());
                 numberEmergenciesAtt++;
             }
@@ -251,6 +245,17 @@ public class EmergencyManager implements SubjectEmergencies {
         System.out.println("\n === ESTADISTICAS DEL DIA ===");
         System.out.println("Emergencias atendidas: " + numberEmergenciesAtt);
         System.out.println("TIEMPO: " + totalAttentionTime);
+    }
+
+    public void operations(Emergency nextEmergency) {
+
+        if (nextEmergency.getType() == EmergencyType.ROBO) {
+            Policia.executeRobbery(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
+        } else if (nextEmergency.getType() == EmergencyType.ACCIDENTE_TRANSITO) {
+            Ambulancia.executetrafficAccident(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
+        } else if (nextEmergency.getType() == EmergencyType.INCENDIO) {
+            Bomberos.executeFire(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
+        }
     }
 
     @Override

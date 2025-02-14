@@ -1,10 +1,10 @@
-package model;
+package models;
 
-import model.strategy.PrioritizationEmergenciesStrategy;
+import models.strategy.PrioritizationEmergenciesStrategy;
 import utils.*;
 
 public abstract class Emergency implements Comparable<Emergency> {
-    private String type;
+    private EmergencyType type;
     private EmergencyLocation location;
     private SeverityLevel severityLevel;
     private int responseTime;
@@ -13,7 +13,7 @@ public abstract class Emergency implements Comparable<Emergency> {
     private long startTimeAttention;
     private long finalTimeAttention;
 
-    public Emergency(String type, EmergencyLocation location, SeverityLevel severityLevel, int responseTime) {
+    public Emergency(EmergencyType type, EmergencyLocation location, SeverityLevel severityLevel, int responseTime) {
         this.type = type;
         this.location = location;
         this.severityLevel = severityLevel;
@@ -22,11 +22,11 @@ public abstract class Emergency implements Comparable<Emergency> {
 
     }
 
-    public String getType() {
+    public EmergencyType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(EmergencyType type) {
         this.type = type;
     }
 

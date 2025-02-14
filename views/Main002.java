@@ -2,8 +2,8 @@ package views;
 
 import java.util.*;
 import controller.*;
-import model.strategy.*;
 import images.*;
+import models.strategy.*;
 
 public class Main002 {
 
@@ -34,7 +34,7 @@ public class Main002 {
                     manager.registerEmergencyMenu(scanner);
                     break;
                 case 2:
-                    manager.handleNextEmergency(null, null, null);
+                    manager.handleNextEmergency();
                     break;
                 case 3:
                     showMenu.menuResources();
@@ -55,43 +55,4 @@ public class Main002 {
             }
         }
     }
-
-    // Menu para registrar la emergencia
-
 }
-
-// codigo de prueba
-
-/*
- * while (true) {
- * System.out.
- * println("Presiona 's' para atender la siguiente emergencia, 'n' para salir");
- * input = scanner.nextLine();
- *
- * if (input.equalsIgnoreCase("s")) {
- * Emergency nextEmergency = manager.peekNextEmergency();
- * if (nextEmergency != null) {
- * System.out.println("Siguiente emergencia con prioridad: " +
- * nextEmergency.getPriority());
- * System.out.println("DATOS: " +nextEmergency.getType()+" "+
- * nextEmergency.getSeverityLevel() +" "+ nextEmergency.getLocation());
- *
- * System.out.
- * println("Presiona 's' para atender la emergencia, 'n' para no atenderla");
- * input = scanner.nextLine();
- * if (input.equalsIgnoreCase("s")) {
- * manager.handleNextEmergency();
- * }else{
- * System.out.println("SALIENDO...");
- * break;
- * }
- * }else{
- * System.out.println("No hay mas emergencias por atender");
- * break;
- * }
- * }else if (input.equalsIgnoreCase("n")) {
- * break;
- * }
- * }
- * scanner.close();
- */

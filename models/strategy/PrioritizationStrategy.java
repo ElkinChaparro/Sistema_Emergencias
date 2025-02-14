@@ -1,6 +1,6 @@
-package model.strategy;
+package models.strategy;
 
-import model.Emergency;
+import models.Emergency;
 import utils.EmergencyLocation;
 
 public interface PrioritizationStrategy {

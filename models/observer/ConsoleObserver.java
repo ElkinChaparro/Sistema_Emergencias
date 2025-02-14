@@ -1,10 +1,10 @@
-package model.observer;
+package models.observer;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import images.ConsoleColor;
-import model.Emergency;
+import models.Emergency;
 
 public class ConsoleObserver implements ObserverEmergencies {
 

@@ -1,9 +1,9 @@
-package model.factory;
+package models.factory;
 
-import model.Emergency;
-import model.Fire;
-import model.Robbery;
-import model.TrafficAccident;
+import models.Emergency;
+import models.Fire;
+import models.Robbery;
+import models.TrafficAccident;
 import utils.EmergencyLocation;
 import utils.EmergencyType;
 import utils.SeverityLevel;

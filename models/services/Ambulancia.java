@@ -1,14 +1,11 @@
-package model.services;
+package models.services;
 
 import utils.*;
 import controller.*;
 
-public class Policia {
-    public Policia(String id, int personalDisponible, int combustible) {
-        super();
-    }
+public class Ambulancia {
 
-    public static void executeRobbery(EmergencyLocation location, SeverityLevel severityLevel) {
+    public static void executetrafficAccident(EmergencyLocation location, SeverityLevel severityLevel) {
         switch (location) {
             case ZONA_NORTE:
                 var operator01 = dailyRequest.litersOfGasoline.get(0);
@@ -73,6 +70,5 @@ public class Policia {
                 dailyRequest.ammunition.add(operator06);
                 break;
         }
-
     }
 }

@@ -1,4 +1,4 @@
-package model.interfaces;
+package models.interfaces;
 
 public interface lEmergencyService {
 

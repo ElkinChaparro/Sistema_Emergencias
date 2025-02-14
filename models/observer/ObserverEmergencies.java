@@ -1,6 +1,6 @@
-package model.observer;
+package models.observer;
 
-import model.Emergency;
+import models.Emergency;
 
 public interface ObserverEmergencies {
 

@@ -1,10 +1,10 @@
-package model;
+package models;
 
 import utils.*;
 
 public class TrafficAccident extends Emergency {
 
     public TrafficAccident(EmergencyLocation location, SeverityLevel severityLevel, int responseTime) {
-        super("AccidentedeTransito", location, severityLevel, responseTime);
+        super(EmergencyType.ACCIDENTE_TRANSITO, location, severityLevel, responseTime);
     }
 }
