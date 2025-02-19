@@ -140,16 +140,23 @@ public class EmergencyManager implements SubjectEmergencies {
             Emergency newEmergency = FactoryEmergencies.creatEmergency(type, location, severityLevel,
                     strategy.estimatedTime(location));
             if (newEmergency == null) {
-                System.out.println("Tipo de emergencia invalido");
+                    System.out.println(ConsoleColor.redText("""
+                            |===========================================================|
+                            |================-Tipo de emergencia invalido-==============|
+                            |===========================================================|"""));
                 return;
             }
 
             addEmergency(newEmergency);
-            System.out.println(ConsoleColor.greenText("Emergencia registrada exitosamente. "));
+            System.out.println(ConsoleColor.greenText("""
+                            |===========================================================|
+                            |============-Emergencia registrada exitosamente.-==========|
+                            |===========================================================|"""));
             // se agrega el observer y se notifica de la emergencia registrada
             addObserver(observer);
             notifyObservers(newEmergency);
             removeObserver(observer);
+            showMenu.pressEnter(scanner);
             exit = true;
         }
     }
@@ -195,7 +202,8 @@ public class EmergencyManager implements SubjectEmergencies {
             if (emergency.getLocation().equals(EmergencyLocation.ZONA_SUR)
                     || emergency.getLocation().equals(EmergencyLocation.ZONA_NORTE)) {
                 Thread.sleep(random.nextInt((45000 - 30000) + 1) + 30000);
-            } else if (emergency.getLocation().equals(EmergencyLocation.ZONA_OCCIDENTE)) {
+            } else if (emergency.getLocation().equals(EmergencyLocation.ZONA_OCCIDENTE)
+                    || (emergency.getLocation().equals(EmergencyLocation.ZONA_ORIENTE))) {
                 Thread.sleep(random.nextInt((29000 - 15000) + 1) + 15000);
             } else {
                 Thread.sleep(random.nextInt((10000 - 5000) + 1) + 5000);

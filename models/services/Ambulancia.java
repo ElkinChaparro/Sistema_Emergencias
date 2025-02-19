@@ -6,69 +6,82 @@ import controller.*;
 public class Ambulancia {
 
     public static void executetrafficAccident(EmergencyLocation location, SeverityLevel severityLevel) {
-        switch (location) {
-            case ZONA_NORTE:
-                var operator01 = dailyRequest.litersOfGasoline.get(0);
-                operator01 -= 15;
-                dailyRequest.litersOfGasoline.clear();
-                dailyRequest.litersOfGasoline.add(operator01);
-                break;
-            case ZONA_SUR:
-                var operator02 = dailyRequest.litersOfGasoline.get(0);
-                operator02 -= 15;
-                dailyRequest.litersOfGasoline.clear();
-                dailyRequest.litersOfGasoline.add(operator02);
-                break;
-            case ZONA_CENTRO:
-                var operator03 = dailyRequest.litersOfGasoline.get(0);
-                operator03 -= 15;
-                dailyRequest.litersOfGasoline.clear();
-                dailyRequest.litersOfGasoline.add(operator03);
-                break;
-            case ZONA_ORIENTE:
-                var operator04 = dailyRequest.litersOfGasoline.get(0);
-                operator04 -= 15;
-                dailyRequest.litersOfGasoline.clear();
-                dailyRequest.litersOfGasoline.add(operator04);
-                break;
-            case ZONA_OCCIDENTE:
-                var operator05 = dailyRequest.litersOfGasoline.get(0);
-                operator05 -= 15;
-                dailyRequest.litersOfGasoline.clear();
-                dailyRequest.litersOfGasoline.add(operator05);
-                break;
-        }
-        switch (severityLevel) {
-            case BAJO:
-                var operator01 = dailyRequest.patrols.get(0);
-                var operator02 = dailyRequest.ammunition.get(0);
-                operator01 -= 1;
-                operator02 -= 10;
-                dailyRequest.patrols.clear();
-                dailyRequest.patrols.add(operator01);
-                dailyRequest.ammunition.clear();
-                dailyRequest.ammunition.add(operator02);
-                break;
-            case MEDIO:
-                var operator03 = dailyRequest.patrols.get(0);
-                var operator04 = dailyRequest.ammunition.get(0);
-                operator03 -= 2;
-                operator04 -= 30;
-                dailyRequest.patrols.clear();
-                dailyRequest.patrols.add(operator03);
-                dailyRequest.ammunition.clear();
-                dailyRequest.ammunition.add(operator04);
-                break;
-            case ALTO:
-                var operator05 = dailyRequest.patrols.get(0);
-                var operator06 = dailyRequest.ammunition.get(0);
-                operator05 -= 3;
-                operator06 -= 50;
-                dailyRequest.patrols.clear();
-                dailyRequest.patrols.add(operator05);
-                dailyRequest.ammunition.clear();
-                dailyRequest.ammunition.add(operator06);
-                break;
+        if ((dailyRequest.litersOfGasoline.get(0) == 0) || (dailyRequest.ambulances.get(0) == 0)
+                || (dailyRequest.firstAidKits.get(0) == 0) || (dailyRequest.paramedics.get(0) == 0)) {
+            System.out.println("No hay recursos disponibles para atender la emergencia");
+        } else {
+            var operator01 = dailyRequest.litersOfGasoline.get(0);
+            var operator02 = dailyRequest.ambulances.get(0);
+            var operator03 = dailyRequest.firstAidKits.get(0);
+            var operator04 = dailyRequest.paramedics.get(0);
+            switch (location) {
+                case ZONA_NORTE:
+                    operator01 -= 75;
+                    operator02 -= 3;
+                    dailyRequest.litersOfGasoline.clear();
+                    dailyRequest.litersOfGasoline.add(operator01);
+                    dailyRequest.ambulances.clear();
+                    dailyRequest.ambulances.add(operator01);
+                    break;
+                case ZONA_SUR:
+                    operator01 -= 75;
+                    operator02 -= 3;
+                    dailyRequest.litersOfGasoline.clear();
+                    dailyRequest.litersOfGasoline.add(operator01);
+                    dailyRequest.ambulances.clear();
+                    dailyRequest.ambulances.add(operator01);
+                    break;
+                case ZONA_CENTRO:
+                    operator01 -= 25;
+                    operator02 -= 1;
+                    dailyRequest.litersOfGasoline.clear();
+                    dailyRequest.litersOfGasoline.add(operator01);
+                    dailyRequest.ambulances.clear();
+                    dailyRequest.ambulances.add(operator01);
+                    break;
+                case ZONA_ORIENTE:
+                    operator01 -= 50;
+                    operator02 -= 2;
+                    dailyRequest.litersOfGasoline.clear();
+                    dailyRequest.litersOfGasoline.add(operator01);
+                    dailyRequest.ambulances.clear();
+                    dailyRequest.ambulances.add(operator01);
+                    break;
+                case ZONA_OCCIDENTE:
+                    operator01 -= 50;
+                    operator02 -= 2;
+                    dailyRequest.litersOfGasoline.clear();
+                    dailyRequest.litersOfGasoline.add(operator01);
+                    dailyRequest.ambulances.clear();
+                    dailyRequest.ambulances.add(operator01);
+                    break;
+            }
+            switch (severityLevel) {
+                case BAJO:
+                    operator03 -= 2;
+                    operator04 -= 2;
+                    dailyRequest.firstAidKits.clear();
+                    dailyRequest.firstAidKits.add(operator02);
+                    dailyRequest.paramedics.clear();
+                    dailyRequest.paramedics.add(operator01);
+                    break;
+                case MEDIO:
+                    operator03 -= 4;
+                    operator04 -= 4;
+                    dailyRequest.firstAidKits.clear();
+                    dailyRequest.firstAidKits.add(operator02);
+                    dailyRequest.paramedics.clear();
+                    dailyRequest.paramedics.add(operator01);
+                    break;
+                case ALTO:
+                    operator03 -= 6;
+                    operator04 -= 6;
+                    dailyRequest.firstAidKits.clear();
+                    dailyRequest.firstAidKits.add(operator02);
+                    dailyRequest.paramedics.clear();
+                    dailyRequest.paramedics.add(operator01);
+                    break;
+            }
         }
     }
 }

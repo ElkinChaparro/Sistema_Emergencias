@@ -11,6 +11,8 @@ public class ConsoleColor {
     public static final String cyanColor = "\u001B[36m";
     // color azul
     public static final String blueColor = "\u001B[34m";
+//Color blanco
+    public static final String whiteColor = "\u001B[37m";
      // restablecer color
     public static final String resetColor = "\u001B[0m";
 
@@ -32,6 +34,11 @@ public class ConsoleColor {
     //metodo para obtener el texto en color Cyan
     public static String cyanText(String text){
         return cyanColor + text + resetColor;
+    }
+
+    //metodo para obtener el texto en color Blanco
+    public static String whiteText(String text){
+        return whiteColor + text + resetColor;
     }
 
     //metodo para obtener el texto en color azul

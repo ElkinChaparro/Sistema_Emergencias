@@ -8,7 +8,7 @@ import models.Emergency;
 
 public class ConsoleObserver implements ObserverEmergencies {
 
-    public String GetDateTime(){
+    public String GetDateTime() {
         // obtener fecha y hora actual
         LocalDateTime now = LocalDateTime.now();
 
@@ -19,18 +19,22 @@ public class ConsoleObserver implements ObserverEmergencies {
         return formattedDateTime;
     }
 
-
     @Override
     public void update(Emergency emergency) {
-        System.out.println(ConsoleColor.redText("""
+        System.out.print(ConsoleColor.redText("""
+                |===========================================================|
                 |================= ALERTA DE EMERGENCIA ====================|
                 |===========================================================|
                 |============== NUEVA EMERGENCIA RECIBIDA ==================|
+                |===========================================================|
                 """));
-        System.out.println("Tipo de emergencia: " + emergency.getType());
-        System.out.println("Ubicación: " + emergency.getLocation());
-        System.out.println("Prioridad: " + emergency.getPriority());
-        System.out.println("Fecha y hora del suceso: " + GetDateTime());
+        System.out.println(
+                ConsoleColor.redText("|=-") + ConsoleColor.whiteText("Tipo de emergencia: ") + emergency.getType());
+        System.out
+                .println(ConsoleColor.redText("|=-") + ConsoleColor.whiteText("Ubicación: ") + emergency.getLocation());
+        System.out.println(
+                ConsoleColor.redText("|=-") + ConsoleColor.whiteText("Fecha y hora del suceso: ") + GetDateTime());
+        System.out.println(ConsoleColor.redText("|===========================================================|"));
     }
 
 }

@@ -3,30 +3,68 @@ package images;
 public class imagesACCI {
 
     public static void Welcome() {
-System.out.print("""
-|===========================================================|
-|-MMMMMMMMMMk..................kMMMMMMMMMM-|                |
-|-MMMMMMMMMMk.'cllllllllllllc'.kMMMMMMMMMM-|                |
-|-MMMMMMMMMMk.'cllllllllllllc'.kMMMMMMMMMM-|  Sistema de    |
-|-MMMMMMMMMMk.'cllllllllllllc'.kMMMMMMMMMM-|  Emergencias   |
-|-MMMMMMMMMMk.'cllllllllllllc'.kMMMMMMMMMM-|                |
-|-cccccccccc,.'cllllllllllllc'.,cccccccccc-|   #123         |
-|- .,,,,,,,,,;:cllllllllllllc:;,,,,,,,,,. -|                |
-|- ,llllllllllllllllllllllllllllllllllll, -|                |
-|- ,llllllllllllllllllllllllllllllllllll, -| *Policia       |
-|- ,llllllllllllllllllllllllllllllllllll, -| *Ambulancia    |
-|- ,llllllllllllllllllllllllllllllllllll, -| *Bomberos      |
-|- ,llllllllllllllllllllllllllllllllllll,.-|                |
-|- ,cccccccccllllllllllllllllllccccccccc,.-|                |
-|-..'''''''''.;cllllllllllllc;.'''''''''..-|                |
-|-K000000000l.'cllllllllllllc'.o000000000K-|                |
-|-MMMMMMMMMMk.'cllllllllllllc'.kMMMMMMMMMM-| Version 1.0    |
-|-MMMMMMMMMMk.'cllllllclllllc'.kMMMMMMMMMM-|                |
-|-MMMMMMMMMMk.'cl:;::;,;;;;;;..kMMMMMMMMMM-| Felix Islande  |
-|-MMMMMMMMMMk..;:'.''..........kMMMMMMMMMM-| Elkin Chaparro |
-|-MMMMMMMMMMk.                .kMMMMMMMMMM-|                |
-|===========================================================|
-        """);
-    }
+        System.out.println(ConsoleColor.cyanText("|===========================================================|"));
+        System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("MMMMMMMMMMk")
+                + ConsoleColor.whiteText("..................") + ConsoleColor.blueText("kMMMMMMMMMM")
+                + ConsoleColor.cyanText("-|                |"));
+        System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("MMMMMMMMMMk")
+                + ConsoleColor.whiteText(".'") + ConsoleColor.redText("cllllllllllllc") + ConsoleColor.whiteText("'.")
+                + ConsoleColor.blueText("kMMMMMMMMMM") + ConsoleColor.cyanText("-|                |"));
+        System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("MMMMMMMMMMk")
+                + ConsoleColor.whiteText(".'") + ConsoleColor.redText("cllllllllllllc") + ConsoleColor.whiteText("'.")
+                + ConsoleColor.blueText("kMMMMMMMMMM") + ConsoleColor.cyanText("-|  Sistema de    |"));
+        System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("MMMMMMMMMMk")
+                + ConsoleColor.whiteText(".'") + ConsoleColor.redText("cllllllllllllc") + ConsoleColor.whiteText("'.")
+                + ConsoleColor.blueText("kMMMMMMMMMM") + ConsoleColor.cyanText("-|  Emergencias   |"));
+        System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("MMMMMMMMMMk")
+                + ConsoleColor.whiteText(".'") + ConsoleColor.redText("cllllllllllllc") + ConsoleColor.whiteText("'.")
+                + ConsoleColor.blueText("kMMMMMMMMMM") + ConsoleColor.cyanText("-|                |"));
+        System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("cccccccccc")
+                + ConsoleColor.whiteText(",.'") + ConsoleColor.redText("cllllllllllllc") + ConsoleColor.whiteText("'.,")
+                + ConsoleColor.blueText("cccccccccc") + ConsoleColor.cyanText("-|   #123         |"));
+        System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.whiteText(" .,,,,,,,,,;:")
+                + ConsoleColor.redText("cllllllllllllc") + ConsoleColor.whiteText(":;,,,,,,,,,.")
+                + ConsoleColor.cyanText(" -|                |"));
+        System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.whiteText(" ,")
+                + ConsoleColor.redText("llllllllllllllllllllllllllllllllllll") + ConsoleColor.whiteText(",")
+                + ConsoleColor.cyanText(" -|                |"));
+        System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.whiteText(" ,")
+                + ConsoleColor.redText("llllllllllllllllllllllllllllllllllll") + ConsoleColor.whiteText(",")
+                + ConsoleColor.cyanText(" -| *Policia       |"));
+        System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.whiteText(" ,")
+                + ConsoleColor.redText("llllllllllllllllllllllllllllllllllll") + ConsoleColor.whiteText(",")
+                + ConsoleColor.cyanText(" -| *Ambulancia    |"));
+        System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.whiteText(" ,")
+                + ConsoleColor.redText("llllllllllllllllllllllllllllllllllll") + ConsoleColor.whiteText(",")
+                + ConsoleColor.cyanText(" -| *Bomberos      |"));
+        System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.whiteText(" ,")
+                + ConsoleColor.redText("llllllllllllllllllllllllllllllllllll") + ConsoleColor.whiteText(",")
+                + ConsoleColor.cyanText(" -|                |"));
+        System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.whiteText(" ,")
+                + ConsoleColor.redText("cccccccccllllllllllllllllllccccccccc") + ConsoleColor.whiteText(",")
+                + ConsoleColor.cyanText(" -|                |"));
+        System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.whiteText("  '''''''''.;")
+                + ConsoleColor.redText("cllllllllllllc") + ConsoleColor.whiteText(";.'''''''''..")
+                + ConsoleColor.cyanText("-|                |"));
+        System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("K000000000l")
+                + ConsoleColor.whiteText(".'") + ConsoleColor.redText("cllllllllllllc") + ConsoleColor.whiteText("'.")
+                + ConsoleColor.blueText("o000000000K") + ConsoleColor.cyanText("-|                |"));
+        System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("MMMMMMMMMMk")
+                + ConsoleColor.whiteText(".'") + ConsoleColor.redText("cllllllllllllc") + ConsoleColor.whiteText("'.")
+                + ConsoleColor.blueText("kMMMMMMMMMM") + ConsoleColor.cyanText("-| Version 1.0    |"));
+        System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("MMMMMMMMMMk")
+                + ConsoleColor.whiteText(".'") + ConsoleColor.redText("cllllllllllllc") + ConsoleColor.whiteText("'.")
+                + ConsoleColor.blueText("kMMMMMMMMMM") + ConsoleColor.cyanText("-|                |"));
+        System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("MMMMMMMMMMk")
+                + ConsoleColor.whiteText(".'") + ConsoleColor.redText("cllllllllllllc") + ConsoleColor.whiteText("'.")
+                + ConsoleColor.blueText("kMMMMMMMMMM") + ConsoleColor.cyanText("-| Felix Islande  |"));
+        System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("MMMMMMMMMMk")
+                + ConsoleColor.whiteText(".'") + ConsoleColor.redText("cllllllllllllc") + ConsoleColor.whiteText("'.")
+                + ConsoleColor.blueText("kMMMMMMMMMM") + ConsoleColor.cyanText("-| Elkin Chaparro |"));
+        System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("MMMMMMMMMMk")
+                + ConsoleColor.whiteText("..................") + ConsoleColor.blueText("kMMMMMMMMMM")
+                + ConsoleColor.cyanText("-|                |"));
+        System.out.println(ConsoleColor.cyanText("|===========================================================|"));
 
+    }
 }
