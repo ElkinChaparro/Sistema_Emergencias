@@ -7,6 +7,7 @@ import images.showMenu;
 
 public class dailyRequest {
         static Scanner scGame = new Scanner(System.in);
+        // Se crean las listas para almacenar los suministros diarios
         public static List<Integer> firstAidKits = new ArrayList<>();
         public static List<Integer> ambulances = new ArrayList<>();
         public static List<Integer> paramedics = new ArrayList<>();
@@ -18,13 +19,9 @@ public class dailyRequest {
         public static List<Integer> police = new ArrayList<>();
         public static List<Integer> litersOfGasoline = new ArrayList<>();
 
-        public static void Application() {
-                System.out.println(ConsoleColor.greenText("""
-                                |===========================================================|
-                                |======-Bienvenido al sistema de suministros diarios-=======|
-                                |===========================================================|
-                                |=-Por favor, ingrese la cantidad de suministros            |
-                                |=-con los que cuenta el dia de hoy.                        |"""));
+        public static void Application() throws InterruptedException {
+                // Se solicitan los suministros diarios
+                iniciarListas();
                 solfirstAidKits();
                 solambulances();
                 solparamedics();
@@ -35,20 +32,79 @@ public class dailyRequest {
                 solpatrols();
                 solpolice();
                 sollitersOfGasoline();
+                showMenu.printLoadingBar();
                 System.out.println(ConsoleColor.greenText("""
                                 |===========================================================|
                                 |==========-Suministros registrados correctamente-==========|
                                 |===========================================================|"""));
         }
 
+        public static void iniciarListas() {
+                int operator = 0;
+                firstAidKits.add(operator);
+                ambulances.add(operator);
+                paramedics.add(operator);
+                litersOfWater.add(operator);
+                fireTrucks.add(operator);
+                firefighters.add(operator);
+                ammunition.add(operator);
+                patrols.add(operator);
+                police.add(operator);
+                litersOfGasoline.add(operator);
+        }
+
+        public static void añadirRecursos() {
+                showMenu.añadirRecursos(null);
+                var option = Integer.parseInt(scGame.nextLine());
+                switch (option) {
+                        case 1:
+                                solfirstAidKits();
+                                break;
+                        case 2:
+                                solambulances();
+                                break;
+                        case 3:
+                                solparamedics();
+                                break;
+                        case 4:
+                                solLitersOfWater();
+                                break;
+                        case 5:
+                                solfireTrucks();
+                                break;
+                        case 6:
+                                solfirefighters();
+                                break;
+                        case 7:
+                                solammunition();
+                                break;
+                        case 8:
+                                solpatrols();
+                                break;
+                        case 9:
+                                solpolice();
+                                break;
+                        case 10:
+                                sollitersOfGasoline();
+                                break;
+                        default:
+                                break;
+                }
+        }
+
         public static void solfirstAidKits() {
-                System.out.print(ConsoleColor.greenText("""
-                                |===========================================================|
-                                |-Con cuantos botiquines contamos el dia de hoy?            |
-                                |==-"""));
+                var operator = firstAidKits.get(0);
+                System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + ConsoleColor.blueText("Ingrese la cantidad de botiquines de primeros auxilios")
+                                + ConsoleColor.cyanText("    |"));
+                System.out.print(ConsoleColor.cyanText("|==-"));
                 try {
-                        var option = Integer.parseInt(scGame.nextLine());
-                        firstAidKits.add(option);
+                        int option = Integer.parseInt(scGame.nextLine());
+                        int result = operator + option;
+                        firstAidKits.clear();
+                        firstAidKits.add(result);
                 } catch (NumberFormatException e) {
                         showMenu.serrMenu();
                         solfirstAidKits();
@@ -59,13 +115,18 @@ public class dailyRequest {
         }
 
         private static void solambulances() {
-                System.out.print(ConsoleColor.greenText("""
-                                |===========================================================|
-                                |-Con cuantas ambulancias contamos el dia de hoy?           |
-                                |==-"""));
+                var operator = ambulances.get(0);
+                System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + ConsoleColor.blueText("Ingrese la cantidad de ambulancias")
+                                + ConsoleColor.cyanText("                        |"));
+                System.out.print(ConsoleColor.cyanText("|==-"));
                 try {
-                        var option = Integer.parseInt(scGame.nextLine());
-                        ambulances.add(option);
+                        int option = Integer.parseInt(scGame.nextLine());
+                        int result = operator + option;
+                        ambulances.clear();
+                        ambulances.add(result);
                 } catch (NumberFormatException e) {
                         showMenu.serrMenu();
                         solambulances();
@@ -76,13 +137,18 @@ public class dailyRequest {
         }
 
         private static void solparamedics() {
-                System.out.print(ConsoleColor.greenText("""
-                                |===========================================================|
-                                |-Con cuantos paramedicos contamos el dia de hoy?           |
-                                |==-"""));
+                var operator = paramedics.get(0);
+                System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + ConsoleColor.blueText("Ingrese la cantidad de paramedicos")
+                                + ConsoleColor.cyanText("                        |"));
+                System.out.print(ConsoleColor.cyanText("|==-"));
                 try {
                         var option = Integer.parseInt(scGame.nextLine());
-                        paramedics.add(option);
+                        var result = operator + option;
+                        paramedics.clear();
+                        paramedics.add(result);
                 } catch (NumberFormatException e) {
                         showMenu.serrMenu();
                         solparamedics();
@@ -93,13 +159,18 @@ public class dailyRequest {
         }
 
         private static void solLitersOfWater() {
-                System.out.print(ConsoleColor.greenText("""
-                                |===========================================================|
-                                |-Con cuantos Litros de agua contamos el dia de hoy?        |
-                                |==-"""));
+                var operator = litersOfWater.get(0);
+                System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + ConsoleColor.blueText("Ingrese la cantidad de litros de agua")
+                                + ConsoleColor.cyanText("                     |"));
+                System.out.print(ConsoleColor.cyanText("|==-"));
                 try {
                         var option = Integer.parseInt(scGame.nextLine());
-                        litersOfWater.add(option);
+                        var result = operator + option;
+                        litersOfWater.clear();
+                        litersOfWater.add(result);
                 } catch (NumberFormatException e) {
                         showMenu.serrMenu();
                         solLitersOfWater();
@@ -110,13 +181,18 @@ public class dailyRequest {
         }
 
         private static void solfireTrucks() {
-                System.out.print(ConsoleColor.greenText("""
-                                |===========================================================|
-                                |-Con cuantos carros de bomberos contamos el dia de hoy?    |
-                                |==-"""));
+                var operator = fireTrucks.get(0);
+                System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + ConsoleColor.blueText("Ingrese la cantidad de carros de bomberos")
+                                + ConsoleColor.cyanText("                 |"));
+                System.out.print(ConsoleColor.cyanText("|==-"));
                 try {
                         var option = Integer.parseInt(scGame.nextLine());
-                        fireTrucks.add(option);
+                        var result = operator + option;
+                        fireTrucks.clear();
+                        fireTrucks.add(result);
                 } catch (NumberFormatException e) {
                         showMenu.serrMenu();
                         solfireTrucks();
@@ -127,13 +203,18 @@ public class dailyRequest {
         }
 
         private static void solfirefighters() {
-                System.out.print(ConsoleColor.greenText("""
-                                |===========================================================|
-                                |-Con cuantos bomberos contamos el dia de hoy?              |
-                                |==-"""));
+                var operator = firefighters.get(0);
+                System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + ConsoleColor.blueText("Ingrese la cantidad de bomberos")
+                                + ConsoleColor.cyanText("                           |"));
+                System.out.print(ConsoleColor.cyanText("|==-"));
                 try {
                         var option = Integer.parseInt(scGame.nextLine());
-                        firefighters.add(option);
+                        var result = operator + option;
+                        firefighters.clear();
+                        firefighters.add(result);
                 } catch (NumberFormatException e) {
                         showMenu.serrMenu();
                         solfirefighters();
@@ -144,13 +225,18 @@ public class dailyRequest {
         }
 
         private static void solammunition() {
-                System.out.print(ConsoleColor.greenText("""
-                                |===========================================================|
-                                |-Con cuantas municiones contamos el dia de hoy?            |
-                                |==-"""));
+                var operator = ammunition.get(0);
+                System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + ConsoleColor.blueText("Ingrese la cantidad de municiones")
+                                + ConsoleColor.cyanText("                         |"));
+                System.out.print(ConsoleColor.cyanText("|==-"));
                 try {
                         var option = Integer.parseInt(scGame.nextLine());
-                        ammunition.add(option);
+                        var result = operator + option;
+                        ammunition.clear();
+                        ammunition.add(result);
                 } catch (NumberFormatException e) {
                         showMenu.serrMenu();
                         solammunition();
@@ -161,13 +247,18 @@ public class dailyRequest {
         }
 
         private static void solpatrols() {
-                System.out.print(ConsoleColor.greenText("""
-                                |===========================================================|
-                                |-Con cuantas patrullas contamos el dia de hoy?             |
-                                |==-"""));
+                var operator = patrols.get(0);
+                System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + ConsoleColor.blueText("Ingrese la cantidad de patrullas")
+                                + ConsoleColor.cyanText("                          |"));
+                System.out.print(ConsoleColor.cyanText("|==-"));
                 try {
                         var option = Integer.parseInt(scGame.nextLine());
-                        patrols.add(option);
+                        var result = operator + option;
+                        patrols.clear();
+                        patrols.add(result);
                 } catch (NumberFormatException e) {
                         showMenu.serrMenu();
                         solpatrols();
@@ -178,13 +269,18 @@ public class dailyRequest {
         }
 
         private static void solpolice() {
-                System.out.print(ConsoleColor.greenText("""
-                                |===========================================================|
-                                |-Con cuantos policias contamos el dia de hoy?              |
-                                |==-"""));
+                var operator = police.get(0);
+                System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + ConsoleColor.blueText("Ingrese la cantidad de policias")
+                                + ConsoleColor.cyanText("                           |"));
+                System.out.print(ConsoleColor.cyanText("|==-"));
                 try {
                         var option = Integer.parseInt(scGame.nextLine());
-                        police.add(option);
+                        var result = operator + option;
+                        police.clear();
+                        police.add(result);
                 } catch (NumberFormatException e) {
                         showMenu.serrMenu();
                         solpolice();
@@ -195,13 +291,18 @@ public class dailyRequest {
         }
 
         private static void sollitersOfGasoline() {
-                System.out.print(ConsoleColor.greenText("""
-                                |===========================================================|
-                                |-Con cuantos litros de gasolina contamos el dia de hoy?    |
-                                |==-"""));
+                var operator = litersOfGasoline.get(0);
+                System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + ConsoleColor.blueText("Ingrese la cantidad de galones de gasolina")
+                                + ConsoleColor.cyanText("                |"));
+                System.out.print(ConsoleColor.cyanText("|==-"));
                 try {
                         var option = Integer.parseInt(scGame.nextLine());
-                        litersOfGasoline.add(option);
+                        var result = operator + option;
+                        litersOfGasoline.clear();
+                        litersOfGasoline.add(result);
                 } catch (NumberFormatException e) {
                         showMenu.serrMenu();
                         sollitersOfGasoline();

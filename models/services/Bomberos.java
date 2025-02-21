@@ -2,6 +2,7 @@ package models.services;
 
 import utils.*;
 import controller.*;
+import images.ConsoleColor;
 
 public class Bomberos {
 
@@ -13,7 +14,9 @@ public class Bomberos {
         int operator = 0;
 
         if (gasoline <= 0 || fireTrucks <= 0 || litersOfWater <= 0 || firefighters <= 0) {
-            System.out.println("No hay recursos disponibles para atender la emergencia");
+            System.out.println(ConsoleColor.orangeText("|===========================================================|"));
+            System.out.println(ConsoleColor.orangeText("|=-No hay recursos disponibles para atender la emergencia-==|"));
+            System.out.println(ConsoleColor.orangeText("|===========================================================|"));
         } else {
             switch (severityLevel) {
                 case BAJO:

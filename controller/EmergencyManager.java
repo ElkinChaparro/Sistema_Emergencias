@@ -12,6 +12,7 @@ import utils.*;
 
 public class EmergencyManager implements SubjectEmergencies {
 
+    // Atributos
     private static EmergencyManager instancia;
     private static PrioritizationStrategy strategy;
     private static PriorityQueue<Emergency> ePriorityQueue;
@@ -24,6 +25,7 @@ public class EmergencyManager implements SubjectEmergencies {
     private int numberEmergenciesAtt;
     private int totalAttentionTime;
 
+    // Constructor
     public EmergencyManager() {
         ePriorityQueue = new PriorityQueue<>();
         attendedEmergencies = new ArrayList<>();
@@ -32,6 +34,7 @@ public class EmergencyManager implements SubjectEmergencies {
         totalAttentionTime = 0;
     }
 
+    // Getters y Setters
     public void setStrategy(PrioritizationStrategy strategy) {
         EmergencyManager.strategy = strategy;
     }
@@ -43,7 +46,8 @@ public class EmergencyManager implements SubjectEmergencies {
         return instancia;
     }
 
-    public void registerEmergencyMenu(Scanner scanner) {
+    // Función para registrar una nueva emergencia
+    public void registerEmergencyMenu(Scanner scanner) throws InterruptedException {
         boolean exit = false;
         EmergencyType type = null;
         EmergencyLocation location = null;
@@ -143,6 +147,7 @@ public class EmergencyManager implements SubjectEmergencies {
                 break;
             }
 
+            // Se crea la nueva emergencia
             Emergency newEmergency = FactoryEmergencies.creatEmergency(type, location, severityLevel,
                     strategy.estimatedTime(location));
             if (newEmergency == null) {
@@ -154,19 +159,23 @@ public class EmergencyManager implements SubjectEmergencies {
             }
             // Se agrega la emergencia a la lista de emergencias
             addEmergency(newEmergency);
+            // Barra de carga
+            showMenu.printLoadingBar();
             // Se imprime la emergencia registrada
             System.out.println(ConsoleColor.greenText("""
                     |===========================================================|
                     |============-Emergencia registrada exitosamente.-==========|
                     |===========================================================|"""));
+            // Simulates a process with a small delay
+            Thread.sleep(500);
             // se agrega el observer y se notifica de la emergencia registrada
             addObserver(observer);
             notifyObservers(newEmergency);
             removeObserver(observer);
-            // Se imprime un mensaje de confirmación
-            showMenu.pressEnter(scanner);
             exit = true;
         }
+        // Se imprime un mensaje de confirmación
+        showMenu.pressEnter(scanner);
     }
 
     // Función para aregar una emergencia nueva
@@ -226,19 +235,32 @@ public class EmergencyManager implements SubjectEmergencies {
     public Emergency handleNextEmergency() {
         Emergency nextEmergency = peekNextEmergency();
         if (nextEmergency == null) {
-            System.out.println(ConsoleColor.orangeText("|===========================================================|"));
-            System.out.println(ConsoleColor.orangeText("|==============-No hay emergencias pendientes-==============|"));
-            System.out.println(ConsoleColor.orangeText("|===========================================================|"));
+            // Si no hay emergencias pendientes
+            System.out
+                    .println(ConsoleColor.greenText("|===========================================================|"));
+            System.out
+                    .println(ConsoleColor.greenText("|==============-No hay emergencias pendientes-==============|"));
+            System.out
+                    .println(ConsoleColor.greenText("|===========================================================|"));
         } else {
+
+            // Si hay emergencias pendientes
             printAllEmergencies();
-            System.out.println("Desea atender la siguiente emergencia? 's' o 'n'");
+            // Se imprime el mensaje de confirmación
+            System.out
+                    .println(ConsoleColor.cyanText("|===========================================================|"));
+            System.out
+                    .println(ConsoleColor.cyanText("|====-Desea atender la siguiente emergencia? |S| o |N|-=====|"));
+            System.out
+                    .println(ConsoleColor.cyanText("|===========================================================|"));
             String option = scanner.nextLine();
             if (option.equalsIgnoreCase("s")) {
-                nextEmergency = ePriorityQueue.poll();// Obtiene y elimina la emergencia con mayor prioridad
+                // Obtiene y elimina la emergencia con mayor prioridad
+                nextEmergency = ePriorityQueue.poll();
                 attendedEmergencies.add(nextEmergency);
                 // se llama al metodo para manejar la emergencia como una tarea secundaria
                 backgroundEmergency(nextEmergency);
-                System.out.println("Atendiendo emergencia: " + nextEmergency.getDescription());
+                System.out.println("|-Atendiendo emergencia: " + nextEmergency.getDescription());
                 numberEmergenciesAtt++;
                 operations(nextEmergency);
             }
@@ -268,9 +290,11 @@ public class EmergencyManager implements SubjectEmergencies {
 
         if (nextEmergency.getType() == EmergencyType.ROBO) {
             Policia.executeRobbery(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
-        } else if (nextEmergency.getType() == EmergencyType.ACCIDENTE_TRANSITO) {
+        }
+        if (nextEmergency.getType() == EmergencyType.ACCIDENTE_TRANSITO) {
             Ambulancia.executetrafficAccident(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
-        } else {
+        }
+        if (nextEmergency.getType() == EmergencyType.INCENDIO) {
             Bomberos.executeFire(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
         }
     }
@@ -282,7 +306,7 @@ public class EmergencyManager implements SubjectEmergencies {
 
     @Override
     public void removeObserver(ObserverEmergencies observerEmergencies) {
-        observers.remove(numberEmergenciesAtt);
+        observers.remove(observerEmergencies);
     }
 
     @Override
