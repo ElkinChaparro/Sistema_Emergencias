@@ -6,6 +6,23 @@ import controller.dailyRequest;
 
 public class showMenu {
 
+        // Welcome
+        public static void Welcome() {
+                System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
+                System.out.println(ConsoleColor.cyanText("|=====-")
+                                + ConsoleColor.blueText("BIENVENIDO al SISTEMA DE GESTIÓN DE EMERGENCIAS")
+                                + ConsoleColor.cyanText("-=====|"));
+                System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + ConsoleColor.blueText("Por favor, ingrese la cantidad de suministros")
+                                + ConsoleColor.cyanText("             |"));
+                System.out.println(
+                                ConsoleColor.cyanText("|-") + ConsoleColor.blueText("con los que cuenta el dia de hoy.")
+                                                + ConsoleColor.cyanText("                         |"));
+        }
+
         // Menu principal
         public static Integer menuMain(Integer option) {
                 System.out.println(
@@ -25,13 +42,56 @@ public class showMenu {
                                 + " 3. Recursos actuales                                     "
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + " 4. Emergencais pendientes                                "
+                                + " 4. Añadir recursos                                       "
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + " 5. Mostrar estadísticas del día                          "
+                                + " 5. Emergencias pendientes                                "
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + " 6. Finalizar jornada **                                  "
+                                + " 6. Mostrar estadísticas del día                          "
+                                + ConsoleColor.cyanText("|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + " 7. Finalizar jornada **                                  "
+                                + ConsoleColor.cyanText("|"));
+                System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
+                System.out.print(ConsoleColor.orangeText("|- Seleccione una opcion: "));
+                option = 0;
+                return option;
+        }
+
+        public static Integer añadirRecursos(Integer option) {
+                System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + " 1. Añadir Botiquines                                     "
+                                + ConsoleColor.cyanText("|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + " 2. Añadir Ambulancias                                    "
+                                + ConsoleColor.cyanText("|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + " 3. Añadir Paramedicos                                    "
+                                + ConsoleColor.cyanText("|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + " 4. Añadir Litros de Agua                                 "
+                                + ConsoleColor.cyanText("|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + " 5. Añadir Carro de bomberos                              "
+                                + ConsoleColor.cyanText("|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + " 6. añadir Bomberos                                       "
+                                + ConsoleColor.cyanText("|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + " 7. añañdir Municion                                      "
+                                + ConsoleColor.cyanText("|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + " 8. Añadir Patrullas de policia                           "
+                                + ConsoleColor.cyanText("|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + " 9. Añadir Policias                                       "
+                                + ConsoleColor.cyanText("|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + " 10. Añadir Litros de Gasolina                            "
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -153,5 +213,28 @@ public class showMenu {
                                 |==============-Presione Enter para Continuar-==============|
                                 |===========================================================|"""));
                 scGame.nextLine();
+        }
+
+        public static void printLoadingBar() throws InterruptedException {
+                int total = 53;
+                for (int i = 0; i <= total; i++) {
+                        // Calcula el porcentaje
+                        int porcentaje = (i * 100) / total;
+                        // Genera la barra de carga
+                        StringBuilder barra = new StringBuilder("[");
+                        for (int j = 0; j < total; j++) {
+                                if (j < i) {
+                                        barra.append("=");
+                                } else {
+                                        barra.append(" ");
+                                }
+                        }
+                        barra.append("] ").append(porcentaje).append("%");
+                        // Imprime la barra de carga
+                        System.out.print("\r" + barra.toString());
+                        // Simula un trabajo en progreso
+                        Thread.sleep(50);
+                }
+                System.out.println(" ");
         }
 }

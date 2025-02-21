@@ -9,7 +9,7 @@ public class Main002 {
 
     static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         boolean exit = false;
         // Se crea la instancia
@@ -17,11 +17,13 @@ public class Main002 {
         manager.setStrategy(new PrioritizationEmergenciesStrategy());
         // Impresion de imagen de bienvenida
         imagesACCI.Welcome();
+        showMenu.Welcome();
         // Se almacenan los suministros diarios
         dailyRequest.Application();
         showMenu.pressEnter(scanner);
-        // Menú inicial
+
         while (!exit) {
+            // Se muestra el menú principal
             var option = showMenu.menuMain(null);
 
             // Se valida que la opción sea un número
@@ -47,16 +49,20 @@ public class Main002 {
                     showMenu.pressEnter(scanner);
                     break;
                 case 4:
+                    // Solicitar suministros
+                    dailyRequest.añadirRecursos();
+                    break;
+                case 5:
                     // Emergencias pendeintes
                     manager.printAllEmergencies();
                     showMenu.pressEnter(scanner);
                     break;
-                case 5:
+                case 6:
                     // Estadisticas
                     manager.showStatistics();
                     showMenu.pressEnter(scanner);
                     break;
-                case 6:
+                case 7:
                     // Finalizar jornada
                     break;
                 default:
