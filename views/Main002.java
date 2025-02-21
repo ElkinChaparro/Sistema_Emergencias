@@ -48,7 +48,7 @@ public class Main002 {
                     showMenu.pressEnter(scanner);
                     break;
                 case 6:
-                    // Finalizar jornada
+                    BackgroundEmergencies.printBar();
                     break;
                 default:
                     showMenu.serrMenu();

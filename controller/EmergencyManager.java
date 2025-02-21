@@ -1,6 +1,9 @@
 package controller;
 
+import java.time.temporal.TemporalAdjuster;
 import java.util.*;
+
+import javax.crypto.spec.RC2ParameterSpec;
 
 import images.*;
 import models.*;
@@ -28,6 +31,7 @@ public class EmergencyManager implements SubjectEmergencies {
         ePriorityQueue = new PriorityQueue<>();
         attendedEmergencies = new ArrayList<>();
         observers = new ArrayList<>();
+
         numberEmergenciesAtt = 0;
         totalAttentionTime = 0;
     }
@@ -156,9 +160,9 @@ public class EmergencyManager implements SubjectEmergencies {
             addObserver(observer);
             notifyObservers(newEmergency);
             removeObserver(observer);
-            showMenu.pressEnter(scanner);
             exit = true;
         }
+        showMenu.pressEnter(scanner);
     }
 
     // Función para aregar una emergencia nueva
@@ -173,52 +177,15 @@ public class EmergencyManager implements SubjectEmergencies {
         return ePriorityQueue.peek(); // Obtiene la emergencia con mayor prioridad
     }
 
-    // Ejecuta un hilo secundario para atender la emergencia y poder seguir usando
-    // el programa
-    public void backgroundEmergency(Emergency emergency) {
-        Thread emergencyThread = new Thread(new Runnable() {
 
-            @Override
-            public void run() {
-                emergency.startAttention();
-                attendedEmergencie(emergency);
-                emergency.endAttention();
-                System.out.println("\nLa emergencia: " + emergency.getDescription() + " ha sido atendida exitosamente");
-                // transformar de milisegundos a segundos
-                long durationMillis = emergency.calculateAttentionTime();
-                double durationSeconds = durationMillis / 1000.0;
-                System.out.println("La emergencia ha sido atentido en: " + durationSeconds + " segundos");
-                totalAttentionTime += durationSeconds;
-            }
-        });
-        emergencyThread.start();
-        System.out.println("continua la ejecución");
-    }
 
-    // tiempo de ejecucion de la emergencia
-    public static void attendedEmergencie(Emergency emergency) {
-        Random random = new Random();
-        try {
-            if (emergency.getLocation().equals(EmergencyLocation.ZONA_SUR)
-                    || emergency.getLocation().equals(EmergencyLocation.ZONA_NORTE)) {
-                Thread.sleep(random.nextInt((45000 - 30000) + 1) + 30000);
-            } else if (emergency.getLocation().equals(EmergencyLocation.ZONA_OCCIDENTE)
-                    || (emergency.getLocation().equals(EmergencyLocation.ZONA_ORIENTE))) {
-                Thread.sleep(random.nextInt((29000 - 15000) + 1) + 15000);
-            } else {
-                Thread.sleep(random.nextInt((10000 - 5000) + 1) + 5000);
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 
     // Función para manejar o atender la siguiente emergencia, ordenadas en una
     // "Queue" según su prioridad
     public Emergency handleNextEmergency() {
         printAllEmergencies();
         Emergency nextEmergency = peekNextEmergency();
-
+        BackgroundEmergencies bEmergencies = new BackgroundEmergencies(nextEmergency);
         if (nextEmergency != null) {
             System.out.println("Desea atender la siguiente emergencia? 's' o 'n'");
             String option = scanner.nextLine();
@@ -227,7 +194,7 @@ public class EmergencyManager implements SubjectEmergencies {
                 nextEmergency = ePriorityQueue.poll();// Obtiene y elimina la emergencia con mayor prioridad
                 attendedEmergencies.add(nextEmergency);
                 // se llama al metodo para manejar la emergencia como una tarea secundaria
-                backgroundEmergency(nextEmergency);
+                bEmergencies.backgroundEmergency(nextEmergency);
                 System.out.println("Atendiendo emergencia: " + nextEmergency.getDescription());
                 numberEmergenciesAtt++;
             }
@@ -273,7 +240,7 @@ public class EmergencyManager implements SubjectEmergencies {
 
     @Override
     public void removeObserver(ObserverEmergencies observerEmergencies) {
-        observers.remove(numberEmergenciesAtt);
+        observers.remove(observerEmergencies);
     }
 
     @Override

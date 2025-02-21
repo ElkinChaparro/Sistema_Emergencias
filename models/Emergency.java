@@ -3,7 +3,7 @@ package models;
 import models.strategy.PrioritizationEmergenciesStrategy;
 import utils.*;
 
-public abstract class Emergency implements Comparable<Emergency> {
+public abstract class Emergency implements Comparable<Emergency>{
     private EmergencyType type;
     private EmergencyLocation location;
     private SeverityLevel severityLevel;
