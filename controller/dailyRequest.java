@@ -81,7 +81,7 @@ public class dailyRequest {
                                 |-Con cuantos policias contamos el dia de hoy?              |
                                 |==-"""));
                 var option09 = scGame.nextInt();
-                patrols.add(option09);
+                police.add(option09);
 
                 System.out.print(ConsoleColor.greenText("""
                                 |===========================================================|

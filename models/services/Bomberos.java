@@ -21,7 +21,7 @@ public class Bomberos {
                     dailyRequest.litersOfGasoline.clear();
                     dailyRequest.litersOfGasoline.add(operator01);
                     dailyRequest.fireTrucks.clear();
-                    dailyRequest.fireTrucks.add(operator01);
+                    dailyRequest.fireTrucks.add(operator02);
                     break;
                 case ZONA_SUR:
                     operator01 -= 75;
@@ -29,7 +29,7 @@ public class Bomberos {
                     dailyRequest.litersOfGasoline.clear();
                     dailyRequest.litersOfGasoline.add(operator01);
                     dailyRequest.fireTrucks.clear();
-                    dailyRequest.fireTrucks.add(operator01);
+                    dailyRequest.fireTrucks.add(operator02);
                     break;
                 case ZONA_CENTRO:
                     operator01 -= 25;
@@ -37,7 +37,7 @@ public class Bomberos {
                     dailyRequest.litersOfGasoline.clear();
                     dailyRequest.litersOfGasoline.add(operator01);
                     dailyRequest.fireTrucks.clear();
-                    dailyRequest.fireTrucks.add(operator01);
+                    dailyRequest.fireTrucks.add(operator02);
                     break;
                 case ZONA_ORIENTE:
                     operator01 -= 50;
@@ -45,7 +45,7 @@ public class Bomberos {
                     dailyRequest.litersOfGasoline.clear();
                     dailyRequest.litersOfGasoline.add(operator01);
                     dailyRequest.fireTrucks.clear();
-                    dailyRequest.fireTrucks.add(operator01);
+                    dailyRequest.fireTrucks.add(operator02);
                     break;
                 case ZONA_OCCIDENTE:
                     operator01 -= 50;
@@ -53,7 +53,7 @@ public class Bomberos {
                     dailyRequest.litersOfGasoline.clear();
                     dailyRequest.litersOfGasoline.add(operator01);
                     dailyRequest.fireTrucks.clear();
-                    dailyRequest.fireTrucks.add(operator01);
+                    dailyRequest.fireTrucks.add(operator02);
                     break;
             }
             switch (severityLevel) {
@@ -61,25 +61,25 @@ public class Bomberos {
                     operator03 -= 200;
                     operator04 -= 2;
                     dailyRequest.litersOfWater.clear();
-                    dailyRequest.litersOfWater.add(operator02);
+                    dailyRequest.litersOfWater.add(operator03);
                     dailyRequest.firefighters.clear();
-                    dailyRequest.firefighters.add(operator01);
+                    dailyRequest.firefighters.add(operator04);
                     break;
                 case MEDIO:
                     operator03 -= 400;
                     operator04 -= 4;
                     dailyRequest.litersOfWater.clear();
-                    dailyRequest.litersOfWater.add(operator02);
+                    dailyRequest.litersOfWater.add(operator03);
                     dailyRequest.firefighters.clear();
-                    dailyRequest.firefighters.add(operator01);
+                    dailyRequest.firefighters.add(operator04);
                     break;
                 case ALTO:
                     operator03 -= 600;
                     operator04 -= 6;
                     dailyRequest.litersOfWater.clear();
-                    dailyRequest.litersOfWater.add(operator02);
+                    dailyRequest.litersOfWater.add(operator03);
                     dailyRequest.firefighters.clear();
-                    dailyRequest.firefighters.add(operator01);
+                    dailyRequest.firefighters.add(operator04);
                     break;
             }
         }

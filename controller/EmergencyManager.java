@@ -1,9 +1,6 @@
 package controller;
 
-import java.time.temporal.TemporalAdjuster;
 import java.util.*;
-
-import javax.crypto.spec.RC2ParameterSpec;
 
 import images.*;
 import models.*;
@@ -194,7 +191,7 @@ public class EmergencyManager implements SubjectEmergencies {
                 nextEmergency = ePriorityQueue.poll();// Obtiene y elimina la emergencia con mayor prioridad
                 attendedEmergencies.add(nextEmergency);
                 // se llama al metodo para manejar la emergencia como una tarea secundaria
-                bEmergencies.backgroundEmergency(nextEmergency);
+                bEmergencies.backgroundEmergency();
                 System.out.println("Atendiendo emergencia: " + nextEmergency.getDescription());
                 numberEmergenciesAtt++;
             }

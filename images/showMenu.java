@@ -117,16 +117,16 @@ public class showMenu {
                                 ConsoleColor.cyanText("|===========================================================|"));
                 System.out.println(ConsoleColor.cyanText("|-") + "Botiquines: " + dailyRequest.firstAidKits.get(0));
                 System.out.println(ConsoleColor.cyanText("|-") + "Ambulancias: " + dailyRequest.ambulances.get(0));
-                System.out.println(ConsoleColor.cyanText("|-") + "Paramedicos: " + dailyRequest.firstAidKits.get(0));
+                System.out.println(ConsoleColor.cyanText("|-") + "Paramedicos: " + dailyRequest.paramedics.get(0));
                 System.out.println(
                                 ConsoleColor.cyanText("|-") + "Litros de Agua: " + dailyRequest.litersOfWater.get(0));
                 System.out.println(
                                 ConsoleColor.cyanText("|-") + "Carro de bomberos: " + dailyRequest.fireTrucks.get(0));
-                System.out.println(ConsoleColor.cyanText("|-") + "Bomberos: " + dailyRequest.firstAidKits.get(0));
+                System.out.println(ConsoleColor.cyanText("|-") + "Bomberos: " + dailyRequest.firefighters.get(0));
                 System.out.println(ConsoleColor.cyanText("|-") + "Municion: " + dailyRequest.ammunition.get(0));
                 System.out.println(
                                 ConsoleColor.cyanText("|-") + "Patrullas de policia: " + dailyRequest.patrols.get(0));
-                System.out.println(ConsoleColor.cyanText("|-") + "Policias: " + dailyRequest.firstAidKits.get(0));
+                System.out.println(ConsoleColor.cyanText("|-") + "Policias: " + dailyRequest.police.get(0));
                 System.out.println(ConsoleColor.cyanText("|-") + "Litros de Gasolina: "
                                 + dailyRequest.litersOfGasoline.get(0));
                 System.out.println(

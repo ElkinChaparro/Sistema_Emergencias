@@ -21,7 +21,7 @@ public class Ambulancia {
                     dailyRequest.litersOfGasoline.clear();
                     dailyRequest.litersOfGasoline.add(operator01);
                     dailyRequest.ambulances.clear();
-                    dailyRequest.ambulances.add(operator01);
+                    dailyRequest.ambulances.add(operator02);
                     break;
                 case ZONA_SUR:
                     operator01 -= 75;
@@ -29,7 +29,7 @@ public class Ambulancia {
                     dailyRequest.litersOfGasoline.clear();
                     dailyRequest.litersOfGasoline.add(operator01);
                     dailyRequest.ambulances.clear();
-                    dailyRequest.ambulances.add(operator01);
+                    dailyRequest.ambulances.add(operator02);
                     break;
                 case ZONA_CENTRO:
                     operator01 -= 25;
@@ -37,7 +37,7 @@ public class Ambulancia {
                     dailyRequest.litersOfGasoline.clear();
                     dailyRequest.litersOfGasoline.add(operator01);
                     dailyRequest.ambulances.clear();
-                    dailyRequest.ambulances.add(operator01);
+                    dailyRequest.ambulances.add(operator02);
                     break;
                 case ZONA_ORIENTE:
                     operator01 -= 50;
@@ -45,7 +45,7 @@ public class Ambulancia {
                     dailyRequest.litersOfGasoline.clear();
                     dailyRequest.litersOfGasoline.add(operator01);
                     dailyRequest.ambulances.clear();
-                    dailyRequest.ambulances.add(operator01);
+                    dailyRequest.ambulances.add(operator02);
                     break;
                 case ZONA_OCCIDENTE:
                     operator01 -= 50;
@@ -53,7 +53,7 @@ public class Ambulancia {
                     dailyRequest.litersOfGasoline.clear();
                     dailyRequest.litersOfGasoline.add(operator01);
                     dailyRequest.ambulances.clear();
-                    dailyRequest.ambulances.add(operator01);
+                    dailyRequest.ambulances.add(operator02);
                     break;
             }
             switch (severityLevel) {
@@ -61,25 +61,25 @@ public class Ambulancia {
                     operator03 -= 2;
                     operator04 -= 2;
                     dailyRequest.firstAidKits.clear();
-                    dailyRequest.firstAidKits.add(operator02);
+                    dailyRequest.firstAidKits.add(operator03);
                     dailyRequest.paramedics.clear();
-                    dailyRequest.paramedics.add(operator01);
+                    dailyRequest.paramedics.add(operator04);
                     break;
                 case MEDIO:
                     operator03 -= 4;
                     operator04 -= 4;
                     dailyRequest.firstAidKits.clear();
-                    dailyRequest.firstAidKits.add(operator02);
+                    dailyRequest.firstAidKits.add(operator03);
                     dailyRequest.paramedics.clear();
-                    dailyRequest.paramedics.add(operator01);
+                    dailyRequest.paramedics.add(operator04);
                     break;
                 case ALTO:
                     operator03 -= 6;
                     operator04 -= 6;
                     dailyRequest.firstAidKits.clear();
-                    dailyRequest.firstAidKits.add(operator02);
+                    dailyRequest.firstAidKits.add(operator03);
                     dailyRequest.paramedics.clear();
-                    dailyRequest.paramedics.add(operator01);
+                    dailyRequest.paramedics.add(operator04);
                     break;
             }
         }

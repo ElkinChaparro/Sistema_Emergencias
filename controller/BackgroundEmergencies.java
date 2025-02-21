@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+import images.ConsoleColor;
 import models.Emergency;
 import utils.EmergencyLocation;
 
@@ -13,25 +14,25 @@ public class BackgroundEmergencies {
 
     private static List<BackgroundEmergencies> emergenciesInProcess = new ArrayList<>();
     private final Emergency emergency;
-    private static Long timeStart;
-    private static int timeDuration;
+    private long timeStart;
+    private int timeDuration;
 
     public BackgroundEmergencies(Emergency emergency) {
         this.emergency = emergency;
     }
 
     // Ejecuta un hilo secundario para atender la emergencia y poder seguir usando el programa
-    public void backgroundEmergency(Emergency nextEmergency) {
-        BackgroundEmergencies bEmergencies = new BackgroundEmergencies(nextEmergency);
+    public void backgroundEmergency() {
+        BackgroundEmergencies bEmergencies = new BackgroundEmergencies(emergency);
         emergenciesInProcess.add(bEmergencies); // Agregar la emergencia a la lista
         Thread emergencyThread = new Thread(() -> {
-            nextEmergency.startAttention();
-            timeStart = System.currentTimeMillis();
-            bEmergencies.attendedEmergencie(nextEmergency);
-            nextEmergency.endAttention();
-            System.out.println("\nLa emergencia: " + nextEmergency.getDescription() + " ha sido atendida exitosamente");
+            emergency.startAttention();
+            bEmergencies.timeStart = System.currentTimeMillis();
+            bEmergencies.attendedEmergencie();
+            emergency.endAttention();
+            System.out.println("\nLa emergencia: " + emergency.getDescription() + " ha sido atendida exitosamente");
             // Transformar de milisegundos a segundos
-            long durationMillis = nextEmergency.calculateAttentionTime();
+            long durationMillis = emergency.calculateAttentionTime();
             double durationSeconds = durationMillis / 1000.0;
             System.out.println("La emergencia ha sido atendida en: " + durationSeconds + " segundos");
         });
@@ -40,7 +41,7 @@ public class BackgroundEmergencies {
         System.out.println("Continúa la ejecución");
     }
 
-    public void attendedEmergencie(Emergency emergency) {
+    public void attendedEmergencie() {
         Random random = new Random();
         // Variables locales que almacenan la fórmula para el random del tiempo
         var time1 = random.nextInt((45000 - 30000) + 1) + 30000;
@@ -64,40 +65,18 @@ public class BackgroundEmergencies {
         }
     }
 
-    public static void progressEmergency(Emergency emergency) {
-        BackgroundEmergencies bEmergencies = new BackgroundEmergencies(emergency);
-        Thread task = new Thread(() -> {
-            try {
-                Thread.sleep(timeDuration);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        task.start();
-
-        while (task.isAlive()) {
-            bEmergencies.printProgress();
-            try {
-                Thread.sleep(1000);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        System.out.println("COMPLETADO");
-    }
-
     public void printProgress() {
         long currentTime = System.currentTimeMillis();
-        Long lapsedTime = currentTime - timeStart;
+        long lapsedTime = currentTime - timeStart;
         if (timeDuration > 0) {
             double percentageCompleted = ((double) lapsedTime / timeDuration) * 100;
-            percentageCompleted = Math.min(percentageCompleted, 100); // Limita el valor maximo del porcentaje a 100
-            System.out.printf("Progreso actual: %.2f%%\n", percentageCompleted);
+            percentageCompleted = Math.min(percentageCompleted, 100); // Limitar el valor máximo a 100
+            System.out.printf(ConsoleColor.blueText("Progreso actual de '%s': %.2f%%\n"), emergency.getType(), percentageCompleted);
             if (percentageCompleted >= 100) {
-                synchronized(emergenciesInProcess){
+                synchronized (emergenciesInProcess) {
                     emergenciesInProcess.remove(this);
                 }
-                System.out.println("ESTA EMERGENCIA YA HA SIDO ATENDIDA");
+                System.out.println(ConsoleColor.redText("ESTA EMERGENCIA YA HA SIDO ATENDIDA"));
             }
         } else {
             System.out.println("NO VALIDO");
@@ -108,7 +87,7 @@ public class BackgroundEmergencies {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Seleccione una emergencia para ver el progreso (0 para salir):");
-            synchronized(emergenciesInProcess){
+            synchronized (emergenciesInProcess) {
                 for (int i = 0; i < emergenciesInProcess.size(); i++) {
                     System.out.printf("%d: %s\n", i + 1, emergenciesInProcess.get(i).emergency.getDescription());
                 }
@@ -117,12 +96,16 @@ public class BackgroundEmergencies {
             if (opcion == 0) {
                 break;
             } else if (opcion > 0 && opcion <= emergenciesInProcess.size()) {
-                emergenciesInProcess.get(opcion - 1).printProgress();
+                synchronized (emergenciesInProcess) {
+                    emergenciesInProcess.get(opcion - 1).printProgress();
+                }
             } else {
                 System.out.println("Opción no válida.");
             }
         }
 
         System.out.println("Programa terminado.");
+        scanner.close();
     }
 }
+

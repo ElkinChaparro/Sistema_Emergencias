@@ -21,7 +21,7 @@ public class Policia {
                     dailyRequest.litersOfGasoline.clear();
                     dailyRequest.litersOfGasoline.add(operator01);
                     dailyRequest.patrols.clear();
-                    dailyRequest.patrols.add(operator01);
+                    dailyRequest.patrols.add(operator02);
                     break;
                 case ZONA_SUR:
                     operator01 -= 75;
@@ -29,7 +29,7 @@ public class Policia {
                     dailyRequest.litersOfGasoline.clear();
                     dailyRequest.litersOfGasoline.add(operator01);
                     dailyRequest.patrols.clear();
-                    dailyRequest.patrols.add(operator01);
+                    dailyRequest.patrols.add(operator02);
                     break;
                 case ZONA_CENTRO:
                     operator01 -= 25;
@@ -37,7 +37,7 @@ public class Policia {
                     dailyRequest.litersOfGasoline.clear();
                     dailyRequest.litersOfGasoline.add(operator01);
                     dailyRequest.patrols.clear();
-                    dailyRequest.patrols.add(operator01);
+                    dailyRequest.patrols.add(operator02);
                     break;
                 case ZONA_ORIENTE:
                     operator01 -= 50;
@@ -45,7 +45,7 @@ public class Policia {
                     dailyRequest.litersOfGasoline.clear();
                     dailyRequest.litersOfGasoline.add(operator01);
                     dailyRequest.patrols.clear();
-                    dailyRequest.patrols.add(operator01);
+                    dailyRequest.patrols.add(operator02);
                     break;
                 case ZONA_OCCIDENTE:
                     operator01 -= 50;
@@ -53,7 +53,7 @@ public class Policia {
                     dailyRequest.litersOfGasoline.clear();
                     dailyRequest.litersOfGasoline.add(operator01);
                     dailyRequest.patrols.clear();
-                    dailyRequest.patrols.add(operator01);
+                    dailyRequest.patrols.add(operator02);
                     break;
             }
             switch (severityLevel) {
@@ -61,25 +61,25 @@ public class Policia {
                     operator03 -= 20;
                     operator04 -= 2;
                     dailyRequest.ammunition.clear();
-                    dailyRequest.ammunition.add(operator02);
+                    dailyRequest.ammunition.add(operator03);
                     dailyRequest.police.clear();
-                    dailyRequest.police.add(operator01);
+                    dailyRequest.police.add(operator04);
                     break;
                 case MEDIO:
                     operator03 -= 40;
                     operator04 -= 4;
                     dailyRequest.ammunition.clear();
-                    dailyRequest.ammunition.add(operator02);
+                    dailyRequest.ammunition.add(operator03);
                     dailyRequest.police.clear();
-                    dailyRequest.police.add(operator01);
+                    dailyRequest.police.add(operator04);
                     break;
                 case ALTO:
                     operator03 -= 60;
                     operator04 -= 6;
                     dailyRequest.ammunition.clear();
-                    dailyRequest.ammunition.add(operator02);
+                    dailyRequest.ammunition.add(operator03);
                     dailyRequest.police.clear();
-                    dailyRequest.police.add(operator01);
+                    dailyRequest.police.add(operator04);
                     break;
             }
         }
