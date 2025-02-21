@@ -25,3 +25,4 @@ El sistema puede dar unas breves estadisticas del dia
 Cuando se atiende una emergencia pasa del "Queue" a una lista, donde se almacenarán todas las emergencias ya atendidas // Sujeto a cambios para una mejor optimización
 
 #
+solucionar problemas de las operaciones debido a que no se descuenta el personal y cuando se ejecuta accidente de trafico se descuenta personal de todos jajajaja

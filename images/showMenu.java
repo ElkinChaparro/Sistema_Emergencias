@@ -6,6 +6,7 @@ import controller.dailyRequest;
 
 public class showMenu {
 
+        // Menu principal
         public static Integer menuMain(Integer option) {
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -39,6 +40,7 @@ public class showMenu {
                 return option;
         }
 
+        // Menu de tipo de emergencias
         public static Integer menuType(Integer option01) {
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -63,6 +65,7 @@ public class showMenu {
                 return option01;
         }
 
+        // Menu de locaciones
         public static Integer menuLocation(Integer option02) {
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -88,6 +91,7 @@ public class showMenu {
                 return option02;
         }
 
+        // Menu de gravedad
         public static Integer menuGravity(Integer option03) {
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -107,6 +111,7 @@ public class showMenu {
                 return option03;
         }
 
+        // Menu de recursos
         public static void menuResources() {
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -133,6 +138,7 @@ public class showMenu {
                                 ConsoleColor.cyanText("|===========================================================|"));
         }
 
+        // Mensaje de error
         public static void serrMenu() {
                 System.out.println(ConsoleColor.redText("""
                                 |===========================================================|
@@ -140,6 +146,7 @@ public class showMenu {
                                 |===========================================================|"""));
         }
 
+        // Pausador
         public static void pressEnter(Scanner scGame) {
                 System.out.print(ConsoleColor.orangeText("""
                                 |===========================================================|

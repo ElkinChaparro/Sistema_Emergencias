@@ -2,84 +2,85 @@ package models.services;
 
 import utils.*;
 import controller.*;
+import images.ConsoleColor;
 
 public class Ambulancia {
 
     public static void executetrafficAccident(EmergencyLocation location, SeverityLevel severityLevel) {
-        if ((dailyRequest.litersOfGasoline.get(0) == 0) || (dailyRequest.ambulances.get(0) == 0)
-                || (dailyRequest.firstAidKits.get(0) == 0) || (dailyRequest.paramedics.get(0) == 0)) {
-            System.out.println("No hay recursos disponibles para atender la emergencia");
+        int gasoline = dailyRequest.litersOfGasoline.get(0);
+        int ambulances = dailyRequest.ambulances.get(0);
+        int firstAidKits = dailyRequest.firstAidKits.get(0);
+        int paramedics = dailyRequest.paramedics.get(0);
+        int operator = 0;
+
+        if (gasoline <= 0 || ambulances <= 0 || firstAidKits <= 0 || paramedics <= 0) {
+            System.out.println(ConsoleColor.greenText("|===========================================================|"));
+            System.out.println(ConsoleColor.greenText("|=-No hay recursos disponibles para atender la emergencia-==|"));
+            System.out.println(ConsoleColor.greenText("|===========================================================|"));
         } else {
-            var operator01 = dailyRequest.litersOfGasoline.get(0);
-            var operator02 = dailyRequest.ambulances.get(0);
-            var operator03 = dailyRequest.firstAidKits.get(0);
-            var operator04 = dailyRequest.paramedics.get(0);
-            switch (location) {
-                case ZONA_NORTE:
-                    operator01 -= 75;
-                    operator02 -= 3;
-                    dailyRequest.litersOfGasoline.clear();
-                    dailyRequest.litersOfGasoline.add(operator01);
-                    dailyRequest.ambulances.clear();
-                    dailyRequest.ambulances.add(operator01);
-                    break;
-                case ZONA_SUR:
-                    operator01 -= 75;
-                    operator02 -= 3;
-                    dailyRequest.litersOfGasoline.clear();
-                    dailyRequest.litersOfGasoline.add(operator01);
-                    dailyRequest.ambulances.clear();
-                    dailyRequest.ambulances.add(operator01);
-                    break;
-                case ZONA_CENTRO:
-                    operator01 -= 25;
-                    operator02 -= 1;
-                    dailyRequest.litersOfGasoline.clear();
-                    dailyRequest.litersOfGasoline.add(operator01);
-                    dailyRequest.ambulances.clear();
-                    dailyRequest.ambulances.add(operator01);
-                    break;
-                case ZONA_ORIENTE:
-                    operator01 -= 50;
-                    operator02 -= 2;
-                    dailyRequest.litersOfGasoline.clear();
-                    dailyRequest.litersOfGasoline.add(operator01);
-                    dailyRequest.ambulances.clear();
-                    dailyRequest.ambulances.add(operator01);
-                    break;
-                case ZONA_OCCIDENTE:
-                    operator01 -= 50;
-                    operator02 -= 2;
-                    dailyRequest.litersOfGasoline.clear();
-                    dailyRequest.litersOfGasoline.add(operator01);
-                    dailyRequest.ambulances.clear();
-                    dailyRequest.ambulances.add(operator01);
-                    break;
-            }
             switch (severityLevel) {
                 case BAJO:
-                    operator03 -= 2;
-                    operator04 -= 2;
+                    firstAidKits -= 20;
+                    paramedics -= 2;
+                    ambulances -= 1;
+                    operator = 1;
                     dailyRequest.firstAidKits.clear();
-                    dailyRequest.firstAidKits.add(operator02);
+                    dailyRequest.firstAidKits.add(firstAidKits);
                     dailyRequest.paramedics.clear();
-                    dailyRequest.paramedics.add(operator01);
+                    dailyRequest.paramedics.add(paramedics);
+                    dailyRequest.ambulances.clear();
+                    dailyRequest.ambulances.add(ambulances);
                     break;
                 case MEDIO:
-                    operator03 -= 4;
-                    operator04 -= 4;
+                    firstAidKits -= 40;
+                    paramedics -= 4;
+                    ambulances -= 2;
+                    operator = 2;
                     dailyRequest.firstAidKits.clear();
-                    dailyRequest.firstAidKits.add(operator02);
+                    dailyRequest.firstAidKits.add(firstAidKits);
                     dailyRequest.paramedics.clear();
-                    dailyRequest.paramedics.add(operator01);
+                    dailyRequest.paramedics.add(paramedics);
+                    dailyRequest.ambulances.clear();
+                    dailyRequest.ambulances.add(ambulances);
                     break;
                 case ALTO:
-                    operator03 -= 6;
-                    operator04 -= 6;
+                    firstAidKits -= 60;
+                    paramedics -= 6;
+                    ambulances -= 3;
+                    operator = 3;
                     dailyRequest.firstAidKits.clear();
-                    dailyRequest.firstAidKits.add(operator02);
+                    dailyRequest.firstAidKits.add(firstAidKits);
                     dailyRequest.paramedics.clear();
-                    dailyRequest.paramedics.add(operator01);
+                    dailyRequest.paramedics.add(paramedics);
+                    dailyRequest.ambulances.clear();
+                    dailyRequest.ambulances.add(ambulances);
+                    break;
+            }
+            switch (location) {
+                case ZONA_NORTE:
+                    gasoline -= operator * 75;
+                    dailyRequest.litersOfGasoline.clear();
+                    dailyRequest.litersOfGasoline.add(gasoline);
+                    break;
+                case ZONA_SUR:
+                    gasoline -= operator * 75;
+                    dailyRequest.litersOfGasoline.clear();
+                    dailyRequest.litersOfGasoline.add(gasoline);
+                    break;
+                case ZONA_CENTRO:
+                    gasoline -= operator * 25;
+                    dailyRequest.litersOfGasoline.clear();
+                    dailyRequest.litersOfGasoline.add(gasoline);
+                    break;
+                case ZONA_ORIENTE:
+                    gasoline -= operator * 50;
+                    dailyRequest.litersOfGasoline.clear();
+                    dailyRequest.litersOfGasoline.add(gasoline);
+                    break;
+                case ZONA_OCCIDENTE:
+                    gasoline -= operator * 50;
+                    dailyRequest.litersOfGasoline.clear();
+                    dailyRequest.litersOfGasoline.add(gasoline);
                     break;
             }
         }
