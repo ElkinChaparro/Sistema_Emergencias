@@ -22,6 +22,7 @@ public class Ambulancia {
                     .println(ConsoleColor.orangeText("|===========================================================|"));
         } else {
             switch (severityLevel) {
+                // The following switch statement is repeated in the Policia and Bomberos classes
                 case BAJO:
                     dea -= 10;
                     paramedics -= 2;
