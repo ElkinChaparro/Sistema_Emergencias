@@ -1,88 +1,98 @@
 package models.services;
 
 import utils.*;
+
+
 import controller.*;
 import images.ConsoleColor;
 
 public class Bomberos {
+    //variables que almacenan el valor necesitado para tender la emergencia
+    static int gasolineRequired = 0;
+    static int fireTrucksRequired = 0;
+    static int waterRequired = 0;
+    static int firefightersRequired = 0;
+    static int operator = 0;
+
+    static int gasoline = dailyRequest.litersOfGasoline.get(0);
+    static int fireTrucks = dailyRequest.fireTrucks.get(0);
+    static int litersOfWater = dailyRequest.litersOfWater.get(0);
+    static int firefighters = dailyRequest.firefighters.get(0);
+
+
+
 
     public static void executeFire(EmergencyLocation location, SeverityLevel severityLevel) {
-        int gasoline = dailyRequest.litersOfGasoline.get(0);
-        int fireTrucks = dailyRequest.fireTrucks.get(0);
-        int litersOfWater = dailyRequest.litersOfWater.get(0);
-        int firefighters = dailyRequest.firefighters.get(0);
-        int operator = 0;
+        establishRequirements(location, severityLevel);
 
-        if (gasoline <= 0 || fireTrucks <= 0 || litersOfWater <= 0 || firefighters <= 0) {
+        litersOfWater -= waterRequired;
+        firefighters -= firefightersRequired;
+        fireTrucks -= fireTrucksRequired;
+        gasoline -= gasolineRequired;
+        dailyRequest.litersOfWater.clear();
+        dailyRequest.litersOfWater.add(litersOfWater);
+        dailyRequest.firefighters.clear();
+        dailyRequest.firefighters.add(firefighters);
+        dailyRequest.fireTrucks.clear();
+        dailyRequest.fireTrucks.add(fireTrucks);
+
+        dailyRequest.litersOfGasoline.clear();
+        dailyRequest.litersOfGasoline.add(gasoline);
+        }
+
+    public static void establishRequirements(EmergencyLocation location, SeverityLevel severityLevel){
+        // establecer valores requeridos para "water", "fireTrucks" y "fireFighters"
+        switch (severityLevel) {
+            case BAJO:
+                waterRequired = 200;
+                fireTrucksRequired = 1;
+                firefightersRequired = 2;
+                operator = 1;
+                break;
+            case MEDIO:
+                waterRequired = 400;
+                fireTrucksRequired = 2;
+                firefightersRequired = 4;
+                operator = 2;
+                break;
+            case ALTO:
+                waterRequired = 600;
+                fireTrucksRequired = 3;
+                firefightersRequired = 6;
+                operator = 3;
+                break;
+        }
+        // establecer valores requeridos para la gasolina
+        switch (location) {
+            case ZONA_NORTE:
+                gasolineRequired = operator * 75;
+                break;
+            case ZONA_SUR:
+                gasolineRequired = operator * 75;
+                break;
+            case ZONA_CENTRO:
+                gasolineRequired = operator * 25;
+                break;
+            case ZONA_ORIENTE:
+                gasolineRequired = operator * 50;
+                break;
+            case ZONA_OCCIDENTE:
+                gasolineRequired = operator * 50;
+                break;
+        }
+    }
+
+    public static boolean isAvailablee(EmergencyLocation location, SeverityLevel severityLevel){
+        boolean isAvailable;
+        establishRequirements(location, severityLevel);
+        if (gasoline < gasolineRequired || fireTrucks < fireTrucksRequired || litersOfWater < waterRequired || firefighters < firefightersRequired) {
             System.out.println(ConsoleColor.orangeText("|===========================================================|"));
             System.out.println(ConsoleColor.orangeText("|=-No hay recursos disponibles para atender la emergencia-==|"));
             System.out.println(ConsoleColor.orangeText("|===========================================================|"));
-        } else {
-            switch (severityLevel) {
-                case BAJO:
-                    litersOfWater -= 200;
-                    firefighters -= 2;
-                    fireTrucks -= 1;
-                    operator = 1;
-                    dailyRequest.litersOfWater.clear();
-                    dailyRequest.litersOfWater.add(litersOfWater);
-                    dailyRequest.firefighters.clear();
-                    dailyRequest.firefighters.add(firefighters);
-                    dailyRequest.fireTrucks.clear();
-                    dailyRequest.fireTrucks.add(fireTrucks);
-                    break;
-                case MEDIO:
-                    litersOfWater -= 400;
-                    firefighters -= 4;
-                    fireTrucks -= 2;
-                    operator = 2;
-                    dailyRequest.litersOfWater.clear();
-                    dailyRequest.litersOfWater.add(litersOfWater);
-                    dailyRequest.firefighters.clear();
-                    dailyRequest.firefighters.add(firefighters);
-                    dailyRequest.fireTrucks.clear();
-                    dailyRequest.fireTrucks.add(fireTrucks);
-                    break;
-                case ALTO:
-                    litersOfWater -= 600;
-                    firefighters -= 6;
-                    fireTrucks -= 3;
-                    operator = 3;
-                    dailyRequest.litersOfWater.clear();
-                    dailyRequest.litersOfWater.add(litersOfWater);
-                    dailyRequest.firefighters.clear();
-                    dailyRequest.firefighters.add(firefighters);
-                    dailyRequest.fireTrucks.clear();
-                    dailyRequest.fireTrucks.add(fireTrucks);
-                    break;
-            }
-            switch (location) {
-                case ZONA_NORTE:
-                    gasoline -= operator * 75;
-                    dailyRequest.litersOfGasoline.clear();
-                    dailyRequest.litersOfGasoline.add(gasoline);
-                    break;
-                case ZONA_SUR:
-                    gasoline -= operator * 75;
-                    dailyRequest.litersOfGasoline.clear();
-                    dailyRequest.litersOfGasoline.add(gasoline);
-                    break;
-                case ZONA_CENTRO:
-                    gasoline -= operator * 25;
-                    dailyRequest.litersOfGasoline.clear();
-                    dailyRequest.litersOfGasoline.add(gasoline);
-                    break;
-                case ZONA_ORIENTE:
-                    gasoline -= operator * 50;
-                    dailyRequest.litersOfGasoline.clear();
-                    dailyRequest.litersOfGasoline.add(gasoline);
-                    break;
-                case ZONA_OCCIDENTE:
-                    gasoline -= operator * 50;
-                    dailyRequest.litersOfGasoline.clear();
-                    dailyRequest.litersOfGasoline.add(gasoline);
-                    break;
-            }
+            isAvailable = false;
+        }else{
+            isAvailable = true;
         }
+        return isAvailable;
     }
 }

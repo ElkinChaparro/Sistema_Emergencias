@@ -217,14 +217,16 @@ public class EmergencyManager implements SubjectEmergencies {
                     .println(ConsoleColor.cyanText("|===========================================================|"));
             String option = scanner.nextLine();
             if (option.equalsIgnoreCase("s")) {
-                // Obtiene y elimina la emergencia con mayor prioridad
-                nextEmergency = ePriorityQueue.poll();
-                attendedEmergencies.add(nextEmergency);
-                // se llama al metodo para manejar la emergencia como una tarea secundaria
-                bEmergencie.backgroundEmergency();
-                System.out.println("|-Atendiendo emergencia: " + nextEmergency.getDescription());
-                numberEmergenciesAtt++;
-                operations(nextEmergency);
+                // validacion de recursos disponibles para atender la emergencia
+                if (checkResources(nextEmergency)) {
+                    nextEmergency = ePriorityQueue.poll(); // Obtiene y elimina la emergencia con mayor prioridad
+                    attendedEmergencies.add(nextEmergency);
+                    // se llama al metodo para manejar la emergencia como una tarea secundaria
+                    bEmergencie.backgroundEmergency();
+                    System.out.println("|-Atendiendo emergencia: " + nextEmergency.getDescription());
+                    numberEmergenciesAtt++;
+                    operations(nextEmergency);
+                }
             }
         }
         return nextEmergency;
@@ -259,6 +261,27 @@ public class EmergencyManager implements SubjectEmergencies {
         if (nextEmergency.getType() == EmergencyType.INCENDIO) {
             Bomberos.executeFire(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
         }
+    }
+
+    public boolean checkResources(Emergency emergency){
+        // variable booleana para la verificación de si estan los recursos disponibles
+        boolean isCheck = false;
+
+        // se hace la verificación
+        if (emergency.getType() == EmergencyType.ROBO && Policia.isAvailablee(emergency.getLocation(), emergency.getSeverityLevel()) ) {
+            // si "isAvailable" es true, is check retorna "true"
+            isCheck = true;
+        }else if (emergency.getType() == EmergencyType.INCENDIO && Bomberos.isAvailablee(emergency.getLocation(), emergency.getSeverityLevel())) {
+            isCheck = true;
+
+        }else if (emergency.getType() == EmergencyType.ACCIDENTE_TRANSITO && Ambulancia.isAvailablee(emergency.getLocation(), emergency.getSeverityLevel())) {
+            isCheck = true;
+
+        }else{
+            // si no retorna false
+            isCheck = false;
+        }
+        return isCheck;
     }
 
     @Override
