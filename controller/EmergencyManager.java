@@ -150,13 +150,6 @@ public class EmergencyManager implements SubjectEmergencies {
             // Se crea la nueva emergencia
             Emergency newEmergency = FactoryEmergencies.creatEmergency(type, location, severityLevel,
                     strategy.estimatedTime(location));
-            if (newEmergency == null) {
-                System.out.println(ConsoleColor.redText("""
-                        |===========================================================|
-                        |================-Tipo de emergencia invalido-==============|
-                        |===========================================================|"""));
-                return;
-            }
             // Se agrega la emergencia a la lista de emergencias
             addEmergency(newEmergency);
             // Barra de carga
@@ -269,7 +262,7 @@ public class EmergencyManager implements SubjectEmergencies {
 
         // se hace la verificación
         if (emergency.getType() == EmergencyType.ROBO && Policia.isAvailablee(emergency.getLocation(), emergency.getSeverityLevel()) ) {
-            // si "isAvailable" es true, is check retorna "true"
+            // si "isAvailable" es true, ischeck retorna "true"
             isCheck = true;
         }else if (emergency.getType() == EmergencyType.INCENDIO && Bomberos.isAvailablee(emergency.getLocation(), emergency.getSeverityLevel())) {
             isCheck = true;
