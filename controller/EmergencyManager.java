@@ -160,7 +160,7 @@ public class EmergencyManager implements SubjectEmergencies {
                     |============-Emergencia registrada exitosamente.-==========|
                     |===========================================================|"""));
             // Simulates a process with a small delay
-            Thread.sleep(500);
+            Thread.sleep(1000);
             // se agrega el observer y se notifica de la emergencia registrada
             addObserver(observer);
             notifyObservers(newEmergency);
@@ -217,6 +217,7 @@ public class EmergencyManager implements SubjectEmergencies {
                     // se llama al metodo para manejar la emergencia como una tarea secundaria
                     bEmergencie.backgroundEmergency();
                     System.out.println("|-Atendiendo emergencia: " + nextEmergency.getDescription());
+                    System.out.println("Continúa la ejecución");
                     numberEmergenciesAtt++;
                     operations(nextEmergency);
                 }

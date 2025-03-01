@@ -9,7 +9,6 @@ import images.ConsoleColor;
 import models.Emergency;
 import utils.EmergencyLocation;
 
-
 public class BackgroundEmergencie {
     private static List<BackgroundEmergencie> emergenciesInProcess = new ArrayList<>();
     private final Emergency emergency;
@@ -20,7 +19,8 @@ public class BackgroundEmergencie {
         this.emergency = emergency;
     }
 
-    // Ejecuta un hilo secundario para atender la emergencia y poder seguir usando el programa
+    // Ejecuta un hilo secundario para atender la emergencia y poder seguir usando
+    // el programa
     public void backgroundEmergency() {
         BackgroundEmergencie bEmergencies = new BackgroundEmergencie(emergency);
         emergenciesInProcess.add(bEmergencies); // Agregar la emergencia a la lista
@@ -37,7 +37,6 @@ public class BackgroundEmergencie {
         });
         emergencyThread.start();
 
-        System.out.println("Continúa la ejecución");
     }
 
     public void attendedEmergencie() {
@@ -70,7 +69,8 @@ public class BackgroundEmergencie {
         if (timeDuration > 0) {
             double percentageCompleted = ((double) lapsedTime / timeDuration) * 100;
             percentageCompleted = Math.min(percentageCompleted, 100); // Limitar el valor máximo a 100
-            System.out.printf(ConsoleColor.blueText("Progreso actual de '%s': %.2f%%\n"), emergency.getType(), percentageCompleted);
+            System.out.printf(ConsoleColor.blueText("Progreso actual de '%s': %.2f%%\n"), emergency.getType(),
+                    percentageCompleted);
             if (percentageCompleted >= 100) {
                 synchronized (emergenciesInProcess) {
                     emergenciesInProcess.remove(this);
@@ -107,6 +107,5 @@ public class BackgroundEmergencie {
                 }
             }
         }
-
     }
 }
