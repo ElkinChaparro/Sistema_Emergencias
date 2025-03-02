@@ -86,6 +86,20 @@ public class Ambulancia {
                 System.out.println(ConsoleColor.orangeText("|===========================================================|"));
                 System.out.println(ConsoleColor.orangeText("|=-No hay recursos disponibles para atender la emergencia-==|"));
                 System.out.println(ConsoleColor.orangeText("|===========================================================|"));
+                // se valida cual recurso es el insuficiente para ser mas explicitos con el usuario
+                if (gasoline < gasolineRequired) {
+                    System.out.println(ConsoleColor.orangeText("|- Gasolina insuficiente: '" + gasoline + "' de '" + gasolineRequired + "' requerida           -|"));
+                }
+                if (firstAidKits < firstAidKitsRequired) {
+                    System.out.println(ConsoleColor.orangeText("|- Botiquines insuficientes: '" + firstAidKits + "' de '" + firstAidKitsRequired + "' requeridos        -|"));
+                }
+                if (paramedics < paramedicsRequired) {
+                    System.out.println(ConsoleColor.orangeText("|- Paramédicos insuficientes: '" + paramedics + "' de '" + paramedicsRequired + "' requeridos        -|"));
+                }
+                if (ambulances < ambulancesRequired) {
+                    System.out.println(ConsoleColor.orangeText("|- Ambulancias insuficientes: '" + ambulances + "' de '" + ambulancesRequired + "' requeridas        -|"));
+                }
+                System.out.println(ConsoleColor.orangeText("|===========================================================|"));
                 isAvailable = false;
             }else{
                 isAvailable = true;
