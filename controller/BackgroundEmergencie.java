@@ -9,9 +9,7 @@ import images.ConsoleColor;
 import models.Emergency;
 import utils.EmergencyLocation;
 
-
 public class BackgroundEmergencie {
-
     private static List<BackgroundEmergencie> emergenciesInProcess = new ArrayList<>();
     private final Emergency emergency;
     private long timeStart;
@@ -21,7 +19,8 @@ public class BackgroundEmergencie {
         this.emergency = emergency;
     }
 
-    // Ejecuta un hilo secundario para atender la emergencia y poder seguir usando el programa
+    // Ejecuta un hilo secundario para atender la emergencia y poder seguir usando
+    // el programa
     public void backgroundEmergency() {
         BackgroundEmergencie bEmergencies = new BackgroundEmergencie(emergency);
         emergenciesInProcess.add(bEmergencies); // Agregar la emergencia a la lista
@@ -38,15 +37,14 @@ public class BackgroundEmergencie {
         });
         emergencyThread.start();
 
-        System.out.println("Continúa la ejecución");
     }
 
     public void attendedEmergencie() {
         Random random = new Random();
         // Variables locales que almacenan la fórmula para el random del tiempo
-        var time1 = random.nextInt((45000 - 30000) + 1) + 30000;
-        var time2 = random.nextInt((29000 - 15000) + 1) + 15000;
-        var time3 = random.nextInt((10000 - 5000) + 1) + 5000;
+        var time1 = random.nextInt((450000 - 300000) + 1) + 300000;
+        var time2 = random.nextInt((290000 - 150000) + 1) + 150000;
+        var time3 = random.nextInt((100000 - 50000) + 1) + 50000;
         try {
             if (emergency.getLocation().equals(EmergencyLocation.ZONA_SUR)
                     || emergency.getLocation().equals(EmergencyLocation.ZONA_NORTE)) {
@@ -71,7 +69,8 @@ public class BackgroundEmergencie {
         if (timeDuration > 0) {
             double percentageCompleted = ((double) lapsedTime / timeDuration) * 100;
             percentageCompleted = Math.min(percentageCompleted, 100); // Limitar el valor máximo a 100
-            System.out.printf(ConsoleColor.blueText("Progreso actual de '%s': %.2f%%\n"), emergency.getType(), percentageCompleted);
+            System.out.printf(ConsoleColor.blueText("Progreso actual de '%s': %.2f%%\n"), emergency.getType(),
+                    percentageCompleted);
             if (percentageCompleted >= 100) {
                 synchronized (emergenciesInProcess) {
                     emergenciesInProcess.remove(this);
@@ -86,24 +85,27 @@ public class BackgroundEmergencie {
     public static void printBar() {
         @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);
-        while (true) {
-            System.out.println("Seleccione una emergencia para ver el progreso (0 para salir):");
-            synchronized (emergenciesInProcess) {
-                for (int i = 0; i < emergenciesInProcess.size(); i++) {
-                    System.out.printf("%d: %s\n", i + 1, emergenciesInProcess.get(i).emergency.getDescription());
-                }
-            }
-            int opcion = scanner.nextInt();
-            if (opcion == 0) {
-                break;
-            } else if (opcion > 0 && opcion <= emergenciesInProcess.size()) {
+        if (emergenciesInProcess.isEmpty()) {
+            System.out.println("NO HAY EMERGENCIAS SIENDO ATENDIDAS");
+        }else{
+            while (true) {
+                System.out.println("Seleccione una emergencia para ver el progreso (0 para salir):");
                 synchronized (emergenciesInProcess) {
-                    emergenciesInProcess.get(opcion - 1).printProgress();
+                    for (int i = 0; i < emergenciesInProcess.size(); i++) {
+                        System.out.printf("%d: %s\n", i + 1, emergenciesInProcess.get(i).emergency.getDescription());
+                    }
                 }
-            } else {
-                System.out.println("Opción no válida.");
+                int opcion = scanner.nextInt();
+                if (opcion == 0) {
+                    break;
+                } else if (opcion > 0 && opcion <= emergenciesInProcess.size()) {
+                    synchronized (emergenciesInProcess) {
+                        emergenciesInProcess.get(opcion - 1).printProgress();
+                    }
+                } else {
+                    System.out.println("Opción no válida.");
+                }
             }
         }
-
     }
 }

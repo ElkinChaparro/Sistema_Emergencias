@@ -150,13 +150,6 @@ public class EmergencyManager implements SubjectEmergencies {
             // Se crea la nueva emergencia
             Emergency newEmergency = FactoryEmergencies.creatEmergency(type, location, severityLevel,
                     strategy.estimatedTime(location));
-            if (newEmergency == null) {
-                System.out.println(ConsoleColor.redText("""
-                        |===========================================================|
-                        |================-Tipo de emergencia invalido-==============|
-                        |===========================================================|"""));
-                return;
-            }
             // Se agrega la emergencia a la lista de emergencias
             addEmergency(newEmergency);
             // Barra de carga
@@ -167,7 +160,7 @@ public class EmergencyManager implements SubjectEmergencies {
                     |============-Emergencia registrada exitosamente.-==========|
                     |===========================================================|"""));
             // Simulates a process with a small delay
-            Thread.sleep(500);
+            Thread.sleep(1000);
             // se agrega el observer y se notifica de la emergencia registrada
             addObserver(observer);
             notifyObservers(newEmergency);
@@ -217,14 +210,17 @@ public class EmergencyManager implements SubjectEmergencies {
                     .println(ConsoleColor.cyanText("|===========================================================|"));
             String option = scanner.nextLine();
             if (option.equalsIgnoreCase("s")) {
-                // Obtiene y elimina la emergencia con mayor prioridad
-                nextEmergency = ePriorityQueue.poll();
-                attendedEmergencies.add(nextEmergency);
-                // se llama al metodo para manejar la emergencia como una tarea secundaria
-                bEmergencie.backgroundEmergency();
-                System.out.println("|-Atendiendo emergencia: " + nextEmergency.getDescription());
-                numberEmergenciesAtt++;
-                operations(nextEmergency);
+                // validacion de recursos disponibles para atender la emergencia
+                if (checkResources(nextEmergency)) {
+                    nextEmergency = ePriorityQueue.poll(); // Obtiene y elimina la emergencia con mayor prioridad
+                    attendedEmergencies.add(nextEmergency);
+                    // se llama al metodo para manejar la emergencia como una tarea secundaria
+                    bEmergencie.backgroundEmergency();
+                    System.out.println("|-Atendiendo emergencia: " + nextEmergency.getDescription());
+                    System.out.println("Continúa la ejecución");
+                    numberEmergenciesAtt++;
+                    operations(nextEmergency);
+                }
             }
         }
         return nextEmergency;
@@ -259,6 +255,27 @@ public class EmergencyManager implements SubjectEmergencies {
         if (nextEmergency.getType() == EmergencyType.INCENDIO) {
             Bomberos.executeFire(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
         }
+    }
+
+    public boolean checkResources(Emergency emergency){
+        // variable booleana para la verificación de si estan los recursos disponibles
+        boolean isCheck = false;
+
+        // se hace la verificación
+        if (emergency.getType() == EmergencyType.ROBO && Policia.isAvailablee(emergency.getLocation(), emergency.getSeverityLevel()) ) {
+            // si "isAvailable" es true, ischeck retorna "true"
+            isCheck = true;
+        }else if (emergency.getType() == EmergencyType.INCENDIO && Bomberos.isAvailablee(emergency.getLocation(), emergency.getSeverityLevel())) {
+            isCheck = true;
+
+        }else if (emergency.getType() == EmergencyType.ACCIDENTE_TRANSITO && Ambulancia.isAvailablee(emergency.getLocation(), emergency.getSeverityLevel())) {
+            isCheck = true;
+
+        }else{
+            // si no retorna false
+            isCheck = false;
+        }
+        return isCheck;
     }
 
     @Override
