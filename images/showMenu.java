@@ -33,25 +33,25 @@ public class showMenu {
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + " 1. Registrar una nueva emergencia                        "
+                                + ConsoleColor.blueText(" 1. Registrar una nueva emergencia                        ")
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + " 2. Atender una emergencia                                "
+                                + ConsoleColor.blueText(" 2. Atender una emergencia                                ")
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + " 3. Recursos actuales                                     "
+                                + ConsoleColor.blueText(" 3. Recursos actuales                                     ")
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + " 4. Añadir recursos                                       "
+                                + ConsoleColor.blueText(" 4. Añadir recursos                                       ")
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + " 5. Emergencias pendientes                                "
+                                + ConsoleColor.blueText(" 5. Emergencias pendientes                                ")
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + " 6. Mostrar estadísticas del día                          "
+                                + ConsoleColor.blueText(" 6. Mostrar estadísticas del día                          ")
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + " 7. Finalizar jornada **                                  "
+                                + ConsoleColor.blueText(" 7. Finalizar jornada **                                  ")
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -110,13 +110,13 @@ public class showMenu {
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + " 1. Incendio                                              "
+                                + ConsoleColor.blueText(" 1. Incendio                                              ")
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + " 2. Accidente Vehicular                                   "
+                                + ConsoleColor.blueText(" 2. Accidente Vehicular                                   ")
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + " 3. Robo                                                  "
+                                + ConsoleColor.blueText(" 3. Robo                                                  ")
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -130,19 +130,19 @@ public class showMenu {
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + " 1. Zona-norte                                            "
+                                + ConsoleColor.blueText(" 1. Zona-norte                                            ")
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + " 2. Zona-sur                                              "
+                                + ConsoleColor.blueText(" 2. Zona-sur                                              ")
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + " 3. Zona-centro                                           "
+                                + ConsoleColor.blueText(" 3. Zona-centro                                           ")
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + " 4. Zona-oriente                                          "
+                                + ConsoleColor.blueText(" 4. Zona-oriente                                          ")
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + " 5. Zona-occidente                                        "
+                                + ConsoleColor.blueText(" 5. Zona-occidente                                        ")
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -156,13 +156,12 @@ public class showMenu {
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + " 1. Bajo                                                  "
+                                + ConsoleColor.blueText(" 1. Bajo                                                  ")
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + " 2. Medio                                                 "
-                                + ConsoleColor.cyanText("|"));
+                                + ConsoleColor.blueText(" 2. Medio                                                 "));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + " 3. Alto                                                  "
+                                + ConsoleColor.blueText(" 3. Alto                                                  ")
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -180,19 +179,28 @@ public class showMenu {
                                 + ConsoleColor.cyanText("-====================|"));
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
-                System.out.println(ConsoleColor.cyanText("|-") + "Botiquines: " + dailyRequest.firstAidKits.get(0));
-                System.out.println(ConsoleColor.cyanText("|-") + "Ambulancias: " + dailyRequest.ambulances.get(0));
-                System.out.println(ConsoleColor.cyanText("|-") + "Paramedicos: " + dailyRequest.firstAidKits.get(0));
+                System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("Botiquines: ")
+                                + dailyRequest.firstAidKits.get(0));
+                System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("Ambulancias: ")
+                                + dailyRequest.ambulances.get(0));
+                System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("Paramedicos: ")
+                                + dailyRequest.firstAidKits.get(0));
                 System.out.println(
-                                ConsoleColor.cyanText("|-") + "Litros de Agua: " + dailyRequest.litersOfWater.get(0));
+                                ConsoleColor.cyanText("|-") + ConsoleColor.blueText("Litros de Agua: ")
+                                                + dailyRequest.litersOfWater.get(0));
                 System.out.println(
-                                ConsoleColor.cyanText("|-") + "Carro de bomberos: " + dailyRequest.fireTrucks.get(0));
-                System.out.println(ConsoleColor.cyanText("|-") + "Bomberos: " + dailyRequest.firstAidKits.get(0));
-                System.out.println(ConsoleColor.cyanText("|-") + "Municion: " + dailyRequest.ammunition.get(0));
+                                ConsoleColor.cyanText("|-") + ConsoleColor.blueText("Carro de bomberos: ")
+                                                + dailyRequest.fireTrucks.get(0));
+                System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("Bomberos: ")
+                                + dailyRequest.firstAidKits.get(0));
+                System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("Municion: ")
+                                + dailyRequest.ammunition.get(0));
                 System.out.println(
-                                ConsoleColor.cyanText("|-") + "Patrullas de policia: " + dailyRequest.patrols.get(0));
-                System.out.println(ConsoleColor.cyanText("|-") + "Policias: " + dailyRequest.firstAidKits.get(0));
-                System.out.println(ConsoleColor.cyanText("|-") + "Litros de Gasolina: "
+                                ConsoleColor.cyanText("|-") + ConsoleColor.blueText("Patrullas de policia: ")
+                                                + dailyRequest.patrols.get(0));
+                System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("Policias: ")
+                                + dailyRequest.firstAidKits.get(0));
+                System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("Litros de Gasolina: ")
                                 + dailyRequest.litersOfGasoline.get(0));
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -231,7 +239,7 @@ public class showMenu {
                         }
                         barra.append("] ").append(porcentaje).append("%");
                         // Imprime la barra de carga
-                        System.out.print("\r" + barra.toString());
+                        System.out.print(ConsoleColor.orangeText("\r" + barra.toString()));
                         // Simula un trabajo en progreso
                         Thread.sleep(50);
                 }

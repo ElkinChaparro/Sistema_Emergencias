@@ -159,6 +159,8 @@ public class EmergencyManager implements SubjectEmergencies {
             }
             // Se agrega la emergencia a la lista de emergencias
             addEmergency(newEmergency);
+            System.out.println(
+                    ConsoleColor.cyanText("|===========================================================|"));
             // Barra de carga
             showMenu.printLoadingBar();
             // Se imprime la emergencia registrada
@@ -209,7 +211,15 @@ public class EmergencyManager implements SubjectEmergencies {
             }
         });
         emergencyThread.start();
-        System.out.println("continua la ejecución");
+        System.out.println(
+                ConsoleColor.cyanText(
+                        "|===========================================================|"));
+        System.out.println(
+                ConsoleColor.cyanText("|-") + ConsoleColor.blueText("continua con la ejecucióndel sistema normalmente")
+                        + ConsoleColor.cyanText("          |"));
+        System.out.println(
+                ConsoleColor.cyanText(
+                        "|===========================================================|"));
     }
 
     // tiempo de ejecucion de la emergencia
@@ -260,7 +270,8 @@ public class EmergencyManager implements SubjectEmergencies {
                 attendedEmergencies.add(nextEmergency);
                 // se llama al metodo para manejar la emergencia como una tarea secundaria
                 backgroundEmergency(nextEmergency);
-                System.out.println("|-Atendiendo emergencia: " + nextEmergency.getDescription());
+                System.out
+                        .println(ConsoleColor.orangeText("|-Atendiendo emergencia: ") + nextEmergency.getDescription());
                 numberEmergenciesAtt++;
                 operations(nextEmergency);
             }
@@ -272,10 +283,17 @@ public class EmergencyManager implements SubjectEmergencies {
     public void printAllEmergencies() {
         // copia de la lista principal de "ePriorityQueue" para poder verse en listado
         PriorityQueue<Emergency> copyQueue = new PriorityQueue<>(ePriorityQueue);
-        System.out.println("=== EMERGENCIAS PENDIENTES ===");
+        System.out.println(
+                ConsoleColor.cyanText(
+                        "|===========================================================|"));
+        System.out.println(ConsoleColor.cyanText("|================= ")
+                + ConsoleColor.blueText("EMERGENCIAS PENDIENTES") + ConsoleColor.cyanText("===================|"));
+        System.out.println(
+                ConsoleColor.cyanText(
+                        "|===========================================================|"));
         while (!copyQueue.isEmpty()) {
             Emergency emergency = copyQueue.poll();
-            System.out.println("-> " + emergency);
+            System.out.println(ConsoleColor.orangeText("-> ") + emergency);
         }
     }
 
