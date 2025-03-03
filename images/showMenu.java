@@ -48,10 +48,13 @@ public class showMenu {
                                 + ConsoleColor.blueText(" 5. Emergencias pendientes                                ")
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + ConsoleColor.blueText(" 6. Mostrar estadísticas del día                          ")
+                                + " 6. Mostrar progreso de atención                          "
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + ConsoleColor.blueText(" 7. Finalizar jornada **                                  ")
+                                + " 7. Mostrar estadísticas del día                          "
+                                + ConsoleColor.cyanText("|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + " 8. Finalizar jornada **                                  "
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));

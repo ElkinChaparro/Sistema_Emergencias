@@ -150,13 +150,6 @@ public class EmergencyManager implements SubjectEmergencies {
             // Se crea la nueva emergencia
             Emergency newEmergency = FactoryEmergencies.creatEmergency(type, location, severityLevel,
                     strategy.estimatedTime(location));
-            if (newEmergency == null) {
-                System.out.println(ConsoleColor.redText("""
-                        |===========================================================|
-                        |================-Tipo de emergencia invalido-==============|
-                        |===========================================================|"""));
-                return;
-            }
             // Se agrega la emergencia a la lista de emergencias
             addEmergency(newEmergency);
             System.out.println(
@@ -169,7 +162,7 @@ public class EmergencyManager implements SubjectEmergencies {
                     |============-Emergencia registrada exitosamente.-==========|
                     |===========================================================|"""));
             // Simulates a process with a small delay
-            Thread.sleep(500);
+            Thread.sleep(1000);
             // se agrega el observer y se notifica de la emergencia registrada
             addObserver(observer);
             notifyObservers(newEmergency);
@@ -192,58 +185,12 @@ public class EmergencyManager implements SubjectEmergencies {
         return ePriorityQueue.peek(); // Obtiene la emergencia con mayor prioridad
     }
 
-    // Ejecuta un hilo secundario para atender la emergencia y poder seguir usando
-    // el programa
-    public void backgroundEmergency(Emergency emergency) {
-        Thread emergencyThread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                emergency.startAttention();
-                attendedEmergencie(emergency);
-                emergency.endAttention();
-                System.out.println("\nLa emergencia: " + emergency.getDescription() + " ha sido atendida exitosamente");
-                // transformar de milisegundos a segundos
-                long durationMillis = emergency.calculateAttentionTime();
-                double durationSeconds = durationMillis / 1000.0;
-                System.out.println("La emergencia ha sido atentido en: " + durationSeconds + " segundos");
-                totalAttentionTime += durationSeconds;
-            }
-        });
-        emergencyThread.start();
-        System.out.println(
-                ConsoleColor.cyanText(
-                        "|===========================================================|"));
-        System.out.println(
-                ConsoleColor.cyanText("|-") + ConsoleColor.blueText("continua con la ejecucióndel sistema normalmente")
-                        + ConsoleColor.cyanText("          |"));
-        System.out.println(
-                ConsoleColor.cyanText(
-                        "|===========================================================|"));
-    }
-
-    // tiempo de ejecucion de la emergencia
-    public static void attendedEmergencie(Emergency emergency) {
-        Random random = new Random();
-        try {
-            if (emergency.getLocation().equals(EmergencyLocation.ZONA_SUR)
-                    || emergency.getLocation().equals(EmergencyLocation.ZONA_NORTE)) {
-                Thread.sleep(random.nextInt((45000 - 30000) + 1) + 30000);
-            } else if (emergency.getLocation().equals(EmergencyLocation.ZONA_OCCIDENTE)
-                    || (emergency.getLocation().equals(EmergencyLocation.ZONA_ORIENTE))) {
-                Thread.sleep(random.nextInt((29000 - 15000) + 1) + 15000);
-            } else {
-                Thread.sleep(random.nextInt((10000 - 5000) + 1) + 5000);
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 
     // Función para manejar o atender la siguiente emergencia, ordenadas en una
     // "Queue" según su prioridad
     public Emergency handleNextEmergency() {
         Emergency nextEmergency = peekNextEmergency();
+        BackgroundEmergencie bEmergencie = new BackgroundEmergencie(nextEmergency);
         if (nextEmergency == null) {
             // Si no hay emergencias pendientes
             System.out
@@ -265,15 +212,17 @@ public class EmergencyManager implements SubjectEmergencies {
                     .println(ConsoleColor.cyanText("|===========================================================|"));
             String option = scanner.nextLine();
             if (option.equalsIgnoreCase("s")) {
-                // Obtiene y elimina la emergencia con mayor prioridad
-                nextEmergency = ePriorityQueue.poll();
-                attendedEmergencies.add(nextEmergency);
-                // se llama al metodo para manejar la emergencia como una tarea secundaria
-                backgroundEmergency(nextEmergency);
-                System.out
-                        .println(ConsoleColor.orangeText("|-Atendiendo emergencia: ") + nextEmergency.getDescription());
-                numberEmergenciesAtt++;
-                operations(nextEmergency);
+                // validacion de recursos disponibles para atender la emergencia
+                if (checkResources(nextEmergency)) {
+                    nextEmergency = ePriorityQueue.poll(); // Obtiene y elimina la emergencia con mayor prioridad
+                    attendedEmergencies.add(nextEmergency);
+                    // se llama al metodo para manejar la emergencia como una tarea secundaria
+                    bEmergencie.backgroundEmergency();
+                    System.out.println("|-Atendiendo emergencia: " + nextEmergency.getDescription());
+                    System.out.println("Continúa la ejecución");
+                    numberEmergenciesAtt++;
+                    operations(nextEmergency);
+                }
             }
         }
         return nextEmergency;
@@ -315,6 +264,27 @@ public class EmergencyManager implements SubjectEmergencies {
         if (nextEmergency.getType() == EmergencyType.INCENDIO) {
             Bomberos.executeFire(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
         }
+    }
+
+    public boolean checkResources(Emergency emergency){
+        // variable booleana para la verificación de si estan los recursos disponibles
+        boolean isCheck = false;
+
+        // se hace la verificación
+        if (emergency.getType() == EmergencyType.ROBO && Policia.isAvailablee(emergency.getLocation(), emergency.getSeverityLevel()) ) {
+            // si "isAvailable" es true, ischeck retorna "true"
+            isCheck = true;
+        }else if (emergency.getType() == EmergencyType.INCENDIO && Bomberos.isAvailablee(emergency.getLocation(), emergency.getSeverityLevel())) {
+            isCheck = true;
+
+        }else if (emergency.getType() == EmergencyType.ACCIDENTE_TRANSITO && Ambulancia.isAvailablee(emergency.getLocation(), emergency.getSeverityLevel())) {
+            isCheck = true;
+
+        }else{
+            // si no retorna false
+            isCheck = false;
+        }
+        return isCheck;
     }
 
     @Override

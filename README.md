@@ -26,3 +26,9 @@ Cuando se atiende una emergencia pasa del "Queue" a una lista, donde se almacena
 
 #
 solucionar problemas de las operaciones debido a que no se descuenta el personal y cuando se ejecuta accidente de trafico se descuenta personal de todos
+
+#
+imprimir la cantidad actual de recursos agregados con un if
+imprimir un recomendado de suministros con el mismo if
+
+hacer validacion de que si no hay una emergencia se corte

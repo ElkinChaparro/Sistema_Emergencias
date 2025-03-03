@@ -58,11 +58,14 @@ public class Main002 {
                     showMenu.pressEnter(scanner);
                     break;
                 case 6:
+                    BackgroundEmergencie.printBar();
+                    break;
+                case 7:
                     // Estadisticas
                     manager.showStatistics();
                     showMenu.pressEnter(scanner);
                     break;
-                case 7:
+                case 8:
                     // Finalizar jornada
                     break;
                 default:
