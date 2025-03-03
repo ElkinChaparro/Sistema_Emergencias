@@ -40,6 +40,14 @@ public class Bomberos {
         dailyRequest.litersOfGasoline.add(gasoline);
         }
 
+    // metodo que actualiza y establece los valores de los recursos, esto evita un bug al intentar "añadir recursos"
+    private static void updateVariables() {
+        gasoline = dailyRequest.litersOfGasoline.get(0);
+        litersOfWater = dailyRequest.litersOfWater.get(0);
+        firefighters = dailyRequest.firefighters.get(0);
+        fireTrucks = dailyRequest.fireTrucks.get(0);
+    }
+
     public static void establishRequirements(EmergencyLocation location, SeverityLevel severityLevel){
         // establecer valores requeridos para "water", "fireTrucks" y "fireFighters"
         switch (severityLevel) {
@@ -85,6 +93,7 @@ public class Bomberos {
     public static boolean isAvailablee(EmergencyLocation location, SeverityLevel severityLevel){
         boolean isAvailable;
         establishRequirements(location, severityLevel);
+        updateVariables(); // se actualizan los valores de los recursos antes de ser validados
         if (gasoline < gasolineRequired || fireTrucks < fireTrucksRequired || litersOfWater < waterRequired || firefighters < firefightersRequired) {
             System.out.println(ConsoleColor.orangeText("|===========================================================|"));
             System.out.println(ConsoleColor.orangeText("|=-No hay recursos disponibles para atender la emergencia-==|"));

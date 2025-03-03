@@ -36,6 +36,15 @@ public class Policia {
         dailyRequest.litersOfGasoline.add(gasoline);
     }
 
+    // metodo que actualiza y establece los valores de los recursos, esto evita un bug al intentar "añadir recursos"
+    private static void updateVariables() {
+        gasoline = dailyRequest.litersOfGasoline.get(0);
+        ammunition = dailyRequest.ammunition.get(0);
+        police = dailyRequest.police.get(0);
+        patrols = dailyRequest.patrols.get(0);
+    }
+
+
     public static void establishRequirements(EmergencyLocation location, SeverityLevel severityLevel){
         // establecer valores requeridos para "ammunition", "police" y "patrols"
         switch (severityLevel) {
@@ -83,6 +92,7 @@ public class Policia {
         public static boolean isAvailablee(EmergencyLocation location, SeverityLevel severityLevel){
             boolean isAvailable;
             establishRequirements(location, severityLevel);
+            updateVariables(); // se actualizan los valores de los recursos antes de ser validados
             if (gasoline < gasolineRequired || ammunition < ammunitionRequired || police< policeRequired|| patrols < patrolsRequired) {
                 System.out.println(ConsoleColor.orangeText("|===========================================================|"));
                 System.out.println(ConsoleColor.orangeText("|=-No hay recursos disponibles para atender la emergencia-==|"));
