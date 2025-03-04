@@ -1,5 +1,6 @@
 package models;
 
+import images.ConsoleColor;
 import models.strategy.PrioritizationEmergenciesStrategy;
 import utils.*;
 
@@ -90,17 +91,17 @@ public abstract class Emergency implements Comparable<Emergency> {
         this.startTimeAttention = System.currentTimeMillis();
     }
 
-
     public void endAttention() {
         this.finalTimeAttention = System.currentTimeMillis();
     }
 
     public long calculateAttentionTime() {
-        return (finalTimeAttention- startTimeAttention);
+        return (finalTimeAttention - startTimeAttention);
     }
 
     public String getDescription() {
-        return String.format("%s en %s (gravedad: %s)", type, location, severityLevel + " prioridad:  " + priority);
+        return String.format(ConsoleColor.orangeText("\n|-Tipo: %s \n|-En %s \nCon gravedad: %s \nCon prioridad %s"),
+                type, location, severityLevel, priority);
     }
 
     @Override
@@ -112,8 +113,11 @@ public abstract class Emergency implements Comparable<Emergency> {
 
     @Override
     public String toString() {
-        return "\n|-Emergencia tipo: " + type + ".\n|-Ubicacion: " + location + ".\n|-Nivel de gravedad: " + severityLevel
-                + ".\n|-Con prioridad: " + priority + "\n|-Tiempo estimado de atención: " + responseTime + " minutos";
+        return "\n" + ConsoleColor.cyanText("|-") + ConsoleColor.blueText("Emergencia tipo: ") + type
+                + ConsoleColor.cyanText("\n|-") + ConsoleColor.blueText("Ubicacion: ") + location
+                + ConsoleColor.cyanText("\n|-") + ConsoleColor.blueText("Nivel de gravedad: ") + severityLevel
+                + ConsoleColor.cyanText("\n|-") + ConsoleColor.blueText("Con prioridad: ") + priority
+                + ConsoleColor.cyanText("\n|-") + ConsoleColor.blueText("Tiempo estimado de atención: ") + responseTime
+                + ConsoleColor.blueText(" minutos");
     }
-
 }

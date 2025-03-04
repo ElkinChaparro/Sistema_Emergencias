@@ -32,6 +32,9 @@ public class dailyRequest {
                 solpatrols();
                 solpolice();
                 sollitersOfGasoline();
+                System.out.println(
+                                ConsoleColor.cyanText(
+                                                "|===========================================================|"));
                 showMenu.printLoadingBar();
                 System.out.println(ConsoleColor.greenText("""
                                 |===========================================================|
@@ -41,6 +44,7 @@ public class dailyRequest {
 
         public static void iniciarListas() {
                 int operator = 0;
+                // Se inician las listas para poder añadir recursos
                 firstAidKits.add(operator);
                 ambulances.add(operator);
                 paramedics.add(operator);
@@ -94,6 +98,28 @@ public class dailyRequest {
 
         public static void solfirstAidKits() {
                 var operator = firstAidKits.get(0);
+                if (firstAidKits.get(0) == 0) {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                        + ConsoleColor.redText(
+                                                        "Nota:" + ConsoleColor.blueText(
+                                                                        " El promedio minimo de botiquines solicitados        |\n|-por dia es de 40"))
+                                        + ConsoleColor.cyanText("                                          |"));
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                } else {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                        + ConsoleColor.redText(
+                                                        "Nota: " + ConsoleColor.blueText(
+                                                                        "La cantidad de botiquines actuales es de: "))
+                                        + firstAidKits.get(0));
+                }
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
                 System.out.println(ConsoleColor.cyanText("|-")
@@ -116,6 +142,28 @@ public class dailyRequest {
 
         private static void solambulances() {
                 var operator = ambulances.get(0);
+                if (ambulances.get(0) == 0) {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                        + ConsoleColor.redText(
+                                                        "Nota:" + ConsoleColor.blueText(
+                                                                        " El promedio minimo de ambulancias solicitadas       |\n|-por dia es de 10"))
+                                        + ConsoleColor.cyanText("                                          |"));
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                } else {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                        + ConsoleColor.redText(
+                                                        "Nota: " + ConsoleColor.blueText(
+                                                                        "La cantidad de ambulancias actual es:"))
+                                        + ambulances.get(0));
+                }
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
                 System.out.println(ConsoleColor.cyanText("|-")
@@ -138,6 +186,28 @@ public class dailyRequest {
 
         private static void solparamedics() {
                 var operator = paramedics.get(0);
+                if (paramedics.get(0) == 0) {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                        + ConsoleColor.redText(
+                                                        "Nota:" + ConsoleColor.blueText(
+                                                                        " El promedio minimo de paramedicos solicitados       |\n|-por dia es de 20"))
+                                        + ConsoleColor.cyanText("                                          |"));
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                } else {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                        + ConsoleColor.redText(
+                                                        "Nota: " + ConsoleColor
+                                                                        .blueText("La cantidad de paramedicos actual es: "))
+                                        + paramedics.get(0));
+                }
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
                 System.out.println(ConsoleColor.cyanText("|-")
@@ -160,6 +230,28 @@ public class dailyRequest {
 
         private static void solLitersOfWater() {
                 var operator = litersOfWater.get(0);
+                if (litersOfWater.get(0) == 0) {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                        + ConsoleColor.redText(
+                                                        "Nota:" + ConsoleColor.blueText(
+                                                                        " El promedio minimo de litros de agua solicitados    |\n|-por dia es de 6000"))
+                                        + ConsoleColor.cyanText("                                        |"));
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                } else {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                        + ConsoleColor.redText(
+                                                        "Nota: " + ConsoleColor.blueText(
+                                                                        "La cantidad de litros de agua actual es: "))
+                                        + litersOfWater.get(0));
+                }
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
                 System.out.println(ConsoleColor.cyanText("|-")
@@ -182,6 +274,28 @@ public class dailyRequest {
 
         private static void solfireTrucks() {
                 var operator = fireTrucks.get(0);
+                if (fireTrucks.get(0) == 0) {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                        + ConsoleColor.redText(
+                                                        "Nota:" + ConsoleColor.blueText(
+                                                                        " El promedio minimo de carros de bomberos solicitados|\n|-por dia es de 10"))
+                                        + ConsoleColor.cyanText("                                          |"));
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                } else {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                        + ConsoleColor.redText(
+                                                        "Nota: " + ConsoleColor.blueText(
+                                                                        "La cantidad de carros de bomberos actual es: "))
+                                        + fireTrucks.get(0));
+                }
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
                 System.out.println(ConsoleColor.cyanText("|-")
@@ -204,6 +318,28 @@ public class dailyRequest {
 
         private static void solfirefighters() {
                 var operator = firefighters.get(0);
+                if (firefighters.get(0) == 0) {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                        + ConsoleColor.redText(
+                                                        "Nota:" + ConsoleColor.blueText(
+                                                                        " El promedio minimo de bomberos solicitados          |\n|-por dia es de 20"))
+                                        + ConsoleColor.cyanText("                                          |"));
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                } else {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                        + ConsoleColor.redText(
+                                                        "Nota: " + ConsoleColor.blueText(
+                                                                        "La cantidad de bomberos actual es: "))
+                                        + firefighters.get(0));
+                }
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
                 System.out.println(ConsoleColor.cyanText("|-")
@@ -226,6 +362,28 @@ public class dailyRequest {
 
         private static void solammunition() {
                 var operator = ammunition.get(0);
+                if (ammunition.get(0) == 0) {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                        + ConsoleColor.redText(
+                                                        "Nota:" + ConsoleColor.blueText(
+                                                                        " El promedio minimo de municiones solicitadas        |\n|-por dia es de 1000"))
+                                        + ConsoleColor.cyanText("                                        |"));
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                } else {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                        + ConsoleColor.redText(
+                                                        "Nota: " + ConsoleColor.blueText(
+                                                                        "La cantidad de municiones actual es: "))
+                                        + ammunition.get(0));
+                }
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
                 System.out.println(ConsoleColor.cyanText("|-")
@@ -248,6 +406,28 @@ public class dailyRequest {
 
         private static void solpatrols() {
                 var operator = patrols.get(0);
+                if (patrols.get(0) == 0) {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                        + ConsoleColor.redText(
+                                                        "Nota:" + ConsoleColor.blueText(
+                                                                        " El promedio minimo de patrullas solicitadas         |\n|-por dia es de 10"))
+                                        + ConsoleColor.cyanText("                                          |"));
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                } else {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                        + ConsoleColor.redText(
+                                                        "Nota: " + ConsoleColor.blueText(
+                                                                        "La cantidad de patrullas actual es: "))
+                                        + patrols.get(0));
+                }
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
                 System.out.println(ConsoleColor.cyanText("|-")
@@ -270,6 +450,28 @@ public class dailyRequest {
 
         private static void solpolice() {
                 var operator = police.get(0);
+                if (police.get(0) == 0) {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                        + ConsoleColor.redText(
+                                                        "Nota:" + ConsoleColor.blueText(
+                                                                        " El promedio minimo de policias solicitados          |\n|-por dia es de 20"))
+                                        + ConsoleColor.cyanText("                                          |"));
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                } else {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                        + ConsoleColor.redText(
+                                                        "Nota: " + ConsoleColor.blueText(
+                                                                        "La cantidad de policias actual es: "))
+                                        + police.get(0));
+                }
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
                 System.out.println(ConsoleColor.cyanText("|-")
@@ -292,6 +494,27 @@ public class dailyRequest {
 
         private static void sollitersOfGasoline() {
                 var operator = litersOfGasoline.get(0);
+                if (litersOfGasoline.get(0) == 0) {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                        + ConsoleColor.redText(
+                                                        "Nota:" + ConsoleColor.blueText(
+                                                                        " El promedio minimo de Gal de gasolina solicitados   |\n|-por dia es de 15000"))
+                                        + ConsoleColor.cyanText("                                       |"));
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                } else {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                        + ConsoleColor.redText("Nota: " + ConsoleColor
+                                                        .blueText("La cantidad de galones de gasolina actual es: "))
+                                        + litersOfGasoline.get(0));
+                }
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
                 System.out.println(ConsoleColor.cyanText("|-")
@@ -309,6 +532,25 @@ public class dailyRequest {
                 } catch (NullPointerException e) {
                         showMenu.serrMenu();
                         sollitersOfGasoline();
+                }
+        }
+
+        public static void currenResources() {
+                showMenu.menuResources();
+                System.out
+                                .println(ConsoleColor.cyanText(
+                                                "|===========================================================|"));
+                System.out.println(ConsoleColor.cyanText("|======-")
+                                + ConsoleColor.blueText("¿Desea agregar mas recursos al sistema? |S|N| ")
+                                + ConsoleColor.cyanText("-=====|"));
+                System.out
+                                .println(ConsoleColor.cyanText(
+                                                "|===========================================================|"));
+                System.out.print(ConsoleColor.cyanText("|==-"));
+                var option = scGame.nextLine();
+
+                if (option.equalsIgnoreCase("s")) {
+                        añadirRecursos();
                 }
         }
 }
