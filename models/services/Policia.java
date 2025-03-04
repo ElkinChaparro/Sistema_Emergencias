@@ -89,16 +89,16 @@ public class Policia {
                 System.out.println(ConsoleColor.orangeText("|===========================================================|"));
                 // se valida cual recurso es el insuficiente para ser mas explicitos con el usuario
                 if (gasoline < gasolineRequired) {
-                    System.out.println(ConsoleColor.orangeText("|- Gasolina insuficiente: '" + gasoline + "' de '" + gasolineRequired + "' requerida           -|"));
+                    System.out.println(ConsoleColor.orangeText("|- Gasolina insuficiente: '" + gasoline + "' de '" + gasolineRequired + "' requerida"));
                 }
                 if (ammunition < ammunitionRequired) {
-                    System.out.println(ConsoleColor.orangeText("|- Munición insuficiente: '" + ammunition + "' de '" + ammunitionRequired + "' requeridas           -|"));
+                    System.out.println(ConsoleColor.orangeText("|- Munición insuficiente: '" + ammunition + "' de '" + ammunitionRequired + "' requeridas"));
                 }
                 if (police < policeRequired) {
-                    System.out.println(ConsoleColor.orangeText("|- Policías insuficientes: '" + police + "' de '" + policeRequired + "' requeridos           -|"));
+                    System.out.println(ConsoleColor.orangeText("|- Policías insuficientes: '" + police + "' de '" + policeRequired + "' requeridos"));
                 }
                 if (patrols < patrolsRequired) {
-                    System.out.println(ConsoleColor.orangeText("|- Patrullas insuficientes: '" + patrols + "' de '" + patrolsRequired + "' requeridas          -|"));
+                    System.out.println(ConsoleColor.orangeText("|- Patrullas insuficientes: '" + patrols + "' de '" + patrolsRequired + "' requeridas"));
                 }
                 System.out.println(ConsoleColor.orangeText("|===========================================================|"));
                 isAvailable = false;

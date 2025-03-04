@@ -34,10 +34,10 @@ public class ConsoleObserver implements ObserverEmergencies {
                 System.out.println(
                                 ConsoleColor.redText("|===========================================================|"));
                 System.out.println(
-                                ConsoleColor.redText("|=-") + ConsoleColor.orangeText("Tipo de emergencia: ")
+                                ConsoleColor.redText("|=-") + ConsoleColor.orangeText("Tipo de emergencia:      ")
                                                 + emergency.getType());
                 System.out
-                                .println(ConsoleColor.redText("|=-") + ConsoleColor.orangeText("Ubicación: ")
+                                .println(ConsoleColor.redText("|=-") + ConsoleColor.orangeText("Ubicación:               ")
                                                 + emergency.getLocation());
                 System.out.println(
                                 ConsoleColor.redText("|=-") + ConsoleColor.orangeText("Fecha y hora del suceso: ")

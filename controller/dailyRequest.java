@@ -32,6 +32,9 @@ public class dailyRequest {
                 solpatrols();
                 solpolice();
                 sollitersOfGasoline();
+                System.out.println(
+                                ConsoleColor.cyanText(
+                                                "|===========================================================|"));
                 showMenu.printLoadingBar();
                 System.out.println(ConsoleColor.greenText("""
                                 |===========================================================|
@@ -108,10 +111,14 @@ public class dailyRequest {
                                         ConsoleColor.cyanText(
                                                         "|===========================================================|"));
                 } else {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
                         System.out.println(ConsoleColor.cyanText("|-")
-                                        + ConsoleColor.blueText(
-                                                        "Nota: La cantidad de botiquines de primeros auxilios es ")
-                                        + ConsoleColor.cyanText(firstAidKits.get(0) + "          |"));
+                                        + ConsoleColor.redText(
+                                                        "Nota: " + ConsoleColor.blueText(
+                                                                        "La cantidad de botiquines actuales es de: "))
+                                        + firstAidKits.get(0));
                 }
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -148,10 +155,14 @@ public class dailyRequest {
                                         ConsoleColor.cyanText(
                                                         "|===========================================================|"));
                 } else {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
                         System.out.println(ConsoleColor.cyanText("|-")
-                                        + ConsoleColor.blueText(
-                                                        "Nota: La cantidad de ambulancias es ")
-                                        + ConsoleColor.cyanText(ambulances.get(0) + "          |"));
+                                        + ConsoleColor.redText(
+                                                        "Nota: " + ConsoleColor.blueText(
+                                                                        "La cantidad de ambulancias actual es:"))
+                                        + ambulances.get(0));
                 }
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -188,10 +199,14 @@ public class dailyRequest {
                                         ConsoleColor.cyanText(
                                                         "|===========================================================|"));
                 } else {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
                         System.out.println(ConsoleColor.cyanText("|-")
-                                        + ConsoleColor.blueText(
-                                                        "Nota: La cantidad de paramedicos es ")
-                                        + ConsoleColor.cyanText(paramedics.get(0) + "          |"));
+                                        + ConsoleColor.redText(
+                                                        "Nota: " + ConsoleColor
+                                                                        .blueText("La cantidad de paramedicos actual es: "))
+                                        + paramedics.get(0));
                 }
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -228,10 +243,14 @@ public class dailyRequest {
                                         ConsoleColor.cyanText(
                                                         "|===========================================================|"));
                 } else {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
                         System.out.println(ConsoleColor.cyanText("|-")
-                                        + ConsoleColor.blueText(
-                                                        "Nota: La cantidad de litros de agua es ")
-                                        + ConsoleColor.cyanText(litersOfWater.get(0) + "          |"));
+                                        + ConsoleColor.redText(
+                                                        "Nota: " + ConsoleColor.blueText(
+                                                                        "La cantidad de litros de agua actual es: "))
+                                        + litersOfWater.get(0));
                 }
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -268,10 +287,14 @@ public class dailyRequest {
                                         ConsoleColor.cyanText(
                                                         "|===========================================================|"));
                 } else {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
                         System.out.println(ConsoleColor.cyanText("|-")
-                                        + ConsoleColor.blueText(
-                                                        "Nota: La cantidad de carros de bomberos es ")
-                                        + ConsoleColor.cyanText(fireTrucks.get(0) + "          |"));
+                                        + ConsoleColor.redText(
+                                                        "Nota: " + ConsoleColor.blueText(
+                                                                        "La cantidad de carros de bomberos actual es: "))
+                                        + fireTrucks.get(0));
                 }
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -308,10 +331,14 @@ public class dailyRequest {
                                         ConsoleColor.cyanText(
                                                         "|===========================================================|"));
                 } else {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
                         System.out.println(ConsoleColor.cyanText("|-")
-                                        + ConsoleColor.blueText(
-                                                        "Nota: La cantidad de bomberos es ")
-                                        + ConsoleColor.cyanText(firefighters.get(0) + "          |"));
+                                        + ConsoleColor.redText(
+                                                        "Nota: " + ConsoleColor.blueText(
+                                                                        "La cantidad de bomberos actual es: "))
+                                        + firefighters.get(0));
                 }
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -348,10 +375,14 @@ public class dailyRequest {
                                         ConsoleColor.cyanText(
                                                         "|===========================================================|"));
                 } else {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
                         System.out.println(ConsoleColor.cyanText("|-")
-                                        + ConsoleColor.blueText(
-                                                        "Nota: La cantidad de municiones es ")
-                                        + ConsoleColor.cyanText(ammunition.get(0) + "          |"));
+                                        + ConsoleColor.redText(
+                                                        "Nota: " + ConsoleColor.blueText(
+                                                                        "La cantidad de municiones actual es: "))
+                                        + ammunition.get(0));
                 }
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -388,10 +419,14 @@ public class dailyRequest {
                                         ConsoleColor.cyanText(
                                                         "|===========================================================|"));
                 } else {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
                         System.out.println(ConsoleColor.cyanText("|-")
-                                        + ConsoleColor.blueText(
-                                                        "Nota: La cantidad de patrullas es ")
-                                        + ConsoleColor.cyanText(patrols.get(0) + "          |"));
+                                        + ConsoleColor.redText(
+                                                        "Nota: " + ConsoleColor.blueText(
+                                                                        "La cantidad de patrullas actual es: "))
+                                        + patrols.get(0));
                 }
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -428,10 +463,14 @@ public class dailyRequest {
                                         ConsoleColor.cyanText(
                                                         "|===========================================================|"));
                 } else {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
                         System.out.println(ConsoleColor.cyanText("|-")
-                                        + ConsoleColor.blueText(
-                                                        "Nota: La cantidad de policias es ")
-                                        + ConsoleColor.cyanText(police.get(0) + "          |"));
+                                        + ConsoleColor.redText(
+                                                        "Nota: " + ConsoleColor.blueText(
+                                                                        "La cantidad de policias actual es: "))
+                                        + police.get(0));
                 }
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -467,12 +506,14 @@ public class dailyRequest {
                         System.out.println(
                                         ConsoleColor.cyanText(
                                                         "|===========================================================|"));
-
                 } else {
+                        System.out.println(
+                                        ConsoleColor.cyanText(
+                                                        "|===========================================================|"));
                         System.out.println(ConsoleColor.cyanText("|-")
-                                        + ConsoleColor.blueText("Nota: La cantidad de galones de gasolina es ")
-                                        + ConsoleColor.cyanText(litersOfGasoline.get(0) + "          |"));
-
+                                        + ConsoleColor.redText("Nota: " + ConsoleColor
+                                                        .blueText("La cantidad de galones de gasolina actual es: "))
+                                        + litersOfGasoline.get(0));
                 }
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -491,6 +532,25 @@ public class dailyRequest {
                 } catch (NullPointerException e) {
                         showMenu.serrMenu();
                         sollitersOfGasoline();
+                }
+        }
+
+        public static void currenResources() {
+                showMenu.menuResources();
+                System.out
+                                .println(ConsoleColor.cyanText(
+                                                "|===========================================================|"));
+                System.out.println(ConsoleColor.cyanText("|======-")
+                                + ConsoleColor.blueText("¿Desea agregar mas recursos al sistema? |S|N| ")
+                                + ConsoleColor.cyanText("-=====|"));
+                System.out
+                                .println(ConsoleColor.cyanText(
+                                                "|===========================================================|"));
+                System.out.print(ConsoleColor.cyanText("|==-"));
+                var option = scGame.nextLine();
+
+                if (option.equalsIgnoreCase("s")) {
+                        añadirRecursos();
                 }
         }
 }

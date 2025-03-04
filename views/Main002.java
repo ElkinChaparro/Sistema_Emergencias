@@ -45,8 +45,7 @@ public class Main002 {
                     break;
                 case 3:
                     // Ver recursos actuales
-                    showMenu.menuResources();
-                    showMenu.pressEnter(scanner);
+                    dailyRequest.currenResources();
                     break;
                 case 4:
                     // Solicitar suministros
