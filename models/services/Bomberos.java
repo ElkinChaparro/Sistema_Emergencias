@@ -11,18 +11,14 @@ public class Bomberos {
     static int waterRequired = 0;
     static int firefightersRequired = 0;
     static int operator = 0;
-
+    //Variables que traen las cantidades de las listas
     static int gasoline = dailyRequest.litersOfGasoline.get(0);
     static int fireTrucks = dailyRequest.fireTrucks.get(0);
     static int litersOfWater = dailyRequest.litersOfWater.get(0);
     static int firefighters = dailyRequest.firefighters.get(0);
 
-
-
-
     public static void executeFire(EmergencyLocation location, SeverityLevel severityLevel) {
         establishRequirements(location, severityLevel);
-
         litersOfWater -= waterRequired;
         firefighters -= firefightersRequired;
         fireTrucks -= fireTrucksRequired;
@@ -33,7 +29,6 @@ public class Bomberos {
         dailyRequest.firefighters.add(firefighters);
         dailyRequest.fireTrucks.clear();
         dailyRequest.fireTrucks.add(fireTrucks);
-
         dailyRequest.litersOfGasoline.clear();
         dailyRequest.litersOfGasoline.add(gasoline);
         }

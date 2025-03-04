@@ -1,15 +1,13 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
-import images.ConsoleColor;
+import images.*;
 import models.Emergency;
 import utils.EmergencyLocation;
 
 public class BackgroundEmergencie {
+    static Scanner scanner = new Scanner(System.in);
     private static List<BackgroundEmergencie> emergenciesInProcess = new ArrayList<>();
     private final Emergency emergency;
     private long timeStart;
@@ -29,11 +27,17 @@ public class BackgroundEmergencie {
             bEmergencies.timeStart = System.currentTimeMillis();
             bEmergencies.attendedEmergencie();
             emergency.endAttention();
-            System.out.println("\nLa emergencia: " + emergency.getDescription() + " ha sido atendida exitosamente");
+            System.out.println(
+                    ConsoleColor.redText("\n|===========================================================|"));
+            System.out.println(
+                    ConsoleColor.redText("|-") + ConsoleColor.orangeText("La emergencia ") + emergency.getDescription()
+                            + ConsoleColor.redText("\n|-") + ConsoleColor.orangeText("ha sido atendida exitosamente"));
             // Transformar de milisegundos a segundos
             long durationMillis = emergency.calculateAttentionTime();
             double durationSeconds = durationMillis / 1000.0;
-            System.out.println("La emergencia ha sido atendida en: " + durationSeconds + " segundos");
+            System.out.println(ConsoleColor.orangeText("|-La emergencia ha sido atendida en: " + durationSeconds + " segundos"));
+            System.out.println(
+                    ConsoleColor.redText("|===========================================================|"));
         });
         emergencyThread.start();
 
@@ -69,16 +73,27 @@ public class BackgroundEmergencie {
         if (timeDuration > 0) {
             double percentageCompleted = ((double) lapsedTime / timeDuration) * 100;
             percentageCompleted = Math.min(percentageCompleted, 100); // Limitar el valor máximo a 100
-            System.out.printf(ConsoleColor.blueText("Progreso actual de '%s': %.2f%%\n"), emergency.getType(),
+            System.out.println(
+                    ConsoleColor.orangeText("|===========================================================|"));
+            System.out.printf(
+                    ConsoleColor.orangeText("|-") + ConsoleColor.redText("Progreso actual del '%s': %.2f%%\n"),
+                    emergency.getType(),
                     percentageCompleted);
+            System.out.println(
+                    ConsoleColor.orangeText("|===========================================================|"));
             if (percentageCompleted >= 100) {
                 synchronized (emergenciesInProcess) {
                     emergenciesInProcess.remove(this);
                 }
-                System.out.println(ConsoleColor.redText("ESTA EMERGENCIA YA HA SIDO ATENDIDA"));
+                System.out.println(
+                        ConsoleColor.greenText("|===========================================================|"));
+                System.out.println(
+                        ConsoleColor.greenText("|===========-ESTA EMERGENCIA YA HA SIDO ATENDIDA-===========|"));
+                System.out.println(
+                        ConsoleColor.greenText("|===========================================================|"));
             }
         } else {
-            System.out.println("NO VALIDO");
+            showMenu.serrMenu();
         }
     }
 
@@ -86,24 +101,54 @@ public class BackgroundEmergencie {
         @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);
         if (emergenciesInProcess.isEmpty()) {
-            System.out.println("NO HAY EMERGENCIAS SIENDO ATENDIDAS");
-        }else{
+            System.out.println(
+                    ConsoleColor.orangeText("|===========================================================|"));
+            System.out
+                    .println(ConsoleColor.orangeText("|===========-NO HAY EMERGENCIAS SIENDO ATENDIDAS-===========|"));
+            System.out.println(
+                    ConsoleColor.orangeText("|===========================================================|"));
+        } else {
             while (true) {
-                System.out.println("Seleccione una emergencia para ver el progreso (0 para salir):");
+                System.out.println(
+                        ConsoleColor.cyanText("|===========================================================|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                        + ConsoleColor.blueText("Seleccione una emergencia para ver el progreso")
+                        + ConsoleColor.cyanText("            |"));
+                System.out.println(
+                        ConsoleColor.cyanText("|===========================================================|"));
                 synchronized (emergenciesInProcess) {
                     for (int i = 0; i < emergenciesInProcess.size(); i++) {
-                        System.out.printf("%d: %s\n", i + 1, emergenciesInProcess.get(i).emergency.getDescription());
+                        System.out.printf(ConsoleColor.cyanText("|-> ") + "%d: %s\n", i + 1,
+                                emergenciesInProcess.get(i).emergency.getDescription());
                     }
                 }
-                int opcion = scanner.nextInt();
-                if (opcion == 0) {
-                    break;
-                } else if (opcion > 0 && opcion <= emergenciesInProcess.size()) {
-                    synchronized (emergenciesInProcess) {
-                        emergenciesInProcess.get(opcion - 1).printProgress();
+                System.out.println(
+                        ConsoleColor.cyanText("|===========================================================|"));
+                System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("0 para salir")
+                        + ConsoleColor.cyanText("                                              |"));
+                System.out.println(
+                        ConsoleColor.cyanText("|===========================================================|"));
+                System.out.print(ConsoleColor.cyanText("|==-"));
+                try {
+                    int opcion = scanner.nextInt();
+                    if (opcion == 0) {
+                        break;
+                    } else if (opcion > 0 && opcion <= emergenciesInProcess.size()) {
+                        synchronized (emergenciesInProcess) {
+                            emergenciesInProcess.get(opcion - 1).printProgress();
+                        }
                     }
-                } else {
-                    System.out.println("Opción no válida.");
+                } // Se captura la excepción en caso de que la opción no sea un número
+                catch (NumberFormatException e) {
+                    showMenu.serrMenu();
+                    printBar();
+                } // Se captura la excepción en caso de que la opción sea nula
+                catch (NullPointerException e) {
+                    showMenu.serrMenu();
+                    printBar();
+                } catch (Exception e) {
+                    showMenu.serrMenu();
+                    printBar();
                 }
             }
         }

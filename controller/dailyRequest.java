@@ -59,40 +59,51 @@ public class dailyRequest {
 
         public static void añadirRecursos() {
                 showMenu.añadirRecursos(null);
-                var option = Integer.parseInt(scGame.nextLine());
-                switch (option) {
-                        case 1:
-                                solfirstAidKits();
-                                break;
-                        case 2:
-                                solambulances();
-                                break;
-                        case 3:
-                                solparamedics();
-                                break;
-                        case 4:
-                                solLitersOfWater();
-                                break;
-                        case 5:
-                                solfireTrucks();
-                                break;
-                        case 6:
-                                solfirefighters();
-                                break;
-                        case 7:
-                                solammunition();
-                                break;
-                        case 8:
-                                solpatrols();
-                                break;
-                        case 9:
-                                solpolice();
-                                break;
-                        case 10:
-                                sollitersOfGasoline();
-                                break;
-                        default:
-                                break;
+                try {
+                        var option = Integer.parseInt(scGame.nextLine());
+                        switch (option) {
+                                case 1:
+                                        solfirstAidKits();
+                                        break;
+                                case 2:
+                                        solambulances();
+                                        break;
+                                case 3:
+                                        solparamedics();
+                                        break;
+                                case 4:
+                                        solLitersOfWater();
+                                        break;
+                                case 5:
+                                        solfireTrucks();
+                                        break;
+                                case 6:
+                                        solfirefighters();
+                                        break;
+                                case 7:
+                                        solammunition();
+                                        break;
+                                case 8:
+                                        solpatrols();
+                                        break;
+                                case 9:
+                                        solpolice();
+                                        break;
+                                case 10:
+                                        sollitersOfGasoline();
+                                        break;
+                                default:
+                                        break;
+                        }
+                } catch (NumberFormatException e) {
+                        showMenu.serrMenu();
+                        añadirRecursos();
+                } catch (NullPointerException e) {
+                        showMenu.serrMenu();
+                        añadirRecursos();
+                } catch (Exception e) {
+                        showMenu.serrMenu();
+                        añadirRecursos();
                 }
         }
 
@@ -535,7 +546,7 @@ public class dailyRequest {
                 }
         }
 
-        public static void currenResources() {
+        public static void currenResources(Scanner scanner) throws InterruptedException {
                 showMenu.menuResources();
                 System.out
                                 .println(ConsoleColor.cyanText(
@@ -547,10 +558,45 @@ public class dailyRequest {
                                 .println(ConsoleColor.cyanText(
                                                 "|===========================================================|"));
                 System.out.print(ConsoleColor.cyanText("|==-"));
-                var option = scGame.nextLine();
-
-                if (option.equalsIgnoreCase("s")) {
-                        añadirRecursos();
+                try {
+                        var option = String.format(scanner.nextLine());
+                        if (option.equalsIgnoreCase("s")) {
+                                añadirRecursos();
+                        } else if (option.equalsIgnoreCase("n")) {
+                                System.out.println(
+                                                ConsoleColor.orangeText(
+                                                                "|===========================================================|"));
+                                System.out.println(
+                                                ConsoleColor.orangeText(
+                                                                "|=============-No se registran nuevos recursos.-============|"));
+                                System.out.println(
+                                                ConsoleColor.orangeText(
+                                                                "|===========================================================|"));
+                        }
+                } catch (NumberFormatException e) {
+                        System.out
+                                        .println(ConsoleColor.redText(
+                                                        "|===========================================================|"));
+                        System.out
+                                        .println(ConsoleColor.redText(
+                                                        "|======-Opción no válida. Por favor, ingrese |S| o |N|-=====|"));
+                        System.out
+                                        .println(ConsoleColor.redText(
+                                                        "|===========================================================|"));
+                        currenResources(scanner);
+                } catch (NullPointerException e) {
+                        showMenu.serrMenu();
+                        currenResources(scanner);
+                } catch (Exception e) {
+                        System.out.println(
+                                        ConsoleColor.orangeText(
+                                                        "|===========================================================|"));
+                        System.out.println(
+                                        ConsoleColor.orangeText(
+                                                        "|===============-Ocurrió un error inesperado.-==============|"));
+                        System.out.println(
+                                        ConsoleColor.orangeText(
+                                                        "|===========================================================|"));
                 }
         }
 }
