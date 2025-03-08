@@ -44,7 +44,6 @@ public class BackgroundEmergencie {
                     ConsoleColor.redText("|===========================================================|"));
         });
         emergencyThread.start();
-
     }
 
     public void attendedEmergencie() {
@@ -111,6 +110,7 @@ public class BackgroundEmergencie {
                     .println(ConsoleColor.orangeText("|===========-NO HAY EMERGENCIAS SIENDO ATENDIDAS-===========|"));
             System.out.println(
                     ConsoleColor.orangeText("|===========================================================|"));
+            showMenu.pressEnter(scanner);
         } else {
             while (true) {
                 System.out.println(
@@ -136,7 +136,12 @@ public class BackgroundEmergencie {
                 try {
                     int opcion = scanner.nextInt();
                     if (opcion == 0) {
-                        System.out.println("Continue con la ejecucion");
+                        System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
+                        System.out.println(
+                                ConsoleColor.cyanText("|================-") + ConsoleColor.blueText("Continue con la ejecucion") + ConsoleColor.cyanText("-================|"));
+                        System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
                         break;
                     } else if (opcion > 0 && opcion <= emergenciesInProcess.size()) {
                         synchronized (emergenciesInProcess) {
@@ -152,7 +157,8 @@ public class BackgroundEmergencie {
                 catch (NullPointerException e) {
                     showMenu.serrMenu();
                     printBar();
-                } catch (Exception e) {
+                } // Se captura la exepcion en caso de que ocurra un error inesperado
+                catch (ExceptionInInitializerError e) {
                     showMenu.serrMenu();
                     printBar();
                 }

@@ -319,7 +319,14 @@ public class EmergencyManager implements SubjectEmergencies {
 
     // Muestra las estadisticas del dia
     public void showStatistics() {
-        System.out.println("\n === ESTADISTICAS DEL DIA ===");
+        System.out.println(
+                ConsoleColor.cyanText(
+                        "|===========================================================|"));
+        System.out.println(ConsoleColor.cyanText("|=================-") + ConsoleColor.blueText("ESTADISTICAS DEL DIA")
+                + ConsoleColor.cyanText("-==================|"));
+        System.out.println(
+                ConsoleColor.cyanText(
+                        "|===========================================================|"));
         System.out.println("Emergencias atendidas: " + numberEmergenciesAtt);
         System.out.println("TIEMPO: " + totalAttentionTime);
     }
