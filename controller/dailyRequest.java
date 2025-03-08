@@ -62,6 +62,17 @@ public class dailyRequest {
                 try {
                         var option = Integer.parseInt(scGame.nextLine());
                         switch (option) {
+                                case 0:
+                                        System.out.println(
+                                                        ConsoleColor.orangeText(
+                                                                        "|===========================================================|"));
+                                        System.out.println(
+                                                        ConsoleColor.orangeText(
+                                                                        "|=============-No se registran nuevos recursos.-============|"));
+                                        System.out.println(
+                                                        ConsoleColor.orangeText(
+                                                                        "|===========================================================|"));
+                                        break;
                                 case 1:
                                         solfirstAidKits();
                                         break;
@@ -93,7 +104,7 @@ public class dailyRequest {
                                         sollitersOfGasoline();
                                         break;
                                 default:
-                                        break;
+                                        throw new NullPointerException();
                         }
                 } catch (NumberFormatException e) {
                         showMenu.serrMenu();
@@ -572,7 +583,8 @@ public class dailyRequest {
                                 System.out.println(
                                                 ConsoleColor.orangeText(
                                                                 "|===========================================================|"));
-                        }
+                        } else
+                                throw new NumberFormatException();
                 } catch (NumberFormatException e) {
                         System.out
                                         .println(ConsoleColor.redText(
