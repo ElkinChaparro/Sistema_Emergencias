@@ -11,16 +11,14 @@ public class Policia {
     static int policeRequired = 0;
     static int patrolsRequired = 0;
     static int operator = 0;
-
+    //Variables que traen las cantidades de las listas
     static int gasoline = dailyRequest.litersOfGasoline.get(0);
     static int patrols = dailyRequest.patrols.get(0);
     static int ammunition = dailyRequest.ammunition.get(0);
     static int police = dailyRequest.police.get(0);
 
     public static void executeRobbery(EmergencyLocation location, SeverityLevel severityLevel) {
-
         establishRequirements(location, severityLevel);
-
         ammunition -= ammunitionRequired;
         police -= policeRequired;
         patrols -= patrolsRequired;
@@ -31,7 +29,6 @@ public class Policia {
         dailyRequest.police.add(police);
         dailyRequest.patrols.clear();
         dailyRequest.patrols.add(patrols);
-
         dailyRequest.litersOfGasoline.clear();
         dailyRequest.litersOfGasoline.add(gasoline);
     }

@@ -11,16 +11,14 @@ public class Ambulancia {
     static int paramedicsRequired = 0;
     static int ambulancesRequired = 0;
     static int operator = 0;
-
+    //Variables que traen las cantidades de las listas
     static int gasoline = dailyRequest.litersOfGasoline.get(0);
     static int ambulances = dailyRequest.ambulances.get(0);
     static int firstAidKits = dailyRequest.firstAidKits.get(0);
     static int paramedics = dailyRequest.paramedics.get(0);
 
     public static void executetrafficAccident(EmergencyLocation location, SeverityLevel severityLevel) {
-
         establishRequirements(location, severityLevel);
-
         firstAidKits -= firstAidKitsRequired;
         paramedics -= paramedicsRequired;
         ambulances -= ambulancesRequired;
@@ -31,7 +29,6 @@ public class Ambulancia {
         dailyRequest.paramedics.add(paramedics);
         dailyRequest.ambulances.clear();
         dailyRequest.ambulances.add(ambulances);
-
         dailyRequest.litersOfGasoline.clear();
         dailyRequest.litersOfGasoline.add(gasoline);
 

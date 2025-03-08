@@ -100,7 +100,7 @@ public abstract class Emergency implements Comparable<Emergency> {
     }
 
     public String getDescription() {
-        return String.format(ConsoleColor.orangeText("\n|-Tipo: %s \n|-En %s \nCon gravedad: %s \nCon prioridad %s"),
+        return String.format(ConsoleColor.orangeText("\n|-Tipo: %s \n|-En %s \n|-Con gravedad: %s \n|-Con prioridad %s"),
                 type, location, severityLevel, priority);
     }
 
@@ -113,10 +113,10 @@ public abstract class Emergency implements Comparable<Emergency> {
 
     @Override
     public String toString() {
-        return "\n" + ConsoleColor.cyanText("|-") + ConsoleColor.blueText("Emergencia tipo: ") + type
-                + ConsoleColor.cyanText("\n|-") + ConsoleColor.blueText("Ubicacion: ") + location
+        return "\n" + ConsoleColor.cyanText("|-") + ConsoleColor.blueText("Emergencia tipo:   ") + type
+                + ConsoleColor.cyanText("\n|-") + ConsoleColor.blueText("Ubicacion:         ") + location
                 + ConsoleColor.cyanText("\n|-") + ConsoleColor.blueText("Nivel de gravedad: ") + severityLevel
-                + ConsoleColor.cyanText("\n|-") + ConsoleColor.blueText("Con prioridad: ") + priority
+                + ConsoleColor.cyanText("\n|-") + ConsoleColor.blueText("Con prioridad:     ") + priority
                 + ConsoleColor.cyanText("\n|-") + ConsoleColor.blueText("Tiempo estimado de atención: ") + responseTime
                 + ConsoleColor.blueText(" minutos");
     }

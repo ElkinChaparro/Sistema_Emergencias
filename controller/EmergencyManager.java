@@ -69,17 +69,15 @@ public class EmergencyManager implements SubjectEmergencies {
                     ConsoleColor.cyanText("|===========================================================|"));
             // Barra de carga
             showMenu.printLoadingBar();
+            // se agrega el observer y se notifica de la emergencia registrada
+            addObserver(observer);
+            notifyObservers(newEmergency);
+            removeObserver(observer);
             // Se imprime la emergencia registrada
             System.out.println(ConsoleColor.greenText("""
                     |===========================================================|
                     |============-Emergencia registrada exitosamente.-==========|
                     |===========================================================|"""));
-            // Simula el proceso con un pequeño diley
-            Thread.sleep(2000);
-            // se agrega el observer y se notifica de la emergencia registrada
-            addObserver(observer);
-            notifyObservers(newEmergency);
-            removeObserver(observer);
             exit = true;
         }
         // Se imprime un mensaje de confirmación
@@ -216,6 +214,7 @@ public class EmergencyManager implements SubjectEmergencies {
                     .println(ConsoleColor.redText("|==============-No hay emergencias pendientes-==============|"));
             System.out
                     .println(ConsoleColor.redText("|===========================================================|"));
+            showMenu.pressEnter(scanner);
         } else {
 
             // Si hay emergencias pendientes
@@ -230,19 +229,60 @@ public class EmergencyManager implements SubjectEmergencies {
             System.out
                     .println(ConsoleColor.cyanText("|===========================================================|"));
             System.out.print(ConsoleColor.cyanText("|==-"));
-            String option = scanner.nextLine();
-            if (option.equalsIgnoreCase("s")) {
-                // validacion de recursos disponibles para atender la emergencia
-                if (checkResources(nextEmergency)) {
-                    nextEmergency = ePriorityQueue.poll(); // Obtiene y elimina la emergencia con mayor prioridad
-                    attendedEmergencies.add(nextEmergency);
-                    // se llama al metodo para manejar la emergencia como una tarea secundaria
-                    bEmergencie.backgroundEmergency();
-                    System.out.println("|-Atendiendo emergencia: " + nextEmergency.getDescription());
-                    System.out.println("Continúa la ejecución");
-                    numberEmergenciesAtt++;
-                    operations(nextEmergency);
+            try {
+                var option = String.format(scanner.nextLine());
+                if (option.equalsIgnoreCase("s")) {
+                    // validacion de recursos disponibles para atender la emergencia
+                    if (checkResources(nextEmergency)) {
+                        nextEmergency = ePriorityQueue.poll(); // Obtiene y elimina la emergencia con mayor prioridad
+                        attendedEmergencies.add(nextEmergency);
+                        // se llama al metodo para manejar la emergencia como una tarea secundaria
+                        bEmergencie.backgroundEmergency();
+                        System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|==================-")
+                                + ConsoleColor.blueText("Atendiendo emergencia")
+                                + ConsoleColor.cyanText("-==================|")
+                                + nextEmergency.getDescription());
+                        System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
+                        System.out.println(
+                                ConsoleColor.cyanText("|==================-")
+                                        + ConsoleColor.blueText("Continúa la ejecución")
+                                        + ConsoleColor.cyanText("-==================|"));
+                        System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
+                        numberEmergenciesAtt++;
+                        operations(nextEmergency);
+                    }
+                } else if (option.equalsIgnoreCase("n")) {
+                    System.out.println(
+                            ConsoleColor.orangeText("|===========================================================|"));
+                    System.out.println(
+                            ConsoleColor.orangeText("|=================-Emergencia no atendida.-=================|"));
+                    System.out.println(
+                            ConsoleColor.orangeText("|===========================================================|"));
+                } else {
+                    throw new NumberFormatException();
                 }
+            } catch (NumberFormatException e) {
+                System.out
+                        .println(ConsoleColor.redText("|===========================================================|"));
+                System.out
+                        .println(ConsoleColor.redText("|======-Opción no válida. Por favor, ingrese |S| o |N|-=====|"));
+                System.out
+                        .println(ConsoleColor.redText("|===========================================================|"));
+                handleNextEmergency();
+            } catch (NullPointerException e) {
+                showMenu.serrMenu();
+                handleNextEmergency();
+            } catch (Exception e) {
+                System.out.println(
+                        ConsoleColor.orangeText("|===========================================================|"));
+                System.out.println(
+                        ConsoleColor.orangeText("|===============-Ocurrió un error inesperado.-==============|"));
+                System.out.println(
+                        ConsoleColor.orangeText("|===========================================================|"));
             }
         }
         return nextEmergency;
@@ -252,17 +292,28 @@ public class EmergencyManager implements SubjectEmergencies {
     public void printAllEmergencies() {
         // copia de la lista principal de "ePriorityQueue" para poder verse en listado
         PriorityQueue<Emergency> copyQueue = new PriorityQueue<>(ePriorityQueue);
-        System.out.println(
-                ConsoleColor.cyanText(
-                        "|===========================================================|"));
-        System.out.println(ConsoleColor.cyanText("|=================-")
-                + ConsoleColor.blueText("EMERGENCIAS PENDIENTES") + ConsoleColor.cyanText("-==================|"));
-        System.out.println(
-                ConsoleColor.cyanText(
-                        "|===========================================================|"));
-        while (!copyQueue.isEmpty()) {
-            Emergency emergency = copyQueue.poll();
-            System.out.println(ConsoleColor.orangeText("-> ") + emergency);
+
+        if (copyQueue.isEmpty()) {
+            // Si no hay emergencias pendientes
+            System.out
+                    .println(ConsoleColor.redText("|===========================================================|"));
+            System.out
+                    .println(ConsoleColor.redText("|==============-No hay emergencias pendientes-==============|"));
+            System.out
+                    .println(ConsoleColor.redText("|===========================================================|"));
+        } else {
+            System.out.println(
+                    ConsoleColor.cyanText(
+                            "|===========================================================|"));
+            System.out.println(ConsoleColor.cyanText("|=================-")
+                    + ConsoleColor.blueText("EMERGENCIAS PENDIENTES") + ConsoleColor.cyanText("-==================|"));
+            System.out.println(
+                    ConsoleColor.cyanText(
+                            "|===========================================================|"));
+            while (!copyQueue.isEmpty()) {
+                Emergency emergency = copyQueue.poll();
+                System.out.println(ConsoleColor.orangeText("-> ") + emergency);
+            }
         }
     }
 
@@ -303,9 +354,6 @@ public class EmergencyManager implements SubjectEmergencies {
                 && Ambulancia.isAvailablee(emergency.getLocation(), emergency.getSeverityLevel())) {
             isCheck = true;
 
-        } else {
-            // si no retorna false
-            isCheck = false;
         }
         return isCheck;
     }

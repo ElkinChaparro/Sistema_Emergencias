@@ -91,7 +91,7 @@ public class showMenu {
                                 + ConsoleColor.blueText("  6. Añadir Bomberos                                      ")
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(ConsoleColor.cyanText("|-")
-                                + ConsoleColor.blueText("  7. Añañdir Municion                                     ")
+                                + ConsoleColor.blueText("  7. Añadir Municion                                      ")
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(ConsoleColor.cyanText("|-")
                                 + ConsoleColor.blueText("  8. Añadir Patrullas de policia                          ")
@@ -101,6 +101,9 @@ public class showMenu {
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(ConsoleColor.cyanText("|-")
                                 + ConsoleColor.blueText(" 10. Añadir Litros de Gasolina                            ")
+                                + ConsoleColor.cyanText("|"));
+                System.out.println(ConsoleColor.cyanText("|-")
+                                + ConsoleColor.blueText("  0. Regresar al menu principal                           ")
                                 + ConsoleColor.cyanText("|"));
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));

@@ -29,7 +29,12 @@ public class Main002 {
             // Se valida que la opción sea un número
             try {
                 option = Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e) {
+            } // Se captura la excepción en caso de que la opción no sea un número
+            catch (NumberFormatException e) {
+                showMenu.serrMenu();
+                continue;
+            } // Se captura la excepción en caso de que la opción sea nula
+            catch (NullPointerException e) {
                 showMenu.serrMenu();
                 continue;
             }
@@ -45,7 +50,7 @@ public class Main002 {
                     break;
                 case 3:
                     // Ver recursos actuales
-                    dailyRequest.currenResources();
+                    dailyRequest.currenResources(scanner);
                     break;
                 case 4:
                     // Solicitar suministros
