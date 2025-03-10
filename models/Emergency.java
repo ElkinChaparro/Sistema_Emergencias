@@ -8,11 +8,9 @@ public abstract class Emergency implements Comparable<Emergency> {
     private EmergencyType type;
     private EmergencyLocation location;
     private SeverityLevel severityLevel;
-    private int responseTime;
+    private int responseTime, priority;
     private boolean attended;
-    private int priority;
-    private long startTimeAttention;
-    private long finalTimeAttention;
+    private long startTimeAttention, finalTimeAttention;
 
     public Emergency(EmergencyType type, EmergencyLocation location, SeverityLevel severityLevel, int responseTime) {
         this.type = type;
@@ -20,7 +18,6 @@ public abstract class Emergency implements Comparable<Emergency> {
         this.severityLevel = severityLevel;
         this.responseTime = responseTime;
         this.attended = false;
-
     }
 
     public EmergencyType getType() {
@@ -100,7 +97,7 @@ public abstract class Emergency implements Comparable<Emergency> {
     }
 
     public String getDescription() {
-        return String.format(ConsoleColor.orangeText("\n|-Tipo: %s \n|-En %s \n|-Con gravedad: %s \n|-Con prioridad %s"),
+        return String.format(ConsoleColor.orangeText("|-Tipo: %s \n|-En %s \n|-Con gravedad: %s \n|-Con prioridad %s"),
                 type, location, severityLevel, priority);
     }
 

@@ -2,8 +2,7 @@ package controller;
 
 import java.util.*;
 
-import images.ConsoleColor;
-import images.showMenu;
+import images.*;
 
 public class dailyRequest {
         static Scanner scGame = new Scanner(System.in);
@@ -42,7 +41,7 @@ public class dailyRequest {
                                 |===========================================================|"""));
         }
 
-        public static void iniciarListas() {
+        private static void iniciarListas() {
                 int operator = 0;
                 // Se inician las listas para poder añadir recursos
                 firstAidKits.add(operator);
@@ -118,7 +117,7 @@ public class dailyRequest {
                 }
         }
 
-        public static void solfirstAidKits() {
+        private static void solfirstAidKits() {
                 var operator = firstAidKits.get(0);
                 if (firstAidKits.get(0) == 0) {
                         System.out.println(

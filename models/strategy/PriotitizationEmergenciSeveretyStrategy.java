@@ -17,13 +17,10 @@ public class PriotitizationEmergenciSeveretyStrategy implements PrioritizationSt
             default:
                 return 1;
     }
-
 }
-
 
     @Override
     public int estimatedTime(EmergencyLocation location) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'estimatedTime'");
     }
 }
