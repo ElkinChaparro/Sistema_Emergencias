@@ -1,15 +1,11 @@
 package models.factory;
 
-import models.Emergency;
-import models.Fire;
-import models.Robbery;
-import models.TrafficAccident;
-import utils.EmergencyLocation;
-import utils.EmergencyType;
-import utils.SeverityLevel;
+import models.*;
+import utils.*;
 
 public class FactoryEmergencies {
-    public static Emergency creatEmergency(EmergencyType type, EmergencyLocation location, SeverityLevel severityLevel, int responseTime){
+    public static Emergency creatEmergency(EmergencyType type, EmergencyLocation location, SeverityLevel severityLevel,
+            int responseTime) {
 
         switch (type) {
             case ROBO:

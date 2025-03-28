@@ -10,7 +10,6 @@ public class Main002 {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws InterruptedException {
-
         boolean exit = false;
         // Se crea la instancia
         EmergencyManager manager = EmergencyManager.getInstancia();
@@ -21,11 +20,9 @@ public class Main002 {
         // Se almacenan los suministros diarios
         dailyRequest.Application();
         showMenu.pressEnter(scanner);
-
         while (!exit) {
             // Se muestra el menú principal
             var option = showMenu.menuMain(null);
-
             // Se valida que la opción sea un número
             try {
                 option = Integer.parseInt(scanner.nextLine());
@@ -38,7 +35,6 @@ public class Main002 {
                 showMenu.serrMenu();
                 continue;
             }
-
             switch (option) {
                 case 1:
                     // Registrar emergencia
@@ -72,21 +68,74 @@ public class Main002 {
                     break;
                 case 8:
                     // Finalizar jornada
-                    System.out.println("¿Está seguro de que desea finalizar la jornada? (S/N)");
-                    String confirm = scanner.nextLine();
-                    if (confirm.equalsIgnoreCase("S")) {
-                        System.out.println("Jornada finalizada.");
-                        exit = true;
-                    } else if (confirm.equalsIgnoreCase("N")) {
-                        System.out.println("Jornada no finalizada.");
-                    } else {
-                        System.out.println("Opción inválida. Por favor, ingrese S o N.");
-                    }
+                    exit = getConfirm(exit, manager);
                     break;
                 default:
                     // Opción inválida
                     showMenu.serrMenu();
             }
         }
+    }
+
+    private static boolean getConfirm(boolean exit, EmergencyManager manager) throws InterruptedException {
+        System.out.println(
+                ConsoleColor.cyanText("|===========================================================|"));
+        System.out.println(ConsoleColor.blueText("¿Está seguro de que desea finalizar la jornada? (S/N)"));
+        System.out.println(
+                ConsoleColor.cyanText("|===========================================================|"));
+        System.out.println(ConsoleColor.cyanText("|")
+                + ConsoleColor.blueText("Presione S para confirmar o N para cancelar: "));
+        // Se espera la respuesta del usuario
+        String confirm = scanner.nextLine();
+        if (confirm.equalsIgnoreCase("S")) {
+            // Se finaliza la jornada
+            System.out.println(
+                    ConsoleColor.cyanText("|===========================================================|"));
+            System.out
+                    .println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Finalizando jornada..."));
+            System.out.println(
+                    ConsoleColor.cyanText("|===========================================================|"));
+            System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Guardando datos..."));
+            System.out.println(
+                    ConsoleColor.cyanText("|===========================================================|"));
+            // estadisticas finales
+            manager.showStatistics();
+            System.out.println(
+                    ConsoleColor.cyanText("|===========================================================|"));
+            // Se espera 2 segundos
+            Thread.sleep(2000);
+            // Se imprime el mensaje de finalización
+            System.out.println(
+                    ConsoleColor.cyanText("|===========================================================|"));
+            System.out.println(ConsoleColor.cyanText("|")
+                    + ConsoleColor.blueText("Gracias por usar el sistema de gestión de emergencias."));
+            System.out.println(
+                    ConsoleColor.cyanText("|===========================================================|"));
+            System.out.println(ConsoleColor.cyanText("|")
+                    + ConsoleColor.blueText("Esperamos que haya sido de ayuda."));
+            System.out.println(
+                    ConsoleColor.cyanText("|===========================================================|"));
+            System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Hasta la próxima."));
+            System.out.println(
+                    ConsoleColor.cyanText("|===========================================================|"));
+            exit = true;
+        } else if (confirm.equalsIgnoreCase("N")) {
+            // Se cancela la finalización de la jornada
+            System.out.println(
+                    ConsoleColor.cyanText("|===========================================================|"));
+            System.out.println(ConsoleColor.cyanText("|")
+                    + ConsoleColor.blueText("Cancelando finalización de jornada..."));
+            System.out.println(
+                    ConsoleColor.cyanText("|===========================================================|"));
+        } else {
+            // Opción inválida
+            System.out.println(
+                    ConsoleColor.redText("|===========================================================|"));
+            System.out.println(ConsoleColor.redText("|")
+                    + ConsoleColor.redText("Opción inválida. Por favor, ingrese S o N."));
+            System.out.println(
+                    ConsoleColor.redText("|===========================================================|"));
+        }
+        return exit;
     }
 }

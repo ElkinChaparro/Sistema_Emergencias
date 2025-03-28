@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.*;
-
 import images.*;
 import models.*;
 import models.factory.*;
@@ -332,6 +331,8 @@ public class EmergencyManager implements SubjectEmergencies {
         System.out.println(ConsoleColor.cyanText("|===========================================================|"));
     }
 
+    // Función para realizar las operaciones de la emergencia
+    // dependiendo del tipo de emergencia
     public void operations(Emergency nextEmergency) {
 
         if (nextEmergency.getType() == EmergencyType.ROBO) {
@@ -345,6 +346,7 @@ public class EmergencyManager implements SubjectEmergencies {
         }
     }
 
+    // Función para verificar si hay recursos disponibles para atender la emergencia
     public boolean checkResources(Emergency emergency) {
         // variable booleana para la verificación de si estan los recursos disponibles
         boolean isCheck = false;

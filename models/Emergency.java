@@ -100,7 +100,8 @@ public abstract class Emergency implements Comparable<Emergency> {
     }
 
     public String getDescription() {
-        return String.format(ConsoleColor.orangeText("\n|-Tipo: %s \n|-En %s \n|-Con gravedad: %s \n|-Con prioridad %s"),
+        return String.format(
+                ConsoleColor.orangeText("\n|-Tipo: %s \n|-En %s \n|-Con gravedad: %s \n|-Con prioridad %s"),
                 type, location, severityLevel, priority);
     }
 

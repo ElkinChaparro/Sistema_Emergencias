@@ -5,18 +5,20 @@ import controller.*;
 import images.ConsoleColor;
 
 public class Bomberos {
-    //variables que almacenan el valor necesitado para tender la emergencia
+    // variables que almacenan el valor necesitado para tender la emergencia
     static int gasolineRequired = 0;
     static int fireTrucksRequired = 0;
     static int waterRequired = 0;
     static int firefightersRequired = 0;
     static int operator = 0;
-    //Variables que traen las cantidades de las listas
+    // Variables que traen las cantidades de las listas
     static int gasoline = dailyRequest.litersOfGasoline.get(0);
     static int fireTrucks = dailyRequest.fireTrucks.get(0);
     static int litersOfWater = dailyRequest.litersOfWater.get(0);
     static int firefighters = dailyRequest.firefighters.get(0);
 
+    // metodo que ejecuta la emergencia de incendio, se le pasan los valores de la
+    // emergencia y se le asignan los valores requeridos para atender la emergencia
     public static void executeFire(EmergencyLocation location, SeverityLevel severityLevel) {
         establishRequirements(location, severityLevel);
         litersOfWater -= waterRequired;
@@ -31,9 +33,10 @@ public class Bomberos {
         dailyRequest.fireTrucks.add(fireTrucks);
         dailyRequest.litersOfGasoline.clear();
         dailyRequest.litersOfGasoline.add(gasoline);
-        }
+    }
 
-    // metodo que actualiza y establece los valores de los recursos, esto evita un bug al intentar "añadir recursos"
+    // metodo que actualiza y establece los valores de los recursos, esto evita un
+    // bug al intentar "añadir recursos"
     private static void updateVariables() {
         gasoline = dailyRequest.litersOfGasoline.get(0);
         litersOfWater = dailyRequest.litersOfWater.get(0);
@@ -41,7 +44,8 @@ public class Bomberos {
         fireTrucks = dailyRequest.fireTrucks.get(0);
     }
 
-    public static void establishRequirements(EmergencyLocation location, SeverityLevel severityLevel){
+    // metodo que establece los valores requeridos para atender la emergencia
+    public static void establishRequirements(EmergencyLocation location, SeverityLevel severityLevel) {
         // establecer valores requeridos para "water", "fireTrucks" y "fireFighters"
         switch (severityLevel) {
             case BAJO:
@@ -83,30 +87,41 @@ public class Bomberos {
         }
     }
 
-    public static boolean isAvailablee(EmergencyLocation location, SeverityLevel severityLevel){
+    // metodo que valida si hay recursos disponibles para atender la emergencia
+    public static boolean isAvailablee(EmergencyLocation location, SeverityLevel severityLevel) {
         boolean isAvailable;
         establishRequirements(location, severityLevel);
         updateVariables(); // se actualizan los valores de los recursos antes de ser validados
-        if (gasoline < gasolineRequired || fireTrucks < fireTrucksRequired || litersOfWater < waterRequired || firefighters < firefightersRequired) {
-            System.out.println(ConsoleColor.orangeText("|===========================================================|"));
-            System.out.println(ConsoleColor.orangeText("|=-No hay recursos disponibles para atender la emergencia-==|"));
-            System.out.println(ConsoleColor.orangeText("|===========================================================|"));
-            // se valida cual recurso es el insuficiente para ser mas explicitos con el usuario
+        if (gasoline < gasolineRequired || fireTrucks < fireTrucksRequired || litersOfWater < waterRequired
+                || firefighters < firefightersRequired) {
+            System.out
+                    .println(ConsoleColor.orangeText("|===========================================================|"));
+            System.out
+                    .println(ConsoleColor.orangeText("|=-No hay recursos disponibles para atender la emergencia-==|"));
+            System.out
+                    .println(ConsoleColor.orangeText("|===========================================================|"));
+            // se valida cual recurso es el insuficiente para ser mas explicitos con el
+            // usuario
             if (gasoline < gasolineRequired) {
-                System.out.println(ConsoleColor.orangeText("|- Gasolina insuficiente: '" + gasoline + "' de '" + gasolineRequired + "' requerida"));
+                System.out.println(ConsoleColor.orangeText(
+                        "|- Gasolina insuficiente: '" + gasoline + "' de '" + gasolineRequired + "' requerida"));
             }
             if (fireTrucks < fireTrucksRequired) {
-                System.out.println(ConsoleColor.orangeText("|- Camiones insuficientes: '" + fireTrucks + "' de '" + fireTrucksRequired + "' requeridos"));
+                System.out.println(ConsoleColor.orangeText(
+                        "|- Camiones insuficientes: '" + fireTrucks + "' de '" + fireTrucksRequired + "' requeridos"));
             }
             if (litersOfWater < waterRequired) {
-                System.out.println(ConsoleColor.orangeText("|- Agua insuficiente: '" + litersOfWater + "' de '" + waterRequired + "'  litros requeridos"));
+                System.out.println(ConsoleColor.orangeText(
+                        "|- Agua insuficiente: '" + litersOfWater + "' de '" + waterRequired + "'  litros requeridos"));
             }
             if (firefighters < firefightersRequired) {
-                System.out.println(ConsoleColor.orangeText("|- Bomberos insuficientes: '" + firefighters + "' de '" + firefightersRequired+ "' requeridos"));
+                System.out.println(ConsoleColor.orangeText("|- Bomberos insuficientes: '" + firefighters + "' de '"
+                        + firefightersRequired + "' requeridos"));
             }
-            System.out.println(ConsoleColor.orangeText("|===========================================================|"));
+            System.out
+                    .println(ConsoleColor.orangeText("|===========================================================|"));
             isAvailable = false;
-        }else{
+        } else {
             isAvailable = true;
         }
         return isAvailable;

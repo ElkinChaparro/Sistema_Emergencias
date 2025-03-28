@@ -1,10 +1,9 @@
 package controller;
 
 import java.util.*;
-
 import images.*;
-import models.Emergency;
-import utils.EmergencyLocation;
+import models.*;
+import utils.*;
 
 public class BackgroundEmergencie {
     static Scanner scanner = new Scanner(System.in);
@@ -13,6 +12,9 @@ public class BackgroundEmergencie {
     private long timeStart;
     private int timeDuration;
 
+    // Constructor de la clase BackgroundEmergencie
+    // Se inicializa la emergencia y se agrega a la lista de emergencias en proceso
+    // Se inicializa el tiempo de inicio
     public BackgroundEmergencie(Emergency emergency) {
         this.emergency = emergency;
     }
@@ -37,16 +39,27 @@ public class BackgroundEmergencie {
                             + ConsoleColor.redText("\n|-") + ConsoleColor.orangeText("ha sido atendida exitosamente"));
             // Transformar de milisegundos a segundos
             long durationMillis = emergency.calculateAttentionTime();
-            double durationSeconds = durationMillis / 1000.0;
+            int durationSeconds = (int) durationMillis / 1000;
+            int durationMinutes = durationSeconds / 60;
+            int remainingSeconds = durationSeconds - (durationMinutes * 60);
+            // Mostrar el tiempo de atención en minutos y segundos
             System.out.println(
-                    ConsoleColor.orangeText("|-La emergencia ha sido atendida en: " + durationSeconds + " segundos"));
+                    ConsoleColor.orangeText("|-La emergencia ha sido atendida en: " + durationMinutes + " Horas y "
+                            + remainingSeconds + " Minutos"));
             System.out.println(
                     ConsoleColor.redText("|===========================================================|"));
+            System.out.println(
+                    ConsoleColor.cyanText("|==================-")
+                            + ConsoleColor.blueText("Continúa la ejecución")
+                            + ConsoleColor.cyanText("-==================|"));
+            System.out.println(
+                    ConsoleColor.cyanText("|===========================================================|"));
         });
         emergencyThread.start();
-
     }
 
+    // Método que se encarga de atender la emergencia, se calcula el tiempo de
+    // atención dependiendo de la ubicación de la emergencia
     public void attendedEmergencie() {
         Random random = new Random();
         // Variables locales que almacenan la fórmula para el random del tiempo
@@ -71,6 +84,8 @@ public class BackgroundEmergencie {
         }
     }
 
+    // Método que se encarga de imprimir el progreso de la emergencia, se calcula el
+    // tiempo transcurrido y se muestra el porcentaje de progreso
     public void printProgress() {
         long currentTime = System.currentTimeMillis();
         long lapsedTime = currentTime - timeStart;
@@ -101,6 +116,8 @@ public class BackgroundEmergencie {
         }
     }
 
+    // Método que se encarga de imprimir el progreso de la emergencia, se calcula el
+    // tiempo transcurrido y se muestra el porcentaje de progreso
     public static void printBar() {
         @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);
@@ -136,7 +153,13 @@ public class BackgroundEmergencie {
                 try {
                     int opcion = scanner.nextInt();
                     if (opcion == 0) {
-                        System.out.println("Continue con la ejecucion");
+                        System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                + ConsoleColor.blueText("Saliendo del progreso de la emergencia")
+                                + ConsoleColor.cyanText("            |"));
+                        System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
                         break;
                     } else if (opcion > 0 && opcion <= emergenciesInProcess.size()) {
                         synchronized (emergenciesInProcess) {

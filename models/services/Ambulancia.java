@@ -5,18 +5,20 @@ import controller.*;
 import images.ConsoleColor;
 
 public class Ambulancia {
-    //variables que almacenan el valor necesitado para tender la emergencia
+    // variables que almacenan el valor necesitado para tender la emergencia
     static int gasolineRequired = 0;
     static int firstAidKitsRequired = 0;
     static int paramedicsRequired = 0;
     static int ambulancesRequired = 0;
     static int operator = 0;
-    //Variables que traen las cantidades de las listas
+    // Variables que traen las cantidades de las listas
     static int gasoline = dailyRequest.litersOfGasoline.get(0);
     static int ambulances = dailyRequest.ambulances.get(0);
     static int firstAidKits = dailyRequest.firstAidKits.get(0);
     static int paramedics = dailyRequest.paramedics.get(0);
 
+    // metodo que ejecuta la emergencia de robo, se le pasan los valores de la
+    // emergencia y se le asignan los valores requeridos para atender la emergencia
     public static void executetrafficAccident(EmergencyLocation location, SeverityLevel severityLevel) {
         establishRequirements(location, severityLevel);
         firstAidKits -= firstAidKitsRequired;
@@ -31,9 +33,10 @@ public class Ambulancia {
         dailyRequest.ambulances.add(ambulances);
         dailyRequest.litersOfGasoline.clear();
         dailyRequest.litersOfGasoline.add(gasoline);
-
     }
-    // metodo que actualiza y establece los valores de los recursos, esto evita un bug al intentar "añadir recursos"
+
+    // metodo que actualiza y establece los valores de los recursos, esto evita un
+    // bug al intentar "añadir recursos"
     private static void updateVariables() {
         gasoline = dailyRequest.litersOfGasoline.get(0);
         ambulances = dailyRequest.ambulances.get(0);
@@ -41,9 +44,8 @@ public class Ambulancia {
         paramedics = dailyRequest.paramedics.get(0);
     }
 
-
-    public static void establishRequirements(EmergencyLocation location, SeverityLevel severityLevel){
-        // establecer valores requeridos para "firstAidKits", "paramedics" y "ambulances"
+    // metodo que establece los valores requeridos para atender la emergencia
+    public static void establishRequirements(EmergencyLocation location, SeverityLevel severityLevel) {
         switch (severityLevel) {
             case BAJO:
                 firstAidKitsRequired = 10;
@@ -64,7 +66,7 @@ public class Ambulancia {
                 operator = 3;
                 break;
         }
-         // establecer valores requeridos para la gasolina
+        // establecer valores requeridos para la gasolina
         switch (location) {
             case ZONA_NORTE:
                 gasolineRequired = operator * 75;
@@ -84,33 +86,43 @@ public class Ambulancia {
         }
     }
 
-
-        public static boolean isAvailablee(EmergencyLocation location, SeverityLevel severityLevel){
-            boolean isAvailable;
-            establishRequirements(location, severityLevel);
-            updateVariables(); // se actualizan los valores de los recursos antes de ser validados
-            if (gasoline < gasolineRequired || firstAidKits < firstAidKitsRequired || paramedics < paramedicsRequired|| ambulances < ambulancesRequired) {
-                System.out.println(ConsoleColor.orangeText("|===========================================================|"));
-                System.out.println(ConsoleColor.orangeText("|=-No hay recursos disponibles para atender la emergencia-==|"));
-                System.out.println(ConsoleColor.orangeText("|===========================================================|"));
-                // se valida cual recurso es el insuficiente para ser mas explicitos con el usuario
-                if (gasoline < gasolineRequired) {
-                    System.out.println(ConsoleColor.orangeText("|- Gasolina insuficiente: '" + gasoline + "' de '" + gasolineRequired + "' requerida"));
-                }
-                if (firstAidKits < firstAidKitsRequired) {
-                    System.out.println(ConsoleColor.orangeText("|- Botiquines insuficientes: '" + firstAidKits + "' de '" + firstAidKitsRequired + "' requeridos"));
-                }
-                if (paramedics < paramedicsRequired) {
-                    System.out.println(ConsoleColor.orangeText("|- Paramédicos insuficientes: '" + paramedics + "' de '" + paramedicsRequired + "' requeridos"));
-                }
-                if (ambulances < ambulancesRequired) {
-                    System.out.println(ConsoleColor.orangeText("|- Ambulancias insuficientes: '" + ambulances + "' de '" + ambulancesRequired + "' requeridas"));
-                }
-                System.out.println(ConsoleColor.orangeText("|===========================================================|"));
-                isAvailable = false;
-            }else{
-                isAvailable = true;
+    // metodo que valida si hay recursos disponibles para atender la emergencia
+    public static boolean isAvailablee(EmergencyLocation location, SeverityLevel severityLevel) {
+        boolean isAvailable;
+        establishRequirements(location, severityLevel);
+        updateVariables(); // se actualizan los valores de los recursos antes de ser validados
+        if (gasoline < gasolineRequired || firstAidKits < firstAidKitsRequired || paramedics < paramedicsRequired
+                || ambulances < ambulancesRequired) {
+            System.out
+                    .println(ConsoleColor.orangeText("|===========================================================|"));
+            System.out
+                    .println(ConsoleColor.orangeText("|=-No hay recursos disponibles para atender la emergencia-==|"));
+            System.out
+                    .println(ConsoleColor.orangeText("|===========================================================|"));
+            // se valida cual recurso es el insuficiente para ser mas explicitos con el
+            // usuario
+            if (gasoline < gasolineRequired) {
+                System.out.println(ConsoleColor.orangeText(
+                        "|- Gasolina insuficiente: '" + gasoline + "' de '" + gasolineRequired + "' requerida"));
             }
-            return isAvailable;
+            if (firstAidKits < firstAidKitsRequired) {
+                System.out.println(ConsoleColor.orangeText("|- Botiquines insuficientes: '" + firstAidKits + "' de '"
+                        + firstAidKitsRequired + "' requeridos"));
+            }
+            if (paramedics < paramedicsRequired) {
+                System.out.println(ConsoleColor.orangeText("|- Paramédicos insuficientes: '" + paramedics + "' de '"
+                        + paramedicsRequired + "' requeridos"));
+            }
+            if (ambulances < ambulancesRequired) {
+                System.out.println(ConsoleColor.orangeText("|- Ambulancias insuficientes: '" + ambulances + "' de '"
+                        + ambulancesRequired + "' requeridas"));
+            }
+            System.out
+                    .println(ConsoleColor.orangeText("|===========================================================|"));
+            isAvailable = false;
+        } else {
+            isAvailable = true;
         }
+        return isAvailable;
+    }
 }

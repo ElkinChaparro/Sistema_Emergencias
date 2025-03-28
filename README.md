@@ -35,3 +35,5 @@ hacer validacion de que si no hay una emergencia se corte
 
 #
 poner panel de notificacion para dar a entender que no se corta el programa
+
+# corregir el priority debido a calculñar con prioridad y distancia

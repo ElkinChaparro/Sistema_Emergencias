@@ -1,9 +1,7 @@
 package controller;
 
 import java.util.*;
-
-import images.ConsoleColor;
-import images.showMenu;
+import images.*;
 
 public class dailyRequest {
         static Scanner scGame = new Scanner(System.in);
