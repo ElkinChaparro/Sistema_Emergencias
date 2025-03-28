@@ -1,7 +1,7 @@
 package images;
 
 public class ConsoleColor {
-     // color rojo para errores
+    // color rojo para errores
     public static final String redColor = "\u001B[31m";
     // color verde
     public static final String greenColor = "\u001B[32m";
@@ -11,38 +11,38 @@ public class ConsoleColor {
     public static final String cyanColor = "\u001B[36m";
     // color azul
     public static final String blueColor = "\u001B[34m";
-//Color blanco
+    // Color blanco
     public static final String whiteColor = "\u001B[37m";
-     // restablecer color
+    // restablecer color
     public static final String resetColor = "\u001B[0m";
 
     // metodo para obtener el texto en color rojo
-    public static String redText(String text){
-        return redColor +  text + resetColor;
+    public static String redText(String text) {
+        return redColor + text + resetColor;
     }
 
-    //metodo para obtener el texto en color verde
+    // metodo para obtener el texto en color verde
     public static String greenText(String text) {
         return greenColor + text + resetColor;
     }
 
-    //metodo para obtener el texto en color naranja
+    // metodo para obtener el texto en color naranja
     public static String orangeText(String text) {
         return orangeColor + text + resetColor;
     }
 
-    //metodo para obtener el texto en color Cyan
-    public static String cyanText(String text){
+    // metodo para obtener el texto en color Cyan
+    public static String cyanText(String text) {
         return cyanColor + text + resetColor;
     }
 
-    //metodo para obtener el texto en color Blanco
-    public static String whiteText(String text){
+    // metodo para obtener el texto en color Blanco
+    public static String whiteText(String text) {
         return whiteColor + text + resetColor;
     }
 
-    //metodo para obtener el texto en color azul
-    public static String blueText(String text){
+    // metodo para obtener el texto en color azul
+    public static String blueText(String text) {
         return blueColor + text + resetColor;
     }
 }

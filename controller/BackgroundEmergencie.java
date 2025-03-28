@@ -2,8 +2,8 @@ package controller;
 
 import java.util.*;
 import images.*;
-import models.Emergency;
-import utils.EmergencyLocation;
+import models.*;
+import utils.*;
 
 public class BackgroundEmergencie {
     static Scanner scanner = new Scanner(System.in);
@@ -13,6 +13,9 @@ public class BackgroundEmergencie {
     private long timeStart;
     private int timeDuration;
 
+    // Constructor de la clase BackgroundEmergencie
+    // Se inicializa la emergencia y se agrega a la lista de emergencias en proceso
+    // Se inicializa el tiempo de inicio
     public BackgroundEmergencie(Emergency emergency) {
         this.emergency = emergency;
     }
@@ -22,36 +25,43 @@ public class BackgroundEmergencie {
     public void backgroundEmergency() {
         BackgroundEmergencie bEmergencies = new BackgroundEmergencie(emergency);
         emergenciesInProcess.add(bEmergencies); // Agregar la emergencia a la lista
-        Thread emergencyThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                emergency.startAttention();
-                bEmergencies.timeStart = System.currentTimeMillis();
-                bEmergencies.attendedEmergencie();
-                emergency.endAttention();
-                System.out.println(ConsoleColor.redText("\n|===========================================================|"));
-                System.out.println(ConsoleColor.redText("|============-") + ConsoleColor.orangeText("La emergencia ") + ConsoleColor.redText("-==========|"));
-                System.out.println(ConsoleColor.redText("|===========================================================|"));
-                System.out.println(emergency.getDescription());
-                System.out.println(ConsoleColor.redText("|===========================================================|"));
-                System.out.println(ConsoleColor.redText("\n|-") + ConsoleColor.orangeText("ha sido atendida exitosamente!!!"));
-                System.out.println(ConsoleColor.redText("|===========================================================|"));
-                // Transformar de milisegundos a segundos
-                long durationMillis = emergency.calculateAttentionTime();
-                int durationSeconds = (int) durationMillis / 1000;
-                int durationMinuts = durationSeconds / 60;
-                int finalSeconds = durationSeconds - (60 * durationMinuts);
-                System.out.println(
-                        ConsoleColor.orangeText("|-La emergencia ha sido atendida en: " + durationMinuts + " Min con "
-                                + finalSeconds + " seg"));
-                System.out.println(
-                        ConsoleColor.redText("|===========================================================|"));
-                generalTime.add(durationMinuts);
-            }
+
+        Thread emergencyThread = new Thread(() -> {
+            emergency.startAttention();
+            bEmergencies.timeStart = System.currentTimeMillis();
+            bEmergencies.attendedEmergencie();
+            emergency.endAttention();
+            System.out.println(
+                    ConsoleColor.redText("\n|===========================================================|"));
+            System.out.println(
+                    ConsoleColor.redText("|-")
+                            + ConsoleColor.orangeText(
+                                    "La emergencia \n|===========================================================|")
+                            + emergency.getDescription()
+                            + ConsoleColor.redText("\n|-") + ConsoleColor.orangeText("ha sido atendida exitosamente"));
+            // Transformar de milisegundos a segundos
+            long durationMillis = emergency.calculateAttentionTime();
+            int durationSeconds = (int) durationMillis / 1000;
+            int durationMinutes = durationSeconds / 60;
+            int remainingSeconds = durationSeconds - (durationMinutes * 60);
+            // Mostrar el tiempo de atención en minutos y segundos
+            System.out.println(
+                    ConsoleColor.orangeText("|-La emergencia ha sido atendida en: " + durationMinutes + " Horas y "
+                            + remainingSeconds + " Minutos"));
+            System.out.println(
+                    ConsoleColor.redText("|===========================================================|"));
+            System.out.println(
+                    ConsoleColor.cyanText("|==================-")
+                            + ConsoleColor.blueText("Continúa la ejecución")
+                            + ConsoleColor.cyanText("-==================|"));
+            System.out.println(
+                    ConsoleColor.cyanText("|===========================================================|"));
         });
         emergencyThread.start();
     }
 
+    // Método que se encarga de atender la emergencia, se calcula el tiempo de
+    // atención dependiendo de la ubicación de la emergencia
     public void attendedEmergencie() {
         Random random = new Random();
         // Variables locales que almacenan la fórmula para el random del tiempo
@@ -76,6 +86,8 @@ public class BackgroundEmergencie {
         }
     }
 
+    // Método que se encarga de imprimir el progreso de la emergencia, se calcula el
+    // tiempo transcurrido y se muestra el porcentaje de progreso
     public void printProgress() {
         long currentTime = System.currentTimeMillis();
         long lapsedTime = currentTime - timeStart;
@@ -106,6 +118,8 @@ public class BackgroundEmergencie {
         }
     }
 
+    // Método que se encarga de imprimir el progreso de la emergencia, se calcula el
+    // tiempo transcurrido y se muestra el porcentaje de progreso
     public static void printBar() {
         @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);
@@ -144,10 +158,10 @@ public class BackgroundEmergencie {
                     if (opcion == 0) {
                         System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
-                        System.out.println(
-                                ConsoleColor.cyanText("|================-")
-                                        + ConsoleColor.blueText("Continue con la ejecucion")
-                                        + ConsoleColor.cyanText("-================|"));
+                        System.out.println(ConsoleColor.cyanText("|-")
+                                + ConsoleColor.blueText("Saliendo del progreso de la emergencia")
+                                + ConsoleColor.cyanText("            |"));
+
                         System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
                         break;

@@ -16,6 +16,7 @@ public class PriotitizationEmergenciSeveretyStrategy implements PrioritizationSt
                 return 1;
             default:
                 return 1;
+        }
     }
 }
 

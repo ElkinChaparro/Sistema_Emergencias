@@ -4,6 +4,10 @@ import models.Emergency;
 import utils.EmergencyLocation;
 
 public class PrioritizationEmergenciesStrategy implements PrioritizationStrategy {
+
+    private MapaUrbano mapaUrbano = new MapaUrbano();
+    private SeverityLevel severety = new SeverityLevel();
+
     private class MapaUrbano {
         public int calculateDistance(EmergencyLocation location) {
             switch (location) {
@@ -14,7 +18,7 @@ public class PrioritizationEmergenciesStrategy implements PrioritizationStrategy
                 case ZONA_CENTRO:
                     return 2;
                 case ZONA_ORIENTE:
-                    return 5;
+                    return 4;
                 case ZONA_OCCIDENTE:
                     return 6;
                 default:
@@ -37,9 +41,6 @@ public class PrioritizationEmergenciesStrategy implements PrioritizationStrategy
             }
         }
     }
-
-    private MapaUrbano mapaUrbano = new MapaUrbano();
-    private SeverityLevel severety = new SeverityLevel();
 
     @Override
     public int prioritize(Emergency emergency) {

@@ -2,7 +2,6 @@ package models.observer;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 import images.ConsoleColor;
 import models.Emergency;
 

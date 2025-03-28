@@ -1,8 +1,7 @@
 package images;
 
-import java.util.Scanner;
-
-import controller.dailyRequest;
+import java.util.*;
+import controller.*;
 
 public class showMenu {
 
@@ -63,6 +62,7 @@ public class showMenu {
                 return option;
         }
 
+        // Menu de añadir recursos
         public static Integer añadirRecursos(Integer option) {
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
@@ -181,11 +181,6 @@ public class showMenu {
         public static void menuResources() {
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
-                System.out.println(ConsoleColor.cyanText("|====================-")
-                                + ConsoleColor.blueText("RECURSOS ACTUALES")
-                                + ConsoleColor.cyanText("-====================|"));
-                System.out.println(
-                                ConsoleColor.cyanText("|===========================================================|"));
                 System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("Botiquines:-----------")
                                 + dailyRequest.firstAidKits.get(0));
                 System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("Ambulancias:----------")
@@ -228,6 +223,7 @@ public class showMenu {
                 scGame.nextLine();
         }
 
+        // Barra de carga
         public static void printLoadingBar() throws InterruptedException {
                 int total = 53;
                 for (int i = 0; i <= total; i++) {
