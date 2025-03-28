@@ -30,12 +30,16 @@ public class BackgroundEmergencie {
             System.out.println(
                     ConsoleColor.redText("\n|===========================================================|"));
             System.out.println(
-                    ConsoleColor.redText("|-") + ConsoleColor.orangeText("La emergencia ") + emergency.getDescription()
+                    ConsoleColor.redText("|-")
+                            + ConsoleColor.orangeText(
+                                    "La emergencia \n|===========================================================|")
+                            + emergency.getDescription()
                             + ConsoleColor.redText("\n|-") + ConsoleColor.orangeText("ha sido atendida exitosamente"));
             // Transformar de milisegundos a segundos
             long durationMillis = emergency.calculateAttentionTime();
             double durationSeconds = durationMillis / 1000.0;
-            System.out.println(ConsoleColor.orangeText("|-La emergencia ha sido atendida en: " + durationSeconds + " segundos"));
+            System.out.println(
+                    ConsoleColor.orangeText("|-La emergencia ha sido atendida en: " + durationSeconds + " segundos"));
             System.out.println(
                     ConsoleColor.redText("|===========================================================|"));
         });
@@ -132,12 +136,14 @@ public class BackgroundEmergencie {
                 try {
                     int opcion = scanner.nextInt();
                     if (opcion == 0) {
+                        System.out.println("Continue con la ejecucion");
                         break;
                     } else if (opcion > 0 && opcion <= emergenciesInProcess.size()) {
                         synchronized (emergenciesInProcess) {
                             emergenciesInProcess.get(opcion - 1).printProgress();
                         }
-                    }
+                    } else
+                        throw new NullPointerException();
                 } // Se captura la excepción en caso de que la opción no sea un número
                 catch (NumberFormatException e) {
                     showMenu.serrMenu();
