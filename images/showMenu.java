@@ -246,4 +246,18 @@ public class showMenu {
                 }
                 System.out.println(" ");
         }
+
+        // Creditos
+        public static void credits() {
+                System.out.println(ConsoleColor.cyanText("""
+                                |===========================================================|
+                                |         Muchas gracias por trabajar con nosotros          |
+                                |===========================================================|
+                                |-----------------------------------------------------------|
+                                |-----------------------Produced by: -----------------------|
+                                |--------Ingeniero Elkin Humberto Chaparro Franklin---------|
+                                |-----------Ingeniero Felix Islande Castro Cadena-----------|
+                                |-----------------------------------------------------------|
+                                |===========================================================|"""));
+        }
 }
