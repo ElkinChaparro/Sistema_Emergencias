@@ -1,45 +1,8 @@
-# Sistema_Emergencias
-DEV_SENIOR_CODE
-
-
-# Models
-Fac IntF Serv Strategy
-Fac IntF Felix
-Serv Elkin
-
-# Controller
-Inventario_dia (Recursos Vehiculos Personal) Almacenar en arraylist U objetos Elkin
-
-
-
-
-# View
-Main
-Separar los ShowMenu en una clase aparte
-
-# Update Felix
-El menú accede al tipo de emergencia, ubicación y gravedad por medio de ENUMS, ubicados en la carpeta "utils".
-El sistema puede crear nuevas emergencias y atenderlas de manera basica, solo imprime un mensaje en consola
-El sistema puede mostrar una lista de las emergencias ya registradas y que estan pendientes por atender
-El sistema puede dar unas breves estadisticas del dia
-Cuando se atiende una emergencia pasa del "Queue" a una lista, donde se almacenarán todas las emergencias ya atendidas // Sujeto a cambios para una mejor optimización
-
-#
-solucionar problemas de las operaciones debido a que no se descuenta el personal y cuando se ejecuta accidente de trafico se descuenta personal de todos
-
-#
-imprimir la cantidad actual de recursos agregados con un if
-imprimir un recomendado de suministros con el mismo if
-
-hacer validacion de que si no hay una emergencia se corte
-
-#
-poner panel de notificacion para dar a entender que no se corta el programa
-
 # corregir el priority debido a calculñar con prioridad y distancia
 
 
 # Sistema de Emergencias
+DEV_SENIOR_CODE
 
 El **Sistema de Emergencias** es una aplicación diseñada para gestionar emergencias de manera eficiente, permitiendo registrar, atender y realizar un seguimiento de los recursos utilizados. Este sistema utiliza conceptos de programación orientada a objetos y estructuras de datos como `ArrayList` y `Queue` para manejar emergencias y recursos.
 
