@@ -251,7 +251,6 @@ public class EmergencyManager implements SubjectEmergencies {
                                         + ConsoleColor.greenText("-==================|"));
                         System.out.println(
                                 ConsoleColor.greenText("|===========================================================|"));
-
                         operations(nextEmergency);
                     }
                 } else if (option.equalsIgnoreCase("n")) {
@@ -317,6 +316,12 @@ public class EmergencyManager implements SubjectEmergencies {
 
     // Muestra las estadisticas del dia
     public void showStatistics() {
+        if (attendedEmergencies.isEmpty()) {
+            System.out.println(ConsoleColor.redText("|===========================================================|"));
+            System.out.println(ConsoleColor.redText("|=================-No hay emergencias atendidas-============|"));
+            System.out.println(ConsoleColor.redText("|===========================================================|"));
+            return;
+        }
         System.out.println(ConsoleColor.cyanText("|===========================================================|"));
         System.out.println(ConsoleColor.cyanText("|==================-")
                 + ConsoleColor.blueText("ESTADISTICAS DEL DIA") + ConsoleColor.cyanText("-===================|"));

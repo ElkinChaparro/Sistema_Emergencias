@@ -69,6 +69,7 @@ public class Main002 {
                                 case 8:
                                         // Finalizar jornada
                                         exit = getConfirm(exit, manager);
+                                        showMenu.credits();
                                         break;
                                 default:
                                         // Opción inválida
@@ -80,10 +81,11 @@ public class Main002 {
         private static boolean getConfirm(boolean exit, EmergencyManager manager) throws InterruptedException {
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
-                System.out.println(ConsoleColor.blueText("¿Está seguro de que desea finalizar la jornada? (S/N)"));
+                System.out.println(ConsoleColor.blueText("|-¿Está seguro de que desea finalizar la jornada? (S/N)     ")
+                                + ConsoleColor.cyanText("|"));
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
-                System.out.println(ConsoleColor.cyanText("|")
+                System.out.print(ConsoleColor.cyanText("|")
                                 + ConsoleColor.blueText("Presione S para confirmar o N para cancelar: "));
                 // Se espera la respuesta del usuario
                 String confirm = scanner.nextLine();
