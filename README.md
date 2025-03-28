@@ -32,3 +32,6 @@ imprimir la cantidad actual de recursos agregados con un if
 imprimir un recomendado de suministros con el mismo if
 
 hacer validacion de que si no hay una emergencia se corte
+
+#
+poner panel de notificacion para dar a entender que no se corta el programa

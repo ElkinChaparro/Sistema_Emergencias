@@ -18,19 +18,17 @@ public class EmergencyManager implements SubjectEmergencies {
     private static PriorityQueue<Emergency> ePriorityQueue;
     private List<Emergency> attendedEmergencies;
     private List<ObserverEmergencies> observers;
+    private int totalAttentionTime;
+
     static Scanner scanner = new Scanner(System.in);
     Random random = new Random();
     ObserverEmergencies observer = new ConsoleObserver();
-
-    private int numberEmergenciesAtt;
-    private int totalAttentionTime;
 
     // Constructor
     public EmergencyManager() {
         ePriorityQueue = new PriorityQueue<>();
         attendedEmergencies = new ArrayList<>();
         observers = new ArrayList<>();
-        numberEmergenciesAtt = 0;
         totalAttentionTime = 0;
     }
 
@@ -57,6 +55,7 @@ public class EmergencyManager implements SubjectEmergencies {
             System.out.println(ConsoleColor.cyanText("|================-")
                     + ConsoleColor.blueText("REGISTRAR NUEVA EMERGENCIA")
                     + ConsoleColor.cyanText("-===============|"));
+            // Impresion de los menus de emergencias
             var type = selecType();
             var location = selecLocation();
             var severityLevel = selecSeverityLevel();
@@ -84,7 +83,7 @@ public class EmergencyManager implements SubjectEmergencies {
         showMenu.pressEnter(scanner);
     }
 
-    public static EmergencyType selecType() {
+    private static EmergencyType selecType() {
         EmergencyType type = null;
         // Impresion del menude tipo de emergencia
         var option01 = showMenu.menuType(null);
@@ -117,7 +116,7 @@ public class EmergencyManager implements SubjectEmergencies {
         return type;
     }
 
-    public static EmergencyLocation selecLocation() {
+    private static EmergencyLocation selecLocation() {
         EmergencyLocation location = null;
         // Impresion del menu de locaciones
         var option02 = showMenu.menuLocation(null);
@@ -156,7 +155,7 @@ public class EmergencyManager implements SubjectEmergencies {
         return location;
     }
 
-    public static SeverityLevel selecSeverityLevel() {
+    private static SeverityLevel selecSeverityLevel() {
         SeverityLevel severityLevel = null;
         // impresion del menu de gravedad
         var option03 = showMenu.menuGravity(null);
@@ -190,7 +189,7 @@ public class EmergencyManager implements SubjectEmergencies {
     }
 
     // Función para aregar una emergencia nueva
-    public static void addEmergency(Emergency emergency) {
+    private static void addEmergency(Emergency emergency) {
         int priority = strategy.prioritize(emergency);
         emergency.setPriority(priority);
         ePriorityQueue.add(emergency);
@@ -216,7 +215,6 @@ public class EmergencyManager implements SubjectEmergencies {
                     .println(ConsoleColor.redText("|===========================================================|"));
             showMenu.pressEnter(scanner);
         } else {
-
             // Si hay emergencias pendientes
             printAllEmergencies();
             // Se imprime el mensaje de confirmación
@@ -234,7 +232,8 @@ public class EmergencyManager implements SubjectEmergencies {
                 if (option.equalsIgnoreCase("s")) {
                     // validacion de recursos disponibles para atender la emergencia
                     if (checkResources(nextEmergency)) {
-                        nextEmergency = ePriorityQueue.poll(); // Obtiene y elimina la emergencia con mayor prioridad
+                        // Obtiene y elimina la emergencia con mayor prioridad
+                        nextEmergency = ePriorityQueue.poll();
                         attendedEmergencies.add(nextEmergency);
                         // se llama al metodo para manejar la emergencia como una tarea secundaria
                         bEmergencie.backgroundEmergency();
@@ -252,7 +251,6 @@ public class EmergencyManager implements SubjectEmergencies {
                                         + ConsoleColor.cyanText("-==================|"));
                         System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
-                        numberEmergenciesAtt++;
                         operations(nextEmergency);
                     }
                 } else if (option.equalsIgnoreCase("n")) {
@@ -292,7 +290,6 @@ public class EmergencyManager implements SubjectEmergencies {
     public void printAllEmergencies() {
         // copia de la lista principal de "ePriorityQueue" para poder verse en listado
         PriorityQueue<Emergency> copyQueue = new PriorityQueue<>(ePriorityQueue);
-
         if (copyQueue.isEmpty()) {
             // Si no hay emergencias pendientes
             System.out
@@ -319,9 +316,20 @@ public class EmergencyManager implements SubjectEmergencies {
 
     // Muestra las estadisticas del dia
     public void showStatistics() {
-        System.out.println("\n === ESTADISTICAS DEL DIA ===");
-        System.out.println("Emergencias atendidas: " + numberEmergenciesAtt);
-        System.out.println("TIEMPO: " + totalAttentionTime);
+        System.out.println(ConsoleColor.cyanText("|===========================================================|"));
+        System.out.println(ConsoleColor.cyanText("|==================-")
+                + ConsoleColor.blueText("ESTADISTICAS DEL DIA") + ConsoleColor.cyanText("-===================|"));
+        System.out.println(ConsoleColor.cyanText("|===========================================================|"));
+        System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Emergencias atendidas: ") + attendedEmergencies.size());
+        System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Emergencias pendientes: ") + ePriorityQueue.size());
+        System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Tiempo total de atencion: ") + totalAttentionTime);
+        System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Tiempo promedio de atención: ") + (totalAttentionTime / attendedEmergencies.size()));
+        System.out.println(ConsoleColor.cyanText("|===========================================================|"));
+        System.out.println(ConsoleColor.cyanText("|===================-")
+                + ConsoleColor.blueText("RECURSOS RESTANTES") + ConsoleColor.cyanText("-===================|"));
+        System.out.println(ConsoleColor.cyanText("|===========================================================|"));
+        showMenu.menuResources();
+        System.out.println(ConsoleColor.cyanText("|===========================================================|"));
     }
 
     public void operations(Emergency nextEmergency) {

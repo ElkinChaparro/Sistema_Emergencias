@@ -23,7 +23,6 @@ public class PriotitizationEmergenciSeveretyStrategy implements PrioritizationSt
 
     @Override
     public int estimatedTime(EmergencyLocation location) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'estimatedTime'");
     }
 }

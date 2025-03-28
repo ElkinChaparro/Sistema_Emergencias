@@ -181,11 +181,6 @@ public class showMenu {
         public static void menuResources() {
                 System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
-                System.out.println(ConsoleColor.cyanText("|====================-")
-                                + ConsoleColor.blueText("RECURSOS ACTUALES")
-                                + ConsoleColor.cyanText("-====================|"));
-                System.out.println(
-                                ConsoleColor.cyanText("|===========================================================|"));
                 System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("Botiquines:-----------")
                                 + dailyRequest.firstAidKits.get(0));
                 System.out.println(ConsoleColor.cyanText("|-") + ConsoleColor.blueText("Ambulancias:----------")

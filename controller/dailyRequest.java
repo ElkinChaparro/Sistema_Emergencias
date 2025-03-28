@@ -547,6 +547,11 @@ public class dailyRequest {
         }
 
         public static void currenResources(Scanner scanner) throws InterruptedException {
+                System.out.println(
+                                ConsoleColor.cyanText("|===========================================================|"));
+                System.out.println(ConsoleColor.cyanText("|====================-")
+                                + ConsoleColor.blueText("RECURSOS ACTUALES")
+                                + ConsoleColor.cyanText("-====================|"));
                 showMenu.menuResources();
                 System.out
                                 .println(ConsoleColor.cyanText(

@@ -62,6 +62,7 @@ public class Main002 {
                     showMenu.pressEnter(scanner);
                     break;
                 case 6:
+                    // Progreso de atencion
                     BackgroundEmergencie.printBar();
                     break;
                 case 7:
@@ -71,6 +72,16 @@ public class Main002 {
                     break;
                 case 8:
                     // Finalizar jornada
+                    System.out.println("¿Está seguro de que desea finalizar la jornada? (S/N)");
+                    String confirm = scanner.nextLine();
+                    if (confirm.equalsIgnoreCase("S")) {
+                        System.out.println("Jornada finalizada.");
+                        exit = true;
+                    } else if (confirm.equalsIgnoreCase("N")) {
+                        System.out.println("Jornada no finalizada.");
+                    } else {
+                        System.out.println("Opción inválida. Por favor, ingrese S o N.");
+                    }
                     break;
                 default:
                     // Opción inválida
