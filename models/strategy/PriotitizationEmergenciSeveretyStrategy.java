@@ -18,6 +18,7 @@ public class PriotitizationEmergenciSeveretyStrategy implements PrioritizationSt
                 return 1;
         }
     }
+}
 
     @Override
     public int estimatedTime(EmergencyLocation location) {

@@ -8,6 +8,7 @@ import utils.*;
 public class BackgroundEmergencie {
     static Scanner scanner = new Scanner(System.in);
     private static List<BackgroundEmergencie> emergenciesInProcess = new ArrayList<>();
+    public static List<Integer> generalTime = new ArrayList<>();
     private final Emergency emergency;
     private long timeStart;
     private int timeDuration;
@@ -24,6 +25,7 @@ public class BackgroundEmergencie {
     public void backgroundEmergency() {
         BackgroundEmergencie bEmergencies = new BackgroundEmergencie(emergency);
         emergenciesInProcess.add(bEmergencies); // Agregar la emergencia a la lista
+
         Thread emergencyThread = new Thread(() -> {
             emergency.startAttention();
             bEmergencies.timeStart = System.currentTimeMillis();
@@ -128,6 +130,7 @@ public class BackgroundEmergencie {
                     .println(ConsoleColor.orangeText("|===========-NO HAY EMERGENCIAS SIENDO ATENDIDAS-===========|"));
             System.out.println(
                     ConsoleColor.orangeText("|===========================================================|"));
+            showMenu.pressEnter(scanner);
         } else {
             while (true) {
                 System.out.println(
@@ -158,6 +161,7 @@ public class BackgroundEmergencie {
                         System.out.println(ConsoleColor.cyanText("|-")
                                 + ConsoleColor.blueText("Saliendo del progreso de la emergencia")
                                 + ConsoleColor.cyanText("            |"));
+
                         System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
                         break;
@@ -175,7 +179,8 @@ public class BackgroundEmergencie {
                 catch (NullPointerException e) {
                     showMenu.serrMenu();
                     printBar();
-                } catch (Exception e) {
+                } // Se captura la exepcion en caso de que ocurra un error inesperado
+                catch (ExceptionInInitializerError e) {
                     showMenu.serrMenu();
                     printBar();
                 }

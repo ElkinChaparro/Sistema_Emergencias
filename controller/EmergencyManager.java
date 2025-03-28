@@ -46,7 +46,6 @@ public class EmergencyManager implements SubjectEmergencies {
     // Función para registrar una nueva emergencia
     public void registerEmergencyMenu(Scanner scanner) throws InterruptedException {
         boolean exit = false;
-
         while (!exit) {
             // Impresion del menu de gravedad
             System.out.println(
@@ -240,16 +239,19 @@ public class EmergencyManager implements SubjectEmergencies {
                                 ConsoleColor.cyanText("|===========================================================|"));
                         System.out.println(ConsoleColor.cyanText("|==================-")
                                 + ConsoleColor.blueText("Atendiendo emergencia")
-                                + ConsoleColor.cyanText("-==================|")
-                                + nextEmergency.getDescription());
+                                + ConsoleColor.cyanText("-==================|"));
                         System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
+                        System.out.println(nextEmergency.getDescription());
                         System.out.println(
-                                ConsoleColor.cyanText("|==================-")
+                                ConsoleColor.greenText("|===========================================================|"));
+                        System.out.println(
+                                ConsoleColor.greenText("|==================-")
                                         + ConsoleColor.blueText("Continúa la ejecución")
-                                        + ConsoleColor.cyanText("-==================|"));
+                                        + ConsoleColor.greenText("-==================|"));
                         System.out.println(
-                                ConsoleColor.cyanText("|===========================================================|"));
+                                ConsoleColor.greenText("|===========================================================|"));
+
                         operations(nextEmergency);
                     }
                 } else if (option.equalsIgnoreCase("n")) {
