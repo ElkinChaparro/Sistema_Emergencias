@@ -11,6 +11,7 @@ public abstract class Emergency implements Comparable<Emergency> {
     private int responseTime, priority;
     private boolean attended;
     private long startTimeAttention, finalTimeAttention;
+    PrioritizationEmergenciesStrategy strategy = new PrioritizationEmergenciesStrategy();
 
     public Emergency(EmergencyType type, EmergencyLocation location, SeverityLevel severityLevel, int responseTime) {
         this.type = type;
@@ -106,8 +107,6 @@ public abstract class Emergency implements Comparable<Emergency> {
     public int compareTo(Emergency other) {
         return other.priority - this.priority; // Orden descendente
     }
-
-    PrioritizationEmergenciesStrategy strategy = new PrioritizationEmergenciesStrategy();
 
     @Override
     public String toString() {

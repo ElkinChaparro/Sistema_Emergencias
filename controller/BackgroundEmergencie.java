@@ -25,7 +25,6 @@ public class BackgroundEmergencie {
     public void backgroundEmergency() {
         BackgroundEmergencie bEmergencies = new BackgroundEmergencie(emergency);
         emergenciesInProcess.add(bEmergencies); // Agregar la emergencia a la lista
-
         Thread emergencyThread = new Thread(() -> {
             emergency.startAttention();
             bEmergencies.timeStart = System.currentTimeMillis();
@@ -39,12 +38,12 @@ public class BackgroundEmergencie {
                                     "La emergencia \n|===========================================================|")
                             + emergency.getDescription()
                             + ConsoleColor.redText("\n|-") + ConsoleColor.orangeText("ha sido atendida exitosamente"));
-            // Transformar de milisegundos a segundos
+            // Transformar de milisegundos a segundos para simular horas
             long durationMillis = emergency.calculateAttentionTime();
             int durationSeconds = (int) durationMillis / 1000;
             int durationMinutes = durationSeconds / 60;
             int remainingSeconds = durationSeconds - (durationMinutes * 60);
-            // Mostrar el tiempo de atención en minutos y segundos
+            // Mostrar el tiempo de atención en horas y minutos
             System.out.println(
                     ConsoleColor.orangeText("|-La emergencia ha sido atendida en: " + durationMinutes + " Horas y "
                             + remainingSeconds + " Minutos"));
@@ -161,7 +160,6 @@ public class BackgroundEmergencie {
                         System.out.println(ConsoleColor.cyanText("|-")
                                 + ConsoleColor.blueText("Saliendo del progreso de la emergencia")
                                 + ConsoleColor.cyanText("            |"));
-
                         System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
                         break;

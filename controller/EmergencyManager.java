@@ -244,13 +244,15 @@ public class EmergencyManager implements SubjectEmergencies {
                                 ConsoleColor.cyanText("|===========================================================|"));
                         System.out.println(nextEmergency.getDescription());
                         System.out.println(
-                                ConsoleColor.greenText("|===========================================================|"));
+                                ConsoleColor
+                                        .greenText("|===========================================================|"));
                         System.out.println(
                                 ConsoleColor.greenText("|==================-")
                                         + ConsoleColor.blueText("Continúa la ejecución")
                                         + ConsoleColor.greenText("-==================|"));
                         System.out.println(
-                                ConsoleColor.greenText("|===========================================================|"));
+                                ConsoleColor
+                                        .greenText("|===========================================================|"));
                         operations(nextEmergency);
                     }
                 } else if (option.equalsIgnoreCase("n")) {
@@ -326,10 +328,14 @@ public class EmergencyManager implements SubjectEmergencies {
         System.out.println(ConsoleColor.cyanText("|==================-")
                 + ConsoleColor.blueText("ESTADISTICAS DEL DIA") + ConsoleColor.cyanText("-===================|"));
         System.out.println(ConsoleColor.cyanText("|===========================================================|"));
-        System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Emergencias atendidas: ") + attendedEmergencies.size());
-        System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Emergencias pendientes: ") + ePriorityQueue.size());
-        System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Tiempo total de atencion: ") + totalAttentionTime);
-        System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Tiempo promedio de atención: ") + (totalAttentionTime / attendedEmergencies.size()));
+        System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Emergencias atendidas: ")
+                + attendedEmergencies.size());
+        System.out.println(
+                ConsoleColor.cyanText("|") + ConsoleColor.blueText("Emergencias pendientes: ") + ePriorityQueue.size());
+        System.out.println(
+                ConsoleColor.cyanText("|") + ConsoleColor.blueText("Tiempo total de atencion: ") + totalAttentionTime);
+        System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Tiempo promedio de atención: ")
+                + (totalAttentionTime / attendedEmergencies.size()));
         System.out.println(ConsoleColor.cyanText("|===========================================================|"));
         System.out.println(ConsoleColor.cyanText("|===================-")
                 + ConsoleColor.blueText("RECURSOS RESTANTES") + ConsoleColor.cyanText("-===================|"));
@@ -341,7 +347,6 @@ public class EmergencyManager implements SubjectEmergencies {
     // Función para realizar las operaciones de la emergencia
     // dependiendo del tipo de emergencia
     public void operations(Emergency nextEmergency) {
-
         if (nextEmergency.getType() == EmergencyType.ROBO) {
             Policia.executeRobbery(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
         }
@@ -357,7 +362,6 @@ public class EmergencyManager implements SubjectEmergencies {
     public boolean checkResources(Emergency emergency) {
         // variable booleana para la verificación de si estan los recursos disponibles
         boolean isCheck = false;
-
         // se hace la verificación
         if (emergency.getType() == EmergencyType.ROBO
                 && Policia.isAvailablee(emergency.getLocation(), emergency.getSeverityLevel())) {
@@ -366,11 +370,9 @@ public class EmergencyManager implements SubjectEmergencies {
         } else if (emergency.getType() == EmergencyType.INCENDIO
                 && Bomberos.isAvailablee(emergency.getLocation(), emergency.getSeverityLevel())) {
             isCheck = true;
-
         } else if (emergency.getType() == EmergencyType.ACCIDENTE_TRANSITO
                 && Ambulancia.isAvailablee(emergency.getLocation(), emergency.getSeverityLevel())) {
             isCheck = true;
-
         }
         return isCheck;
     }
@@ -391,5 +393,4 @@ public class EmergencyManager implements SubjectEmergencies {
             observerEmergencies.update(emergency);
         }
     }
-
 }
