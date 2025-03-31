@@ -17,7 +17,9 @@ public class EmergencyManager implements SubjectEmergencies {
     private static PriorityQueue<Emergency> ePriorityQueue;
     private List<Emergency> attendedEmergencies;
     private List<ObserverEmergencies> observers;
-    private int totalAttentionTime;
+    private List<Emergency> emergenciesCompleted;
+    private int attentionTimeMinutes;
+    private int attentionTimeSeconds;
 
     static Scanner scanner = new Scanner(System.in);
     Random random = new Random();
@@ -27,8 +29,11 @@ public class EmergencyManager implements SubjectEmergencies {
     public EmergencyManager() {
         ePriorityQueue = new PriorityQueue<>();
         attendedEmergencies = new ArrayList<>();
+        emergenciesCompleted = new ArrayList<>();
         observers = new ArrayList<>();
-        totalAttentionTime = 0;
+        attentionTimeMinutes = 0;
+        attentionTimeSeconds = 0;
+
     }
 
     // Getters y Setters
@@ -315,10 +320,37 @@ public class EmergencyManager implements SubjectEmergencies {
             }
         }
     }
-
+    // metodo que actualiza y establece la duracion de la atención
+    // de las emergencias en minutos y segundos
+    public void updateTotalAttentionTime() {
+        for (Emergency emergency : attendedEmergencies) {
+            attentionTimeMinutes += emergency.getAttentionDurationMinutes();
+            attentionTimeSeconds += emergency.getAttentionDurationSeconds();
+        }
+    }
+    // metodo que agrega la emergencia a "emergenciesCompleted" cuando ya fueron completadas y las elimina
+    // de attendedEmergencies
+    public void updateEmergencie() {
+        synchronized (attendedEmergencies) {
+            Iterator<Emergency> iterator = attendedEmergencies.iterator();
+            while (iterator.hasNext()) {
+                Emergency emergency = iterator.next();
+                if (emergency.isAttended()) {
+                    // agrega la emergencia a la lista de emergencias completadas
+                    emergenciesCompleted.add(emergency);
+                    iterator.remove(); // Eliminar el elemento usando el iterador
+                }
+            }
+        }
+    }
     // Muestra las estadisticas del dia
     public void showStatistics() {
-        if (attendedEmergencies.isEmpty()) {
+        // se llama al metodo para establecer la duracion
+        updateTotalAttentionTime();
+        // se llama el metodo para actualizar las estadisticas
+        updateEmergencie();
+        // se actualiza el valor de las emergencias ya atendidas
+        if (attendedEmergencies.isEmpty() && emergenciesCompleted.isEmpty()) {
             System.out.println(ConsoleColor.redText("|===========================================================|"));
             System.out.println(ConsoleColor.redText("|=================-No hay emergencias atendidas-============|"));
             System.out.println(ConsoleColor.redText("|===========================================================|"));
@@ -329,13 +361,16 @@ public class EmergencyManager implements SubjectEmergencies {
                 + ConsoleColor.blueText("ESTADISTICAS DEL DIA") + ConsoleColor.cyanText("-===================|"));
         System.out.println(ConsoleColor.cyanText("|===========================================================|"));
         System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Emergencias atendidas: ")
+                + emergenciesCompleted.size());
+        System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Emergencias en proceso: ")
                 + attendedEmergencies.size());
         System.out.println(
                 ConsoleColor.cyanText("|") + ConsoleColor.blueText("Emergencias pendientes: ") + ePriorityQueue.size());
         System.out.println(
-                ConsoleColor.cyanText("|") + ConsoleColor.blueText("Tiempo total de atencion: ") + totalAttentionTime);
+                ConsoleColor.cyanText("|") + ConsoleColor.blueText("Tiempo total de atencion: ") + attentionTimeMinutes +
+                " hora/s y " + attentionTimeSeconds + " minutos");
         System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Tiempo promedio de atención: ")
-                + (totalAttentionTime / attendedEmergencies.size()));
+                    + (emergenciesCompleted.size() > 0 ? (attentionTimeMinutes / emergenciesCompleted.size()) : 0) + " hora/s");
         System.out.println(ConsoleColor.cyanText("|===========================================================|"));
         System.out.println(ConsoleColor.cyanText("|===================-")
                 + ConsoleColor.blueText("RECURSOS RESTANTES") + ConsoleColor.cyanText("-===================|"));
