@@ -2,11 +2,9 @@ package models.factory;
 
 import models.*;
 import utils.*;
-
 public class FactoryEmergencies {
     public static Emergency creatEmergency(EmergencyType type, EmergencyLocation location, SeverityLevel severityLevel,
             int responseTime) {
-
         switch (type) {
             case ROBO:
                 return new Robbery(location, severityLevel, responseTime);

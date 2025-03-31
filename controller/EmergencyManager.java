@@ -17,7 +17,9 @@ public class EmergencyManager implements SubjectEmergencies {
     private static PriorityQueue<Emergency> ePriorityQueue;
     private List<Emergency> attendedEmergencies;
     private List<ObserverEmergencies> observers;
-    private int totalAttentionTime;
+    private List<Emergency> emergenciesCompleted;
+    private int attentionTimeMinutes;
+    private int attentionTimeSeconds;
 
     static Scanner scanner = new Scanner(System.in);
     Random random = new Random();
@@ -27,8 +29,11 @@ public class EmergencyManager implements SubjectEmergencies {
     public EmergencyManager() {
         ePriorityQueue = new PriorityQueue<>();
         attendedEmergencies = new ArrayList<>();
+        emergenciesCompleted = new ArrayList<>();
         observers = new ArrayList<>();
-        totalAttentionTime = 0;
+        attentionTimeMinutes = 0;
+        attentionTimeSeconds = 0;
+
     }
 
     // Getters y Setters
@@ -244,13 +249,15 @@ public class EmergencyManager implements SubjectEmergencies {
                                 ConsoleColor.cyanText("|===========================================================|"));
                         System.out.println(nextEmergency.getDescription());
                         System.out.println(
-                                ConsoleColor.greenText("|===========================================================|"));
+                                ConsoleColor
+                                        .greenText("|===========================================================|"));
                         System.out.println(
                                 ConsoleColor.greenText("|==================-")
                                         + ConsoleColor.blueText("Continúa la ejecución")
                                         + ConsoleColor.greenText("-==================|"));
                         System.out.println(
-                                ConsoleColor.greenText("|===========================================================|"));
+                                ConsoleColor
+                                        .greenText("|===========================================================|"));
                         operations(nextEmergency);
                     }
                 } else if (option.equalsIgnoreCase("n")) {
@@ -313,10 +320,37 @@ public class EmergencyManager implements SubjectEmergencies {
             }
         }
     }
-
+    // metodo que actualiza y establece la duracion de la atención
+    // de las emergencias en minutos y segundos
+    public void updateTotalAttentionTime() {
+        for (Emergency emergency : attendedEmergencies) {
+            attentionTimeMinutes += emergency.getAttentionDurationMinutes();
+            attentionTimeSeconds += emergency.getAttentionDurationSeconds();
+        }
+    }
+    // metodo que agrega la emergencia a "emergenciesCompleted" cuando ya fueron completadas y las elimina
+    // de attendedEmergencies
+    public void updateEmergencie() {
+        synchronized (attendedEmergencies) {
+            Iterator<Emergency> iterator = attendedEmergencies.iterator();
+            while (iterator.hasNext()) {
+                Emergency emergency = iterator.next();
+                if (emergency.isAttended()) {
+                    // agrega la emergencia a la lista de emergencias completadas
+                    emergenciesCompleted.add(emergency);
+                    iterator.remove(); // Eliminar el elemento usando el iterador
+                }
+            }
+        }
+    }
     // Muestra las estadisticas del dia
     public void showStatistics() {
-        if (attendedEmergencies.isEmpty()) {
+        // se llama al metodo para establecer la duracion
+        updateTotalAttentionTime();
+        // se llama el metodo para actualizar las estadisticas
+        updateEmergencie();
+        // se actualiza el valor de las emergencias ya atendidas
+        if (attendedEmergencies.isEmpty() && emergenciesCompleted.isEmpty()) {
             System.out.println(ConsoleColor.redText("|===========================================================|"));
             System.out.println(ConsoleColor.redText("|=================-No hay emergencias atendidas-============|"));
             System.out.println(ConsoleColor.redText("|===========================================================|"));
@@ -326,10 +360,17 @@ public class EmergencyManager implements SubjectEmergencies {
         System.out.println(ConsoleColor.cyanText("|==================-")
                 + ConsoleColor.blueText("ESTADISTICAS DEL DIA") + ConsoleColor.cyanText("-===================|"));
         System.out.println(ConsoleColor.cyanText("|===========================================================|"));
-        System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Emergencias atendidas: ") + attendedEmergencies.size());
-        System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Emergencias pendientes: ") + ePriorityQueue.size());
-        System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Tiempo total de atencion: ") + totalAttentionTime);
-        System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Tiempo promedio de atención: ") + (totalAttentionTime / attendedEmergencies.size()));
+        System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Emergencias atendidas: ")
+                + emergenciesCompleted.size());
+        System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Emergencias en proceso: ")
+                + attendedEmergencies.size());
+        System.out.println(
+                ConsoleColor.cyanText("|") + ConsoleColor.blueText("Emergencias pendientes: ") + ePriorityQueue.size());
+        System.out.println(
+                ConsoleColor.cyanText("|") + ConsoleColor.blueText("Tiempo total de atencion: ") + attentionTimeMinutes +
+                " hora/s y " + attentionTimeSeconds + " minutos");
+        System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Tiempo promedio de atención: ")
+                    + (emergenciesCompleted.size() > 0 ? (attentionTimeMinutes / emergenciesCompleted.size()) : 0) + " hora/s");
         System.out.println(ConsoleColor.cyanText("|===========================================================|"));
         System.out.println(ConsoleColor.cyanText("|===================-")
                 + ConsoleColor.blueText("RECURSOS RESTANTES") + ConsoleColor.cyanText("-===================|"));
@@ -341,7 +382,6 @@ public class EmergencyManager implements SubjectEmergencies {
     // Función para realizar las operaciones de la emergencia
     // dependiendo del tipo de emergencia
     public void operations(Emergency nextEmergency) {
-
         if (nextEmergency.getType() == EmergencyType.ROBO) {
             Policia.executeRobbery(nextEmergency.getLocation(), nextEmergency.getSeverityLevel());
         }
@@ -357,7 +397,6 @@ public class EmergencyManager implements SubjectEmergencies {
     public boolean checkResources(Emergency emergency) {
         // variable booleana para la verificación de si estan los recursos disponibles
         boolean isCheck = false;
-
         // se hace la verificación
         if (emergency.getType() == EmergencyType.ROBO
                 && Policia.isAvailablee(emergency.getLocation(), emergency.getSeverityLevel())) {
@@ -366,11 +405,9 @@ public class EmergencyManager implements SubjectEmergencies {
         } else if (emergency.getType() == EmergencyType.INCENDIO
                 && Bomberos.isAvailablee(emergency.getLocation(), emergency.getSeverityLevel())) {
             isCheck = true;
-
         } else if (emergency.getType() == EmergencyType.ACCIDENTE_TRANSITO
                 && Ambulancia.isAvailablee(emergency.getLocation(), emergency.getSeverityLevel())) {
             isCheck = true;
-
         }
         return isCheck;
     }
@@ -391,5 +428,4 @@ public class EmergencyManager implements SubjectEmergencies {
             observerEmergencies.update(emergency);
         }
     }
-
 }

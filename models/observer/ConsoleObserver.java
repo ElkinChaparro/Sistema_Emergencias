@@ -43,5 +43,4 @@ public class ConsoleObserver implements ObserverEmergencies {
                 System.out.println(
                                 ConsoleColor.redText("|===========================================================|"));
         }
-
 }

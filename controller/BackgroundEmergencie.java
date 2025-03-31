@@ -8,10 +8,10 @@ import utils.*;
 public class BackgroundEmergencie {
     static Scanner scanner = new Scanner(System.in);
     private static List<BackgroundEmergencie> emergenciesInProcess = new ArrayList<>();
-    public static List<Integer> generalTime = new ArrayList<>();
     private final Emergency emergency;
     private long timeStart;
     private int timeDuration;
+    public static int timeAttention;
 
     // Constructor de la clase BackgroundEmergencie
     // Se inicializa la emergencia y se agrega a la lista de emergencias en proceso
@@ -25,12 +25,12 @@ public class BackgroundEmergencie {
     public void backgroundEmergency() {
         BackgroundEmergencie bEmergencies = new BackgroundEmergencie(emergency);
         emergenciesInProcess.add(bEmergencies); // Agregar la emergencia a la lista
-
         Thread emergencyThread = new Thread(() -> {
             emergency.startAttention();
             bEmergencies.timeStart = System.currentTimeMillis();
             bEmergencies.attendedEmergencie();
             emergency.endAttention();
+            emergency.setAttended(true);
             System.out.println(
                     ConsoleColor.redText("\n|===========================================================|"));
             System.out.println(
@@ -39,15 +39,11 @@ public class BackgroundEmergencie {
                                     "La emergencia \n|===========================================================|")
                             + emergency.getDescription()
                             + ConsoleColor.redText("\n|-") + ConsoleColor.orangeText("ha sido atendida exitosamente"));
-            // Transformar de milisegundos a segundos
-            long durationMillis = emergency.calculateAttentionTime();
-            int durationSeconds = (int) durationMillis / 1000;
-            int durationMinutes = durationSeconds / 60;
-            int remainingSeconds = durationSeconds - (durationMinutes * 60);
-            // Mostrar el tiempo de atención en minutos y segundos
+            // Mostrar el tiempo de atención en horas y minutos
             System.out.println(
-                    ConsoleColor.orangeText("|-La emergencia ha sido atendida en: " + durationMinutes + " Horas y "
-                            + remainingSeconds + " Minutos"));
+                    ConsoleColor.orangeText("|-La emergencia ha sido atendida en: "
+                            + emergency.getAttentionDurationMinutes() + " Horas y "
+                            + emergency.getAttentionDurationSeconds() + " Minutos"));
             System.out.println(
                     ConsoleColor.redText("|===========================================================|"));
             System.out.println(
@@ -58,6 +54,10 @@ public class BackgroundEmergencie {
                     ConsoleColor.cyanText("|===========================================================|"));
         });
         emergencyThread.start();
+    }
+
+    public int getDurationMinutes() {
+        return timeAttention; // Getter para obtener la duración
     }
 
     // Método que se encarga de atender la emergencia, se calcula el tiempo de
@@ -161,7 +161,6 @@ public class BackgroundEmergencie {
                         System.out.println(ConsoleColor.cyanText("|-")
                                 + ConsoleColor.blueText("Saliendo del progreso de la emergencia")
                                 + ConsoleColor.cyanText("            |"));
-
                         System.out.println(
                                 ConsoleColor.cyanText("|===========================================================|"));
                         break;
