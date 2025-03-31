@@ -126,26 +126,6 @@ public class EmergencyManager implements SubjectEmergencies {
         // Se valida que la opción sea un número
         try {
             option02 = Integer.parseInt(scanner.nextLine());
-            // switch para seleccionar la locacion de la emergencia
-            switch (option02) {
-                case 1:
-                    location = EmergencyLocation.ZONA_NORTE;
-                    break;
-                case 2:
-                    location = EmergencyLocation.ZONA_SUR;
-                    break;
-                case 3:
-                    location = EmergencyLocation.ZONA_CENTRO;
-                    break;
-                case 4:
-                    location = EmergencyLocation.ZONA_ORIENTE;
-                    break;
-                case 5:
-                    location = EmergencyLocation.ZONA_OCCIDENTE;
-                    break;
-                default:
-                    throw new NullPointerException();
-            }
         } // Se captura la excepción en caso de que la opción no sea un número
         catch (NumberFormatException e) {
             showMenu.serrMenu();
@@ -154,6 +134,26 @@ public class EmergencyManager implements SubjectEmergencies {
         catch (NullPointerException e) {
             showMenu.serrMenu();
             location = selecLocation();
+        }
+        // switch para seleccionar la locacion de la emergencia
+        switch (option02) {
+            case 1:
+                location = EmergencyLocation.ZONA_NORTE;
+                break;
+            case 2:
+                location = EmergencyLocation.ZONA_SUR;
+                break;
+            case 3:
+                location = EmergencyLocation.ZONA_CENTRO;
+                break;
+            case 4:
+                location = EmergencyLocation.ZONA_ORIENTE;
+                break;
+            case 5:
+                location = EmergencyLocation.ZONA_OCCIDENTE;
+                break;
+            default:
+                throw new NullPointerException();
         }
         return location;
     }
@@ -320,6 +320,7 @@ public class EmergencyManager implements SubjectEmergencies {
             }
         }
     }
+
     // metodo que actualiza y establece la duracion de la atención
     // de las emergencias en minutos y segundos
     public void updateTotalAttentionTime() {
@@ -328,7 +329,9 @@ public class EmergencyManager implements SubjectEmergencies {
             attentionTimeSeconds += emergency.getAttentionDurationSeconds();
         }
     }
-    // metodo que agrega la emergencia a "emergenciesCompleted" cuando ya fueron completadas y las elimina
+
+    // metodo que agrega la emergencia a "emergenciesCompleted" cuando ya fueron
+    // completadas y las elimina
     // de attendedEmergencies
     public void updateEmergencie() {
         synchronized (attendedEmergencies) {
@@ -343,6 +346,7 @@ public class EmergencyManager implements SubjectEmergencies {
             }
         }
     }
+
     // Muestra las estadisticas del dia
     public void showStatistics() {
         // se llama al metodo para establecer la duracion
@@ -367,10 +371,12 @@ public class EmergencyManager implements SubjectEmergencies {
         System.out.println(
                 ConsoleColor.cyanText("|") + ConsoleColor.blueText("Emergencias pendientes: ") + ePriorityQueue.size());
         System.out.println(
-                ConsoleColor.cyanText("|") + ConsoleColor.blueText("Tiempo total de atencion: ") + attentionTimeMinutes +
-                " hora/s y " + attentionTimeSeconds + " minutos");
+                ConsoleColor.cyanText("|") + ConsoleColor.blueText("Tiempo total de atencion: ") + attentionTimeMinutes
+                        +
+                        " hora/s y " + attentionTimeSeconds + " minutos");
         System.out.println(ConsoleColor.cyanText("|") + ConsoleColor.blueText("Tiempo promedio de atención: ")
-                    + (emergenciesCompleted.size() > 0 ? (attentionTimeMinutes / emergenciesCompleted.size()) : 0) + " hora/s");
+                + (emergenciesCompleted.size() > 0 ? (attentionTimeMinutes / emergenciesCompleted.size()) : 0)
+                + " hora/s");
         System.out.println(ConsoleColor.cyanText("|===========================================================|"));
         System.out.println(ConsoleColor.cyanText("|===================-")
                 + ConsoleColor.blueText("RECURSOS RESTANTES") + ConsoleColor.cyanText("-===================|"));

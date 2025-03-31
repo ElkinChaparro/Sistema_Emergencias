@@ -8,9 +8,9 @@ import models.strategy.*;
 public class Main002 {
 
         static Scanner scanner = new Scanner(System.in);
+        static boolean exit = false;
 
         public static void main(String[] args) throws InterruptedException {
-                boolean exit = false;
                 // Se crea la instancia
                 EmergencyManager manager = EmergencyManager.getInstancia();
                 manager.setStrategy(new PrioritizationEmergenciesStrategy());
@@ -24,57 +24,31 @@ public class Main002 {
                         // Se muestra el menú principal
                         var option = showMenu.menuMain(null);
                         // Se valida que la opción sea un número
-                        try {
-                                option = Integer.parseInt(scanner.nextLine());
-                        } // Se captura la excepción en caso de que la opción no sea un número
-                        catch (NumberFormatException e) {
-                                showMenu.serrMenu();
-                                continue;
-                        } // Se captura la excepción en caso de que la opción sea nula
-                        catch (NullPointerException e) {
-                                showMenu.serrMenu();
+                        option = getValidOption(scanner, 1, 8);
+                        if (option == -1) {
                                 continue;
                         }
-                        switch (option) {
-                                case 1:
-                                        // Registrar emergencia
-                                        manager.registerEmergencyMenu(scanner);
-                                        break;
-                                case 2:
-                                        // Atender una nueva emergencia
-                                        manager.handleNextEmergency();
-                                        break;
-                                case 3:
-                                        // Ver recursos actuales
-                                        dailyRequest.currenResources(scanner);
-                                        break;
-                                case 4:
-                                        // Solicitar suministros
-                                        dailyRequest.añadirRecursos();
-                                        break;
-                                case 5:
-                                        // Emergencias pendeintes
-                                        manager.printAllEmergencies();
-                                        showMenu.pressEnter(scanner);
-                                        break;
-                                case 6:
-                                        // Progreso de atencion
-                                        BackgroundEmergencie.printBar();
-                                        break;
-                                case 7:
-                                        // Estadisticas
-                                        manager.showStatistics();
-                                        showMenu.pressEnter(scanner);
-                                        break;
-                                case 8:
-                                        // Finalizar jornada
-                                        exit = getConfirm(exit, manager);
-                                        showMenu.credits();
-                                        break;
-                                default:
-                                        // Opción inválida
-                                        showMenu.serrMenu();
+                        handleMenuOption(option, manager);
+                }
+        }
+
+        private static void handleMenuOption(int option, EmergencyManager manager) throws InterruptedException {
+                switch (option) {
+                        case 1 -> manager.registerEmergencyMenu(scanner);
+                        case 2 -> manager.handleNextEmergency();
+                        case 3 -> dailyRequest.currenResources(scanner);
+                        case 4 -> dailyRequest.añadirRecursos();
+                        case 5 -> {
+                                manager.printAllEmergencies();
+                                showMenu.pressEnter(scanner);
                         }
+                        case 6 -> BackgroundEmergencie.printBar();
+                        case 7 -> {
+                                manager.showStatistics();
+                                showMenu.pressEnter(scanner);
+                        }
+                        case 8 -> exit = getConfirm(exit, manager);
+                        default -> showMenu.serrMenu();
                 }
         }
 
@@ -153,5 +127,17 @@ public class Main002 {
                                                         "|===========================================================|"));
                 }
                 return exit;
+        }
+
+        public static int getValidOption(Scanner scanner, int min, int max) {
+                try {
+                        int option = Integer.parseInt(scanner.nextLine());
+                        if (option >= min && option <= max) {
+                                return option;
+                        }
+                } catch (NumberFormatException e) {
+                        System.out.println("Por favor, ingrese un número válido.");
+                }
+                return -1; // Opción inválida
         }
 }
