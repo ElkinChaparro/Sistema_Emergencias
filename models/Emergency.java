@@ -11,6 +11,8 @@ public abstract class Emergency implements Comparable<Emergency> {
     private int responseTime, priority;
     private boolean attended;
     private long startTimeAttention, finalTimeAttention;
+    private int attentionDurationMinutes, attentionDurationSeconds;
+
     PrioritizationEmergenciesStrategy strategy = new PrioritizationEmergenciesStrategy();
 
     public Emergency(EmergencyType type, EmergencyLocation location, SeverityLevel severityLevel, int responseTime) {
@@ -73,16 +75,9 @@ public abstract class Emergency implements Comparable<Emergency> {
         return startTimeAttention;
     }
 
-    public void setStartTimeAttention(long startTimeAttention) {
-        this.startTimeAttention = startTimeAttention;
-    }
 
     public long getFinalTimeAttention() {
         return finalTimeAttention;
-    }
-
-    public void setFinalTimeAttention(long finalTimeAttention) {
-        this.finalTimeAttention = finalTimeAttention;
     }
 
     public void startAttention() {
@@ -91,10 +86,21 @@ public abstract class Emergency implements Comparable<Emergency> {
 
     public void endAttention() {
         this.finalTimeAttention = System.currentTimeMillis();
+        int totalSeconds= (int) ((finalTimeAttention - startTimeAttention) / 1000);
+        this.attentionDurationMinutes = totalSeconds / 60; // Obtener los minutos completos
+        this.attentionDurationSeconds = totalSeconds % 60; // Obtener los segundos restantes
     }
 
     public long calculateAttentionTime() {
         return (finalTimeAttention - startTimeAttention);
+    }
+
+    public int getAttentionDurationMinutes() {
+        return attentionDurationMinutes;
+    }
+
+    public int getAttentionDurationSeconds() {
+        return attentionDurationSeconds;
     }
 
     public String getDescription() {
@@ -117,4 +123,6 @@ public abstract class Emergency implements Comparable<Emergency> {
                 + ConsoleColor.cyanText("\n|-") + ConsoleColor.blueText("Tiempo estimado de atención: ") + responseTime
                 + ConsoleColor.blueText(" minutos");
     }
+
+
 }
